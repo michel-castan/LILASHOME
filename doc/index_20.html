@@ -1,0 +1,41 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1sel"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 4 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">Configuration file</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The configuration file is an XML document used to change various <i>LILAS</i> settings. The path to the configuration file
+can be passed to <i>LILAS</i> system with the help of the <span style="font-family:monospace;">-config</span> options of the command line&nbsp;:
+<div style="white-space:pre;font-family:monospace;">$ <font color="#0x000086">lilas -config=/xxx/yyy/name.ext ...
+</font>
+</div>
+and so, the file can be anywhere in the file system and can have any name. However, if the name of this file is 
+<span style="font-family:monospace;">lilasConfig.xml</span>, <i>LILAS</i> can detect automatically by searching in current directory or parent directories.
+In that case, we do not need to use the <span style="font-family:monospace;">-config</span> options of the command line. If the configuration file is
+not found, <i>LILAS</i> proposed to create one automatically upon startup.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+	The root element of an XML configuration file is <span style="font-family:monospace;">config</span>. It may contain the following elements (in any order)&nbsp;:
+<ul id="ID_PubliTool_N10492">
+	<li><span style="font-family:monospace;">&lt;jar path="xxx"/&gt;</span>&nbsp;: where xxx is the path of a jar file or the path of a directory (in that case,
+		we consider all the jar files containing in that directory)</li>
+	<li><span style="font-family:monospace;">&lt;dir path="xxx"/&gt;</span>&nbsp;: where xxx is the path of a directory</li>
+	<li><span style="font-family:monospace;">&lt;var name="xxx" value="yyy"/&gt;</span>&nbsp;: where xxx is a name of lilas parameters (static field of lilas.Parameter class), 
+		and yyy the value of this parameter.</li>
+</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+	The jar elements and dir elements are used to build the java classpath for lilas with two specials parameters <span style="font-family:monospace;">dirSrc</span>
+	and <span style="font-family:monospace;">dirBin</span>. The classpath contains first the source directory of the <i>LILAS</i> project, indicated by dirSrc variable, following 
+	by the binary directory of the <i>LILAS</i> project, indicated by dirBin variable, following by the jar files associated to <span style="font-family:monospace;">jar</span> element or 
+	the directory associated to the <span style="font-family:monospace;">dir</span>element, in order of appearance in the config file. If the variable
+	<span style="font-family:monospace;">dirSrc</span> is not set, <i>LILAS</i> consider the current directory; if the <span style="font-family:monospace;">dirBin</span> is not set, 
+	<i>LILAS</i> consider the value associated to dirSrc variable.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The different variables that can be changed by a var element are those already presented as option in the section on
+	 <i>LILAS</i> launching command&nbsp;: verbose, logLevel, fileLog, javaLibraryPath, dirSrc, dirBin, withHistoric, parallelMode, board, nexys3LoadCmd, ms6LoadCmd, 
+	ftdiJava, stepByStepMode, activationTimeDefault, simulatedTimeMode, elementaryGateDelay, bitValueDefault, STD_LOGIC_1164_modified_Mode.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+	For example, here is the configuration file that can be created automatically by <i>LILAS</i>&nbsp;:
+<div style="white-space:pre;font-family:monospace;"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;config&gt;</font>
+	<font color="#A020F0">&lt;jar path=</font><font color="#CC6600">"~/LILASHOME/lib/"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;var name=</font><font color="#CC6600">"javaLibraryPath"</font> <font color="#A020F0">value=</font><font color="#CC6600">"~/LILASHOME/lib"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;var name=</font><font color="#CC6600">"dirSrc"</font> <font color="#A020F0">value=</font><font color="#CC6600">"~/LilasProject"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;var name=</font><font color="#CC6600">"logLevel"</font> <font color="#A020F0">value=</font><font color="#CC6600">"INFO"</font><font color="#A020F0">/&gt;</font>
+<font color="#A020F0">&lt;/config&gt;</font>
+</div>
+</p></div></body></html>

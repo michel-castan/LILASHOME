@@ -1,0 +1,69 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv2"><a href="index_22.html" onClick="return chargerURLavecHistorique(this)">5.1 lilas.base</a></li><li class="niv3sel"><a href="index_23.html" onClick="return chargerURLavecHistorique(this)">5.1.1 lilas.base.Signal</a></li><li class="niv3"><a href="index_24.html" onClick="return chargerURLavecHistorique(this)">5.1.2 lilas.base.Port</a></li><li class="niv3"><a href="index_25.html" onClick="return chargerURLavecHistorique(this)">5.1.3 lilas.base.Module</a></li><li class="niv2"><a href="index_26.html" onClick="return chargerURLavecHistorique(this)">5.2 lilas.awt</a></li><li class="niv2"><a href="index_40.html" onClick="return chargerURLavecHistorique(this)">5.3 lilas.script</a></li><li class="niv2"><a href="index_60.html" onClick="return chargerURLavecHistorique(this)">5.4 lilas.sm</a></li><li class="niv2"><a href="index_61.html" onClick="return chargerURLavecHistorique(this)">5.5 lilas.code</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 5.1.1 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">lilas.base.Signal</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">A signal is a connection to convey a value of a given type. The signal is defined by an XML element <span style="font-family:monospace;">signal</span>.
+It is defined with attributes, some common to all signals and some specific to the type of associated data.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">List of common attributes&nbsp;:
+<ul id="ID_PubliTool_N10515">
+	<li><span style="font-family:monospace;">name</span>&nbsp;: the local name of the signal in the module.</li>
+	<li><span style="font-family:monospace;">type</span>&nbsp;: the type of the data carried by the signal</li>
+	<li><span style="font-family:monospace;">sensitive</span>&nbsp;: true indicates that the module is sensitive to this signal (false by default). 
+	In the case of logic module (which can be converted into VHDL), the sensitivity is changed according 
+	to the logic defined in the code module (a warning is printed to signal an automatic modification 
+	on a signal whose sensitivity is not announced according to logic description).</li>
+	<li><span style="font-family:monospace;">mode</span>&nbsp;: the possible values ​​are
+		<ul id="ID_PubliTool_N1052A">
+			<li>in&nbsp;: the signal can only be read in the module</li>
+    		<li>out&nbsp;: the signal can only be write from the module</li>
+			<li>inout&nbsp;: the signal can be read or written by the module</li>
+			<li>constant&nbsp;: the initialization value of the signal is final upon instantiation. Such a signal
+				 is replaced by a constant value. If the value is provided outside the module, 
+				such signal becomes a generic variable.</li>
+			<li>internal&nbsp;: the signal is generated internally in the module. An internal signal (or constant) 
+				is analogous to local variables in a procedure while a signal in or out or inout
+				is analogous to a parameter procedure.</li>
+			<li>dummyIntern&nbsp;: the internal signal is used by a graphical user interface (or a script) 
+				internal to the module.</li>
+			<li>dummyExtern&nbsp;:  the external signal is only used by a graphical user interface (or a script) 
+				internal to the module.</li>
+  		</ul></li>
+	<li><span style="font-family:monospace;">init</span>&nbsp;: the initialization value of the signal when it is created (for internal signals). 
+	The default initialization value is the default value of the associated type.</li>
+	<li><span style="font-family:monospace;">optional</span>&nbsp;: true indicates that the signal may be absent in a module call (for external signals), 
+	false (the default) indicates that the presence of this signal is mandatory.</li>
+	<li><span style="font-family:monospace;">position</span>&nbsp;: { LEFT, RIGHT, UP, DOWN } indicates the position of the external signal 
+	(without effect an internal signal) in the automatic svg representation of a module instance. 
+	When the position is not specified, the default is LEFT for IN mode, RIGHT for OUT mode, DOWN for INOUT mode
+	and UP for CONSTANT and DUMMYEXTERN modes.</li>
+</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example of specific attributes&nbsp;:
+<ul id="ID_PubliTool_N10555">
+<li><span style="font-family:monospace;">size</span>&nbsp;: for signals associated to logical values, this attribute specifies the number of bits 
+of the logic value.</li>
+</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">At any signal associated XML declaration is an instance of the class java <span style="font-family:monospace;">lilas.xml.DefSignal</span>.
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.1.1.1 Specifying a type class</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Any java object can be transmit through a signal. However, it must ensure that the class Signal&lt;T&gt;
+	can generate instances of the associated class T, which can be done by calling the constructor of T set 
+	with the signature <span style="font-family:monospace;">public T(Stringstr)</span>. So, this constructor must be available.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+If several values ​​have to be given, they should be encoded in a string in a way or another. For example, if we wish to 
+	manipulate a two dimensions table of Double  defined by:
+<div style="white-space:pre;font-family:monospace;">java.lang.Double[][] table = new java.lang.Double[10][20];</div>
+Nous pourrons le faire en d&eacute;finissant la classe TableDouble par
+:
+<div style="white-space:pre;font-family:monospace;">
+<font color="#009900">public</font> <font color="#009900">class</font> <font color="#0000FF">TableDouble</font> {
+  Double[][] table;
+	
+  <font color="#009900">public</font> <font color="#0000FF">TableDouble</font>(<font color="#0000FF">String</font> <font color="#FF00FF">init</font>) {
+     <font color="#0000FF">String[] </font><font color="#FF00FF">param</font> = init.split(<font color="#CC6600">":"</font>);
+     table = <font color="#009900">new</font> Double[Integer.parseInt(param[0])][Integer.parseInt(param[1])];
+  }
+  ...	
+}
+</div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">the signal declaration will then be
+<div style="white-space:pre;font-family:monospace;">
+<font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"table"</font> <font color="#A020F0">type=</font><font color="#CC6600">"TableDouble"</font> <font color="#A020F0">init=</font><font color="#CC6600">"10:20"</font><font color="#A020F0">/&gt;</font>
+
+</div>
+</p></div></body></html>

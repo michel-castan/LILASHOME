@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+
+  <signal mode="out" name="s" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="sel" type="lilas.type.StdLogic" size="2"/>
+  <signal mode="in" name="E0" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="E1" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="E2" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="E3" type="lilas.type.StdLogic" size="1"/>
+  
+  
+  <code language="logic"><![CDATA[
+  s <= with sel select (E3, E2, E1, E0);  
+]]></code>
+
+</module>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <signal mode="out" name="q" type="lilas.type.StdLogic" size="4"/>
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="in" name="d" type="lilas.type.StdLogic" size="4"/>
+  
+   <code language="logic"><![CDATA[  
+ if selected(clk) and equals(clk,0b1) then
+  	q <= d;
+ end if; 
+  ]]></code>
+
+</module>
+ 

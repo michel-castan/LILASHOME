@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="no"?>
+<!-- Creator: fig2dev Version 3.2 Patchlevel 5a -->
+<!-- CreationDate: Wed Jan 19 10:15:14 2011 -->
+<!-- Magnification: 1.050 -->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="1.6in" height="0.8in" viewBox="1012 1415 1891 993">
+<g style="stroke-width:.025in; fill:none">
+<!-- Arc -->
+<path style="stroke:#0000b0;stroke-width:48;stroke-linecap:butt;"
+d="M 1956,1461 A 450 450  0  0  1  1956  2362 " />
+<!-- Circle -->
+<circle cx="2519" cy="1911" r="112"
+ style="stroke:#0000b0;stroke-width:48;"/>
+<!-- Line -->
+<polyline points="1058,1687
+1506,1687
+" style="stroke:#0000b0;stroke-width:48;
+stroke-linejoin:miter; stroke-linecap:butt;
+fill:#ffffff;
+"/>
+<!-- Line -->
+<polyline points="2633,1911
+2857,1911
+" style="stroke:#0000b0;stroke-width:48;
+stroke-linejoin:miter; stroke-linecap:butt;
+fill:#ffffff;
+"/>
+<!-- Line -->
+<polyline points="1058,2125
+1506,2125
+" style="stroke:#0000b0;stroke-width:48;
+stroke-linejoin:miter; stroke-linecap:butt;
+fill:#ffffff;
+"/>
+<image xlink:href="index_5.png" preserveAspectRatio="none"
+x="1644" y="1546" width="434" height="674" />
+
+<!-- Line -->
+<polyline points="1956,1461
+1506,1461
+1506,2362
+1956,2362
+" style="stroke:#0000b0;stroke-width:48;
+stroke-linejoin:miter; stroke-linecap:butt;
+"/>
+<!-- Image -->
+</g>
+</svg>

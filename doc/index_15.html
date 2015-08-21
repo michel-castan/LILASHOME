@@ -1,0 +1,64 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv2"><a href="index_8.html" onClick="return chargerURLavecHistorique(this)">2.1 demo.hello.Hello</a></li><li class="niv2"><a href="index_11.html" onClick="return chargerURLavecHistorique(this)">2.2 demo.sqrt.SQRT</a></li><li class="niv2sel"><a href="index_15.html" onClick="return chargerURLavecHistorique(this)">2.3 demo.ctrup.CtrUpDown</a></li><li class="niv3"><a href="index_16.html" onClick="return chargerURLavecHistorique(this)">2.3.1 demo.ctrud.CtrUD_tst</a></li><li class="niv3"><a href="index_17.html" onClick="return chargerURLavecHistorique(this)">2.3.2 demo.ctrud.CtrUDwithClk</a></li><li class="niv3"><a href="index_18.html" onClick="return chargerURLavecHistorique(this)">2.3.3 CtrUDwithClk into FPGA</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 2.3 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">demo.ctrup.CtrUpDown</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+	This example illustrates the use of <i>LILAS</i> for the logical definition of circuit for FPGA. We want to achieve
+	a 32-bit counter with a command <span style="font-family:monospace;">clear</span> allowing asynchronous reset, and a command <span style="font-family:monospace;">upDown</span>
+	indicating if we count up (<span style="font-family:monospace;">upDown=0</span>) or down (<span style="font-family:monospace;">upDown=1</span>) on each rising edge of the clock
+	input <span style="font-family:monospace;">clkCircuit</span>.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+	The 32-bit counter is base on a generic counter <span style="font-family:monospace;">demo.ctrud.CtrUD</span> defined by&nbsp;:
+	<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_184.lilas">CtrUD.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+
+<font color="#A020F0">&lt;module&gt;</font>
+	<font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clkCircuit"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clear"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font> <font color="#A020F0">name=</font><font color="#CC6600">"upDown"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0bU:size"</font> <font color="#A020F0">name=</font><font color="#CC6600">"ctr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font><font color="#A020F0">/&gt;</font>
+					
+   	<font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">name=</font><font color="#CC6600">"valCtr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0bU:size"</font><font color="#A020F0">/&gt;</font>
+   
+	<font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+ 	if clear then
+		valCtr &lt;= 0b0:size;
+	elsif selected(clkCircuit) and clkCircuit then
+		if upDown then valCtr &lt;= valCtr minus 0b1;
+		else valCtr &lt;= valCtr plus 0b1;
+		end if;
+	end if;
+  
+	ctr &lt;= valCtr; 	
+  <font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div>	
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder"><i>LILAS</i> has a type <span style="font-family:monospace;">lilas.type.StdLogic</span> representing a logical value made of 9 differents elementary values (bit) as 
+defined in the IEEE 1164 standard&nbsp;:
+<ul id="ID_PubliTool_N102FA">
+	
+			<li><span style="font-family:monospace;">U</span>&nbsp;: uninitialized</li>
+			<li><span style="font-family:monospace;">X</span>&nbsp;: strong drive, unknown logic value</li>
+			<li><span style="font-family:monospace;">0</span>&nbsp;: strong drive, logic zero</li>
+			<li><span style="font-family:monospace;">1</span>&nbsp;: strong drive, logic one</li>
+			<li><span style="font-family:monospace;">Z</span>&nbsp;: high impedance</li>
+			<li><span style="font-family:monospace;">W</span>&nbsp;: weak drive, unknown logic value</li>
+			<li><span style="font-family:monospace;">L</span>&nbsp;: weak drive, logic zero</li>
+			<li><span style="font-family:monospace;">H</span>&nbsp;: weak drive, logic one</li>
+			<li><span style="font-family:monospace;">-</span>&nbsp;: don't care</li>
+</ul>
+The size of a logical value indicate the number of elementary logic values used for this value. A literal value
+can be given with many formats (binary, hexadecimal, decimal). These are some examples&nbsp;:
+<div style="white-space:pre;font-family:monospace;">
+ "Ob0011"&nbsp;: 4 bits value OO11
+ "0bx" bit value of X
+ "0bx:8": 8-bit value equivalent to "0bxxxxxxxx"
+ "3:5": 5-bit value equivalent to "0b00011"
+ "3:5": 5-bit value equivalent to "0b00011"
+ "0x3: 5": 5-bit value equivalent to "0b00011"
+ "0x3" 4-bit value equivalent to "0b0011"
+ "0b00_1001_1100" 10-bit value equivalent to "0b0010011100"
+</div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Unlike <span style="font-family:monospace;">demo.hello.Hello</span> module or <span style="font-family:monospace;">demo.sqrt.Sqrt1</span>, this module description do not have
+a <span style="font-family:monospace;">code</span> element indicating a java class for the definition of <span style="font-family:monospace;">activation</span> method. Rather, there
+is a <span style="font-family:monospace;">code</span> element whose value correspond to the definition of activation job given in a logic description 
+language (close to the VHDL language).</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Let's try to test this counter.</p></div></body></html>

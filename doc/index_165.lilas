@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module>	
+	<awt name="myComponent"/>
+	
+	<code language="java"/>
+</module>

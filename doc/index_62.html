@@ -1,0 +1,465 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv2"><a href="index_22.html" onClick="return chargerURLavecHistorique(this)">5.1 lilas.base</a></li><li class="niv2"><a href="index_26.html" onClick="return chargerURLavecHistorique(this)">5.2 lilas.awt</a></li><li class="niv2"><a href="index_40.html" onClick="return chargerURLavecHistorique(this)">5.3 lilas.script</a></li><li class="niv2"><a href="index_60.html" onClick="return chargerURLavecHistorique(this)">5.4 lilas.sm</a></li><li class="niv2"><a href="index_61.html" onClick="return chargerURLavecHistorique(this)">5.5 lilas.code</a></li><li class="niv3sel"><a href="index_62.html" onClick="return chargerURLavecHistorique(this)">5.5.1 logic</a></li><li class="niv3"><a href="index_63.html" onClick="return chargerURLavecHistorique(this)">5.5.2 vhdl</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 5.5.1 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">logic</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Page <a href="index_140.html">ParserLogic.html</a> provides a complete grammar 
+of the language produced by the jjdoc tool. The language used to describe a circuit in 
+the form of a list of instructions. A statement begins with a connection identifier or 
+a list of connection identifiers, the character <span style="font-family:monospace;">=</span> then a logical expression and, finally, 
+character <span style="font-family:monospace;">;</span>. Comments can be added at any time between <span style="font-family:monospace;">//</span> and the end of line (like the 
+comments of java language).
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">A connection identifier may indicate a connection size (number of bits) by attaching to the character 
+	identifier <span style="font-family:monospace;">:</span> followed by the value of size. If size is not specified, it will be synthesized by the <i>LILAS</i> system.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The following sections provide some examples of LC language instructions.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+A literal corresponding to a value of lilas.type.StdLogic type can have one of the following formats:
+
+<ul id="ID_PubliTool_N10ACF">
+	<li><strong>0[b,B]([0-1,u,U,z,Z,x,X,w,W,l,L,h,H,-]):([0-9])+</strong>&nbsp;: <i>value of one bit repeated on all bits</i></li>
+	<li><strong>0[b,B]([0-1,u,U,z,Z,x,X,w,W,l,L,h,H,-])*</strong>&nbsp;: <i>binary format</i></li>
+	<li><strong>0[x,X]([0-9,a-f,A-F,u,U,z,Z,x,X,w,W,l,L,h,H,-])+(:([0-9])+)?</strong>&nbsp;: <i>hexadecimal format</i></li>
+	<li><strong>([0-9])+:([0-9])+</strong>&nbsp;: <i>decimal format</i></li>
+</ul>
+Optionally, the literal may contain one or more characters '_' not material. When the number of bits in size 
+is not given (binary or hexadecimal format), the number of bits of the value is the number of binary characters 
+or four times the number of hexadecimal characters.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Examples&nbsp;:
+<div style="white-space:pre;font-family:monospace;"> "0bx"&nbsp;: 1 bit value
+ "0bx:8"&nbsp;: 8 bits value equivalent to 0bxxxxxxxx
+ "3:5"&nbsp;: 5 bits value equivalent to "0b00011"
+ "3:5"&nbsp;: 5 bits value equivalent to "0b00011"
+ "0x3:5": 5 bits value equivalent to "0b00011"
+ "0x3":  4 bits value equivalent to "0b0011"
+ "0b00_1001_1100":  10 bits value equivalent to "0b0010011100"
+</div>	
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.1 Logical expression</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The logical operators available to constitute a logical expression are and, or, exclusive-or not:
+<ul id="ID_PubliTool_N10B00">
+  <li>and&nbsp;: And</li>
+  <li>or&nbsp;: Or</li>
+  <li>xor&nbsp;: Xor</li>
+  <li>not&nbsp;: Not</li>
+</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">These operators are applied to explicit connections or the output logic 
+	sub-expressions or logic functions such as mining, smelting, multiplexing 
+	or the constant generation logic.</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: consider the circuit
+<div class="centr&eacute;e"><embed src="index_141.svg" type="image/svg+xml"></embed></div>
+
+It can be described with the following code:
+	<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_142.lilas">EncodeurPriorite.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"Demand_IT1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"Demand_IT2"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"Demand_IT3"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"Demand_IT4"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"IT1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"IT2"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"IT3"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"IT4"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  
+  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+	IT1 &lt;= Demand_IT1;
+	IT2 &lt;= not Demand_IT1 and Demand_IT2;
+	IT3 &lt;= not (Demand_IT1 or Demand_IT2) and Demand_IT3;
+	IT4 &lt;= not (Demand_IT1 or Demand_IT2 or Demand_IT3) and Demand_IT4;
+ <font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+   
+ <font color="#A020F0">&lt;/module&gt;</font>
+</div></div>     
+      </p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.2 Arithmetic expression</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The arithmetic operators available to constitute a logical expression are plus, minus and mult:
+<ul id="ID_PubliTool_N10B28">
+  <li>plus&nbsp;: Addition</li>
+  <li>minus&nbsp;: Subtraction</li>
+  <li>mult&nbsp;: Multiplication</li>
+</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">These operators are applied to explicit connections or the output logic sub-expressions or logic functions. 
+	The arguments (there are 2) must be the same size in the case of addition or subtraction (the result will 
+	be the same size), or of different size in the case of multiplcation (the size of the result will be then 
+	the sum of the sizes of arguments).</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: an adder circuit can be described with the following code:
+	<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_143.lilas">Add4b.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"q"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"4"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"d1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"4"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"d2"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"4"</font><font color="#A020F0">/&gt;</font>
+  
+   <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>  
+   	q &lt;= d1 plus d2;
+   <font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+ 
+</div></div>     
+      </p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.3 Conditional expression</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">A conditional expression can use the following function:
+<ul id="ID_PubliTool_N10B47">
+  <li>Selected&nbsp;: true indicates if the arrival of data on the port associated with the variable passed as 
+  	parameter could trigger activation of the module.</li>
+</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: a register can be described with the following code:
+	<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_144.lilas">Reg4b.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"q"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"4"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"d"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"4"</font><font color="#A020F0">/&gt;</font>
+  
+   <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>  
+ if selected(clk) and equals(clk,0b1) then
+  	q &lt;= d;
+ end if; 
+  <font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+ 
+</div></div>     
+      </p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.4 Multiplexer</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: Consider the circuit
+<div class="centr&eacute;e"><embed src="index_145.svg" type="image/svg+xml"></embed></div>
+
+It can be described with the following code:
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_146.lilas">Multiplexeur.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"s"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"sel"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"2"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"E0"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"E1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"E2"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"E3"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  
+  
+  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+  s &lt;= with sel select (E3, E2, E1, E0);  
+<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div> 
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.5 Distribution</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: Consider the circuit
+<div class="centr&eacute;e"><embed src="index_147.svg" type="image/svg+xml"></embed></div>
+
+It can be described with the following code:
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_148.lilas">Distribution.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"a"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"b"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"2"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"c"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"3"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"bus"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"6"</font><font color="#A020F0">/&gt;</font>
+  
+    <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+   (a, b, c) &lt;= bus;  
+<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+  
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div> 
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.6 Extraction</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: Consider the circuit
+<div class="centr&eacute;e"><embed src="index_149.svg" type="image/svg+xml"></embed></div>
+
+It can be described with the following code:
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_150.lilas">Extraction.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"x"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"3"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"y"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"a"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"8"</font><font color="#A020F0">/&gt;</font>
+ 
+  
+  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+	 x&lt;=a[4:2]; // a &eacute;tant sur 8 bits
+  	 y&lt;=a[3];
+  
+<font color="#A020F0">]]&gt;</font>   <font color="#A020F0">&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div> 
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.7 Concatenation</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: Consider the circuit
+<div class="centr&eacute;e"><embed src="index_151.svg" type="image/svg+xml"></embed></div>
+
+It can be described with the following code:
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_152.lilas">Concatenation.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"x"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"8"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"a"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"b"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"2"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"c"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"5"</font><font color="#A020F0">/&gt;</font>
+  
+  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+	x &lt;= a &amp; b &amp; c;
+<font color="#A020F0">]]&gt;</font>  <font color="#A020F0">&lt;/code&gt;</font>
+  
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div> 
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.8 Local variable</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">A local variable can be set to activation through the keyword <i>local</i>. Example:
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_153.lilas">Local.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"a"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"b"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"cin"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font>  <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"cout"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font> <font color="#A020F0">optional=</font><font color="#CC6600">"true"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"s"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  
+    <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+    	local g &lt;= a and b;
+    	local p &lt;= a or b;
+    	cout &lt;= g or (p and cin);
+    	s &lt;= a xor b xor cin;
+<font color="#A020F0">]]&gt;</font> <font color="#A020F0">&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div> 
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.9 Internal variable</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">We can declare a signal with the internal mode directly in the code. with the keyword <i>internal</i>. 
+	This just means making the declaration of a signal type "lilas.type.StdLogic" fashion "internal" 
+	size indicated after the name. Example:
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_154.lilas">LocalInternal.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"a"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"b"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"cin"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"cout"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font> <font color="#A020F0">optional=</font><font color="#CC6600">"true"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"s"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
+  
+    <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+    	local g &lt;= a and b;
+    	internal p:1 &lt;= a or b;
+    	cout &lt;= g or (p and cin);
+    	s &lt;= a xor b xor cin;
+<font color="#A020F0">]]&gt;</font> <font color="#A020F0">&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_155.vhd">LocalInternal.vhd</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#9A1900">--------------------------------------------
+-- g&eacute;n&eacute;r&eacute; par LILASV4                     --
+--------------------------------------------
+</font><font color="#009900">library</font> <font color="#0000FF">IEEE</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.std_logic_1164.</font><font color="#009900">all</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.Numeric_Std.</font><font color="#009900">all</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.std_logic_unsigned.</font><font color="#009900">all</font>;
+
+<font color="#009900">entity</font> <font color="#0000FF">tst_code_logic_LocalInternal</font> <font color="#009900">is</font>
+<font color="#009900">port</font>(
+	<font color="#00A0FF">a</font> : <font color="#009900">IN</font> std_logic := '0';
+	<font color="#00A0FF">b</font> : <font color="#009900">IN</font> std_logic := '0';
+	<font color="#00A0FF">cin</font> : <font color="#009900">IN</font> std_logic := '0';
+	<font color="#00A0FF">cout</font> : <font color="#009900">OUT</font> std_logic := '0';
+	<font color="#00A0FF">s</font> : <font color="#009900">OUT</font> std_logic := '0');
+<font color="#009900">end</font> <font color="#009900">entity</font> <font color="#0000FF">tst_code_logic_LocalInternal</font>;
+
+<font color="#009900">architecture</font> <font color="#0000FF">a_tst_code_logic_LocalInternal</font> <font color="#009900">of</font> <font color="#0000FF">tst_code_logic_LocalInternal</font> <font color="#009900">is</font>
+<font color="#9A1900">-- d&eacute;claration des variables modules 
+-- d&eacute;claration des signaux internes 
+</font>	<font color="#00A0FF">signal</font> <font color="#00A0FF">p</font> :  std_logic  := 'U';
+<font color="#9A1900">-- d&eacute;claration des variables locales 
+</font><font color="#009900">begin</font>
+	process (a, b, p, cin)
+		<font color="#00A0FF">variable</font> <font color="#00A0FF">g</font> :  std_logic;
+	<font color="#009900">begin</font>
+		g := (a <font color="#009900">and</font> b);
+		p &lt;= (a <font color="#009900">or</font> b);
+		cout &lt;= (g <font color="#009900">or</font> (p <font color="#009900">and</font> cin));
+		s &lt;= (a <font color="#009900">xor</font> b <font color="#009900">xor</font> cin);
+	<font color="#009900">end</font> <font color="#0000FF">process</font>;
+
+<font color="#009900">end</font> <font color="#009900">architecture</font> <font color="#0000FF">a_tst_code_logic_LocalInternal</font><font color="#009900">;</font>
+
+<font color="#0000FF">dernierTokenDuFichierSource</font><font color="#009900">dernierTokenDuFichierSource</font></div></div> 
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.10 Array</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example&nbsp;: 
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_156.lilas">Memoire.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"adr"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"4"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"we"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"din"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"8"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dout"</font> <font color="#A020F0">optional=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"8"</font><font color="#A020F0">/&gt;</font>
+  
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">name=</font><font color="#CC6600">"mem"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.ArrayStdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"16:0xUU"</font><font color="#A020F0">/&gt;</font>
+
+  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
+  array mem &lt;= ( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0);
+  if selected(clk) and equals(clk,0b1) and equals(we,0b1) then
+  	mem(adr) &lt;= din ;
+  end if;
+  dout &lt;= mem(adr);
+      
+ <font color="#A020F0">]]&gt;</font> <font color="#A020F0">&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_157.vhd">Memoire.vhd</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#9A1900">--------------------------------------------
+-- g&eacute;n&eacute;r&eacute; par LILASV4                     --
+--------------------------------------------
+</font><font color="#009900">library</font> <font color="#0000FF">IEEE</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.std_logic_1164.</font><font color="#009900">all</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.Numeric_Std.</font><font color="#009900">all</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.std_logic_unsigned.</font><font color="#009900">all</font>;
+
+<font color="#009900">entity</font> <font color="#0000FF">tst_code_logic_Memoire</font> <font color="#009900">is</font>
+<font color="#009900">port</font>(
+	<font color="#00A0FF">adr</font> : <font color="#009900">IN</font> std_logic_vector(3 downto 0) := "UUUU";
+	<font color="#00A0FF">we</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">clk</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">din</font> : <font color="#009900">IN</font> std_logic_vector(7 downto 0) := "UUUUUUUU";
+	<font color="#00A0FF">dout</font> : <font color="#009900">OUT</font> std_logic_vector(7 downto 0) := "UUUUUUUU");
+<font color="#009900">end</font> <font color="#009900">entity</font> <font color="#0000FF">tst_code_logic_Memoire</font>;
+
+<font color="#009900">architecture</font> <font color="#0000FF">a_tst_code_logic_Memoire</font> <font color="#009900">of</font> <font color="#0000FF">tst_code_logic_Memoire</font> <font color="#009900">is</font>
+<font color="#9A1900">-- d&eacute;claration des variables modules 
+-- d&eacute;claration des signaux internes 
+</font>	<font color="#009900">type</font> mem_type <font color="#009900">is</font> <font color="#009900">array</font> (0 to 16-1) <font color="#009900">of</font> std_logic_vector(8-1 downto 0);
+	<font color="#00A0FF">signal</font> <font color="#00A0FF">mem</font> : mem_type := (
+		0 =&gt; "11111111", 
+		1 =&gt; "11111110", 
+		2 =&gt; "11111101", 
+		3 =&gt; "11111100", 
+		4 =&gt; "11111011", 
+		5 =&gt; "11111010", 
+		6 =&gt; "11111001", 
+		7 =&gt; "11111000", 
+		8 =&gt; "11110111", 
+		9 =&gt; "11110110", 
+		10 =&gt; "11110101", 
+		11 =&gt; "11110100", 
+		12 =&gt; "11110011", 
+		13 =&gt; "11110010", 
+		14 =&gt; "11110001", 
+		15 =&gt; "11110000", 
+		<font color="#009900">others</font> =&gt; (<font color="#009900">others</font> =&gt; 'U'));
+<font color="#9A1900">-- d&eacute;claration des variables locales 
+</font>	<font color="#00A0FF">signal</font> <font color="#00A0FF">ldl1375940957581</font> :  std_logic  := '1';
+<font color="#009900">begin</font>
+	process (clk, we, adr)
+	<font color="#009900">begin</font>
+		<font color="#009900">if</font> (clk'EVENT <font color="#009900">and</font> clk='1' <font color="#009900">and</font> we=ldl1375940957581) <font color="#009900">then</font> 
+						mem(conv_integer(adr)) &lt;= din;
+		<font color="#009900">end</font> <font color="#009900">if</font>;
+		dout &lt;= mem(conv_integer(adr));
+	<font color="#009900">end</font> <font color="#0000FF">process</font>;
+
+<font color="#009900">end</font> <font color="#009900">architecture</font> <font color="#0000FF">a_tst_code_logic_Memoire</font><font color="#009900">;</font>
+
+<font color="#0000FF">dernierTokenDuFichierSource</font><font color="#009900">dernierTokenDuFichierSource</font></div></div> 
+</p><p class="H3" xmlns:url="http://whatever/java/java.net.URLEncoder">5.5.1.11 Moore machine</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The syntax of the beginning of a definition of a Moore machine is:
+<div style="white-space:pre;font-family:monospace;">
+moore 
+   smclock=nomConnexionClock
+   smreset=nomConnexionReset
+   sminit=nomEtatAuReset
+   state=nomConnexionNomEtatCourant
+   out= (nomSignalLogique1, ...)
+   { nomEtat1 (nomSignal &lt;= val, ...)
+   	 on expLog1 target nomEtat;
+   	 on.. }
+   { .. }
+</div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example: Consider the circuit
+<div class="centr&eacute;e"><embed src="index_158.svg" type="image/svg+xml"></embed></div>
+
+It can be described with the following code:
+  
+<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_159.lilas">Moore.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"rst"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"etat"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.String"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"monter"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"descendre"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"DS"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"DI"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"MS"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"MI"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"MA"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"DA"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  
+  
+  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font> 
+  moore smclock=clk smreset=rst sminit=CabineArretDescente
+  		smstate=etat
+	out=(monter, descendre)
+    {CabineArretDescente ()
+      on DS target CabineEnMont&eacute;e,
+      on DI target CabineEnDescente},
+    {CabineArretMont&eacute;e ()
+      on MS target CabineEnMont&eacute;e,
+      on MI target CabineEnDescente},
+    {CabineEnMont&eacute;e (monter&lt;=0b1)
+      on MA target CabineArretMont&eacute;e},
+     {CabineEnDescente (descendre&lt;=0b1)
+      on DA target CabineArretDescente};
+ <font color="#A020F0">]]&gt;</font> <font color="#A020F0">&lt;/code&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_160.vhd">Moore.vhd</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#9A1900">--------------------------------------------
+-- g&eacute;n&eacute;r&eacute; par LILASV4                     --
+--------------------------------------------
+</font><font color="#009900">library</font> <font color="#0000FF">IEEE</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.std_logic_1164.</font><font color="#009900">all</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.Numeric_Std.</font><font color="#009900">all</font>;
+<font color="#009900">use</font> <font color="#0000FF">IEEE.std_logic_unsigned.</font><font color="#009900">all</font>;
+
+<font color="#009900">entity</font> <font color="#0000FF">tst_code_logic_Moore</font> <font color="#009900">is</font>
+<font color="#009900">port</font>(
+	<font color="#00A0FF">clk</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">rst</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">monter</font> : <font color="#009900">OUT</font> std_logic := 'U';
+	<font color="#00A0FF">descendre</font> : <font color="#009900">OUT</font> std_logic := 'U';
+	<font color="#00A0FF">DS</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">DI</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">MS</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">MI</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">MA</font> : <font color="#009900">IN</font> std_logic := 'U';
+	<font color="#00A0FF">DA</font> : <font color="#009900">IN</font> std_logic := 'U');
+<font color="#009900">end</font> <font color="#009900">entity</font> <font color="#0000FF">tst_code_logic_Moore</font>;
+
+<font color="#009900">architecture</font> <font color="#0000FF">a_tst_code_logic_Moore</font> <font color="#009900">of</font> <font color="#0000FF">tst_code_logic_Moore</font> <font color="#009900">is</font>
+<font color="#9A1900">-- d&eacute;claration des variables modules 
+-- d&eacute;claration des signaux internes 
+-- d&eacute;claration des variables locales 
+</font>	<font color="#009900">type</font> typeEtat <font color="#009900">is</font> (CabineArretDescente, CabineArretMont&eacute;e, CabineEnMont&eacute;e, CabineEnDescente);
+	<font color="#00A0FF">signal</font> <font color="#00A0FF">etatCourant</font> : typeEtat := CabineArretDescente;
+<font color="#009900">begin</font>
+	process (rst, clk)
+	<font color="#009900">begin</font>
+	
+		<font color="#009900">if</font> (rst='1') <font color="#009900">then</font> etatCourant &lt;= CabineArretDescente;
+					monter &lt;= '0';
+					descendre &lt;= '0';
+		<font color="#009900">elsif</font> (clk'EVENT <font color="#009900">and</font> clk='1') <font color="#009900">then</font>
+			<font color="#009900">case</font> etatCourant <font color="#009900">is</font>
+				<font color="#009900">when</font> CabineArretDescente =&gt; 
+					<font color="#009900">if</font> DS='1' <font color="#009900">then</font> etatCourant &lt;= CabineEnMont&eacute;e;
+						monter &lt;= '1';
+						descendre &lt;= '0';
+					<font color="#009900">elsif</font> DI='1' <font color="#009900">then</font> etatCourant &lt;= CabineEnDescente;
+						monter &lt;= '0';
+						descendre &lt;= '1';
+					<font color="#009900">end</font> <font color="#009900">if</font>;
+				<font color="#009900">when</font> CabineArretMont&eacute;e =&gt; 
+					<font color="#009900">if</font> MS='1' <font color="#009900">then</font> etatCourant &lt;= CabineEnMont&eacute;e;
+						monter &lt;= '1';
+						descendre &lt;= '0';
+					<font color="#009900">elsif</font> MI='1' <font color="#009900">then</font> etatCourant &lt;= CabineEnDescente;
+						monter &lt;= '0';
+						descendre &lt;= '1';
+					<font color="#009900">end</font> <font color="#009900">if</font>;
+				<font color="#009900">when</font> CabineEnMont&eacute;e =&gt; 
+					<font color="#009900">if</font> MA='1' <font color="#009900">then</font> etatCourant &lt;= CabineArretMont&eacute;e;
+						monter &lt;= '0';
+						descendre &lt;= '0';
+					<font color="#009900">end</font> <font color="#009900">if</font>;
+				<font color="#009900">when</font> CabineEnDescente =&gt; 
+					<font color="#009900">if</font> DA='1' <font color="#009900">then</font> etatCourant &lt;= CabineArretDescente;
+						monter &lt;= '0';
+						descendre &lt;= '0';
+					<font color="#009900">end</font> <font color="#009900">if</font>;
+			<font color="#009900">end</font> <font color="#0000FF">case</font>;
+		<font color="#009900">end</font> <font color="#009900">if</font>;
+		
+	<font color="#009900">end</font> <font color="#0000FF">process</font>;
+
+<font color="#009900">end</font> <font color="#009900">architecture</font> <font color="#0000FF">a_tst_code_logic_Moore</font><font color="#009900">;</font>
+
+<font color="#0000FF">dernierTokenDuFichierSource</font><font color="#009900">dernierTokenDuFichierSource</font></div></div> 
+</p></div></body></html>

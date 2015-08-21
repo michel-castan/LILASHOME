@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Creator: fig2dev Version 3.2 Patchlevel 5a -->
+
+<!-- CreationDate: Thu May 19 11:09:42 2011 -->
+
+<!-- Magnification: 1.050 -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="334.4758"
+   height="267.03061"
+   viewBox="685 449 4439.974 3572.9448"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="moore.svg">
+  <metadata
+     id="metadata188">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs186">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 319.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="747 : 319.5 : 1"
+       inkscape:persp3d-origin="373.5 : 213 : 1"
+       id="perspective190" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1207"
+     inkscape:window-height="862"
+     id="namedview184"
+     showgrid="false"
+     inkscape:zoom="2.1926275"
+     inkscape:cx="180.98334"
+     inkscape:cy="123.94798"
+     inkscape:window-x="46"
+     inkscape:window-y="135"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     inkscape:snap-grids="false"
+     fit-margin-top="0.5"
+     fit-margin-left="0.5"
+     fit-margin-right="0.5"
+     fit-margin-bottom="0.5" />
+  <ellipse
+     d="M 755,0 C 755,260.6784 416.97499,472 0,472 -416.97499,472 -755,260.6784 -755,0 c 0,-260.6784 338.02501,-472 755,-472 416.97499,0 755,211.3216 755,472 z"
+     sodipodi:ry="472"
+     sodipodi:rx="755"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     cy="0"
+     cx="0"
+     id="etat1r"
+     style="fill:#ffffff;stroke:#000000;stroke-width:16"
+     ry="472"
+     rx="755"
+     transform="translate(1441.7249,3108.6901)" />
+  <ellipse
+     d="M 755,0 C 755,260.6784 416.97499,472 0,472 -416.97499,472 -755,260.6784 -755,0 c 0,-260.6784 338.02501,-472 755,-472 416.97499,0 755,211.3216 755,472 z"
+     sodipodi:ry="472"
+     sodipodi:rx="755"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     cy="0"
+     cx="0"
+     id="etat2r"
+     style="fill:#ffffff;stroke:#000000;stroke-width:16"
+     ry="472"
+     rx="755"
+     transform="translate(1434.7249,936.69014)" />
+  <ellipse
+     d="M 755,0 C 755,260.6784 416.97499,472 0,472 -416.97499,472 -755,260.6784 -755,0 c 0,-260.6784 338.02501,-472 755,-472 416.97499,0 755,211.3216 755,472 z"
+     sodipodi:ry="472"
+     sodipodi:rx="755"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     cy="0"
+     cx="0"
+     id="etat3r"
+     style="fill:#ffffff;stroke:#000000;stroke-width:16"
+     ry="472"
+     rx="755"
+     transform="translate(4358.7249,935.69014)" />
+  <ellipse
+     d="M 755,0 C 755,260.6784 416.97499,472 0,472 -416.97499,472 -755,260.6784 -755,0 c 0,-260.6784 338.02501,-472 755,-472 416.97499,0 755,211.3216 755,472 z"
+     sodipodi:ry="472"
+     sodipodi:rx="755"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     cy="0"
+     cx="0"
+     id="etat0r"
+     style="fill:#ffffff;stroke:#000000;stroke-width:16"
+     ry="472"
+     rx="755"
+     transform="translate(4370.7249,3108.6901)" />
+  <polyline
+     id="dsl"
+     style="fill:none;stroke:#000000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter"
+     points="7369,1490 8976,2929 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polygon
+     id="polygon104"
+     style="fill:#000000;stroke:#000000;stroke-width:16;stroke-miterlimit:8"
+     points="7464,1490 7464,1490 7188,1328 7380,1584 7375,1496 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polyline
+     id="mil"
+     style="fill:none;stroke:#000000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter"
+     points="8700,1496 7181,2929 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polygon
+     id="polygon108"
+     style="fill:#000000;stroke:#000000;stroke-width:32;stroke-miterlimit:8"
+     points="8657,1619 8657,1619 8843,1358 8570,1528 8659,1530 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polyline
+     id="dal"
+     style="fill:none;stroke:#000000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:bevel"
+     points="10110,1322 10110,1323 10111,1327 10112,1331 10114,1338 10116,1349 10120,1362 10124,1379 10129,1399 10134,1422 10139,1446 10145,1474 10151,1503 10157,1533 10163,1566 10169,1599 10174,1635 10179,1673 10184,1713 10188,1756 10193,1801 10197,1849 10200,1902 10202,1959 10203,2017 10204,2078 10204,2136 10202,2192 10200,2246 10198,2299 10195,2348 10191,2395 10186,2440 10182,2482 10178,2523 10173,2563 10167,2601 10162,2638 10157,2674 10151,2707 10145,2740 10140,2770 10135,2799 10130,2826 10125,2849 10121,2870 10118,2887 10115,2901 10113,2912 10155,2681 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polygon
+     id="polygon116"
+     style="fill:#000000;stroke:#000000;stroke-width:16;stroke-miterlimit:8"
+     points="10112,2597 10112,2597 10112,2918 10235,2621 10161,2670 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polyline
+     id="dil"
+     style="fill:none;stroke:#000000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:bevel"
+     points="9354,2740 9353,2739 9352,2735 9350,2731 9345,2724 9340,2713 9335,2701 9328,2686 9320,2668 9313,2648 9304,2626 9297,2602 9290,2575 9283,2544 9277,2511 9271,2473 9267,2430 9262,2382 9260,2327 9259,2267 9260,2219 9261,2172 9264,2124 9267,2078 9271,2034 9275,1992 9279,1950 9285,1910 9290,1871 9295,1835 9300,1797 9307,1761 9313,1727 9318,1694 9324,1662 9330,1632 9335,1606 9339,1582 9343,1562 9348,1545 9350,1531 9302,1757 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polygon
+     id="polygon120"
+     style="fill:#000000;stroke:#000000;stroke-width:16;stroke-miterlimit:8"
+     points="9350,1841 9350,1841 9352,1521 9227,1816 9301,1767 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polyline
+     id="mal"
+     style="fill:none;stroke:#000000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:bevel"
+     points="5992,1331 5992,1332 5991,1335 5989,1339 5986,1346 5983,1357 5977,1371 5972,1386 5965,1406 5958,1428 5950,1453 5942,1479 5933,1507 5925,1538 5917,1569 5908,1603 5901,1638 5893,1675 5886,1715 5880,1757 5874,1802 5868,1850 5864,1903 5861,1959 5859,2017 5858,2078 5859,2136 5860,2192 5863,2247 5867,2299 5871,2349 5877,2396 5883,2441 5889,2485 5896,2527 5903,2566 5910,2604 5918,2642 5926,2678 5933,2712 5941,2745 5949,2776 5956,2805 5963,2832 5970,2856 5975,2877 5981,2895 5984,2909 5987,2920 5917,2697 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polygon
+     id="polygon124"
+     style="fill:#000000;stroke:#000000;stroke-width:16;stroke-miterlimit:8"
+     points="5839,2642 5839,2642 5989,2927 5960,2606 5917,2684 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polyline
+     id="msl"
+     style="fill:none;stroke:#000000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:bevel"
+     points="6791,2739 6792,2738 6793,2734 6796,2730 6801,2723 6806,2712 6813,2700 6820,2685 6829,2667 6837,2647 6846,2625 6855,2601 6862,2574 6871,2544 6877,2511 6883,2473 6889,2430 6893,2382 6896,2327 6897,2267 6896,2219 6895,2172 6892,2124 6889,2078 6885,2034 6880,1991 6875,1950 6870,1910 6864,1871 6857,1834 6851,1797 6845,1761 6837,1727 6831,1693 6825,1661 6818,1632 6812,1605 6807,1581 6803,1561 6798,1544 6795,1530 6841,1756 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <polygon
+     id="polygon128"
+     style="fill:#000000;stroke:#000000;stroke-width:16;stroke-miterlimit:8"
+     points="6923,1813 6923,1813 6793,1520 6801,1840 6848,1765 "
+     transform="translate(-5137.2751,-103.30984)" />
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat2t1"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="621.08423"
+     x="1428.7246"
+     xml:space="preserve">cabine</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat2t2"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="857.08386"
+     x="1428.7246"
+     xml:space="preserve">en montée</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat3t1"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="621.08423"
+     x="4358.7246"
+     xml:space="preserve">cabine</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat3t2"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="857.08386"
+     x="4358.7246"
+     xml:space="preserve">en descente</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat0t2"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="3030.0852"
+     x="4405.7246"
+     xml:space="preserve">descente</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat0t1"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="2794.0852"
+     x="4405.7246"
+     xml:space="preserve">arrêt</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat1t1"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="2794.0852"
+     x="1428.7246"
+     xml:space="preserve">arrêt</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="etat1t2"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="3030.0852"
+     x="1428.7246"
+     xml:space="preserve">montée</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="text160"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="1276.7515"
+     x="1409.5981"
+     xml:space="preserve">monter=1</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="text162"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="1282.8539"
+     x="4365.6465"
+     xml:space="preserve">descendre=1</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:bold;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="mat"
+     font-size="152"
+     font-weight="bold"
+     font-style="normal"
+     y="2051.3831"
+     x="887.48285"
+     xml:space="preserve">MA</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:bold;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="mst"
+     font-size="152"
+     font-weight="bold"
+     font-style="normal"
+     y="2069.6902"
+     x="1995.7247"
+     xml:space="preserve">MS</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:bold;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="dit"
+     font-size="152"
+     font-weight="bold"
+     font-style="normal"
+     y="2069.6902"
+     x="3932.7246"
+     xml:space="preserve">DI</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:bold;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="dat"
+     font-size="152"
+     font-weight="bold"
+     font-style="normal"
+     y="2075.7925"
+     x="4906.0688"
+     xml:space="preserve">DA</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:bold;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="mit"
+     font-size="152"
+     font-weight="bold"
+     font-style="normal"
+     y="2683.6902"
+     x="2515.7249"
+     xml:space="preserve">MI</text>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:bold;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="dst"
+     font-size="152"
+     font-weight="bold"
+     font-style="normal"
+     y="2683.6902"
+     x="3318.7249"
+     xml:space="preserve">DS</text>
+  <g
+     id="g3264"
+     transform="matrix(-0.54036788,-0.84142888,0.84142888,-0.54036788,5708.0652,15549.251)">
+    <polyline
+       transform="matrix(1,0,0,0.67214874,1127.8443,2969.3623)"
+       points="10110,1322 10110,1323 10111,1327 10112,1331 10114,1338 10116,1349 10120,1362 10124,1379 10129,1399 10134,1422 10139,1446 10145,1474 10151,1503 10157,1533 10163,1566 10169,1599 10174,1635 10179,1673 10184,1713 10188,1756 10193,1801 10197,1849 10200,1902 10202,1959 10203,2017 10204,2078 10204,2136 10202,2192 10200,2246 10198,2299 10195,2348 10191,2395 10186,2440 10182,2482 10178,2523 10173,2563 10167,2601 10162,2638 10157,2674 10151,2707 10145,2740 10140,2770 10135,2799 10130,2826 10125,2849 10121,2870 10118,2887 10115,2901 10113,2912 10155,2681 "
+       style="fill:none;stroke:#000000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:bevel"
+       id="dal-9" />
+    <polygon
+       transform="translate(1127.8443,2014.6594)"
+       points="10112,2918 10235,2621 10161,2670 10112,2597 10112,2597 "
+       style="fill:#000000;stroke:#000000;stroke-width:16;stroke-miterlimit:8"
+       id="polygon116-9" />
+  </g>
+  <text
+     style="font-size:152px;font-style:normal;font-weight:normal;text-anchor:middle;fill:#000000;stroke-width:0.025in;font-family:Times"
+     id="text160-8"
+     font-size="152"
+     font-weight="normal"
+     font-style="normal"
+     y="3758.5935"
+     x="2933.844"
+     xml:space="preserve">reset</text>
+</svg>

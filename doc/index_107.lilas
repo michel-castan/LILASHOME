@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <doc>
+  	clkMultiply = 2..32 default=4
+  	clkDivide   = 1..32 default=1
+  	
+  	CLOUT_PERIOD donnée en ns
+  </doc>
+  <signal mode="constant" name="CLKOUT_PERIOD" type="java.lang.Float"/>
+  <signal mode="constant" name="printDelay" type="java.lang.Boolean"/>
+  	  
+  <signal init="0b0" mode="out" name="clkOut" type="lilas.type.StdLogic"/>
+  
+  <code language="java"/>
+  
+</module>

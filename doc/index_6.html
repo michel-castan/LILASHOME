@@ -1,0 +1,35 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1sel"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 1 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">Installation</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The complete application <i>LILAS</i> reside in <span style="font-family:monospace;">LILASHOME</span> directory which can be downloaded from the GitHub site&nbsp;:
+<div style="white-space:pre;font-family:monospace;">$ <font color="#000086">git clone https://github.com/michel-castan/LILASHOME</font>
+
+</div>
+This command will create a directory named <span style="font-family:monospace;">LILASHOME</span>. This directory can be anywhere in your file system. 
+	The inclused file <span style="font-family:monospace;">LILASHOME/lib/lilasV4.jar</span> is en executable JAR file. The typical invocation 
+	is <span style="font-family:monospace;">java -jar LILASHOME/lib/lilasV4.jar</span> from a command line or by clicking on this file into a
+	file browser window.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+The next step is to create a working directory for your project in which we will define your lilas modules.
+This working directory can be anywhere in your file system with any name; however it is better to create this
+	directory outside <span style="font-family:monospace;">LILASHOME</span> directory (thus, we can create a git repository different of <span style="font-family:monospace;">LILASHOME</span> one).
+	Let's name LilasProject this directory.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+The final step will be to create a configuration file for LILAS. Again, this file can have any name and can be
+	anywhere in your file system. However, if we call it <span style="font-family:monospace;">lilasConfig.xml</span>	and if it reside at the root
+	of the working directory <span style="font-family:monospace;">LilasProject</span>, this will simplify the run command for lilas. 
+	The simplest way to create this configuration file is to launch the executable JAR archive
+		<span style="font-family:monospace;">LILASHOME/lib/lilasV4.jar</span> either by double clicking on the name of this archive
+		from the file manager, or by the command <span style="font-family:monospace;">java -jar lilasV4.jar</span>.
+		Unless a <span style="font-family:monospace;">lilasConfig.xml</span> configuration file is present in a parent directory of the
+		current directory, we will get the following window:
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">			
+<div class="centr&eacute;e"><img src="index_206.png"></div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+By answering in the affirmative, we will get a java.swing.JFileChooser dialog window for choosing 
+the working directory <span style="font-family:monospace;">LilasProject</span> in which you want to create the configuration file:</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+				
+
+<div class="centr&eacute;e"><img src="index_207.png"></div>
+By clicking on the button <span style="font-family:monospace;">Save</span>, the file lilasConfig.xml will be created in the directory 
+<span style="font-family:monospace;">LilasProject</span>, and also a script file for launching <i>LILAS</i> (lilas.sh or lilas.bat depending on the 
+	operating system).</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Now, you are ready to play with it. Follow the quick start tutorial on next section.</p></div></body></html>

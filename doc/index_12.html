@@ -1,0 +1,93 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv2"><a href="index_8.html" onClick="return chargerURLavecHistorique(this)">2.1 demo.hello.Hello</a></li><li class="niv2"><a href="index_11.html" onClick="return chargerURLavecHistorique(this)">2.2 demo.sqrt.SQRT</a></li><li class="niv3sel"><a href="index_12.html" onClick="return chargerURLavecHistorique(this)">2.2.1 How to test it&nbsp;?</a></li><li class="niv3"><a href="index_13.html" onClick="return chargerURLavecHistorique(this)">2.2.2 Coroutine mode</a></li><li class="niv3"><a href="index_14.html" onClick="return chargerURLavecHistorique(this)">2.2.3 Conditional configuration</a></li><li class="niv2"><a href="index_15.html" onClick="return chargerURLavecHistorique(this)">2.3 demo.ctrup.CtrUpDown</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 2.2.1 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">How to test it&nbsp;?</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Of course, we can run the module with some particular value from a standard graphic interface&nbsp;:
+<div style="white-space:pre;font-family:monospace;">$ <font color="#0x000086">lilas /demo/sqrt/Sqrt1.lilas -awt x=4.0</font>
+
+</div>	
+which give the following snapshot&nbsp;:<div class="centr&eacute;e"><embed src="index_191.svg" type="image/svg+xml"></embed></div>
+Then simply edit the "Value" column of the signal x with a new value (for example 2.0), and we can check the result:
+				
+	<div class="centr&eacute;e"><embed src="index_192.svg" type="image/svg+xml"></embed></div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Unfortunately, this way is a little bit fastidious, but <i>LILAS</i> can help us for writing a test module. This is achieved
+	with the option <span style="font-family:monospace;">-to=tst</span>&nbsp;: 
+
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Launching the command <span style="font-family:monospace;"><font color="#0x000086">lilas /demo/sqrt/Sqrt1.lilas -to=tst</font></span> create a file 
+<span style="font-family:monospace;">/demo/sqrt/Sqrt1_tst.lilas</span> which is a <i>LILAS</i> module description for a test module of <span style="font-family:monospace;">demo.sqrt.Sqrt1</span>.
+This test module contains an instance of <span style="font-family:monospace;">demo.sqrt.Sqrt1</span> and 2 predefined graphic interfaces, the first one
+called <span style="font-family:monospace;">simple</span> for introducing some input values to the checked module, the second one called 
+<span style="font-family:monospace;">awt</span> for introducing some input values to the checked module and visualizing the evolution
+of the signals during execution.
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+	However, there is no java description file to define the activate method use for module 
+	<span style="font-family:monospace;">demo.sqrt.Sqrt1_tst</span>. Instead, there is a script definition named <span style="font-family:monospace;">main</span> defined by
+	the xml element&nbsp;:
+<div style="white-space:pre;font-family:monospace;">
+	<font color="#A020F0">&lt;script name=</font><font color="#CC6600">"main"</font><font color="#A020F0">&gt;</font>
+		<font color="#A020F0">&lt;waitStable/&gt;</font>
+		<font color="#A020F0">&lt;group&gt;</font>
+			<font color="#A020F0">&lt;next signal=</font><font color="#CC6600">"x"</font> <font color="#A020F0">value=</font><font color="#CC6600">"0.0"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;/group&gt;</font>
+		<font color="#A020F0">&lt;waitStable/&gt;</font>
+		<font color="#A020F0">&lt;check signal=</font><font color="#CC6600">"y"</font> <font color="#A020F0">value=</font><font color="#CC6600">"0.0"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;/script&gt;</font>
+
+</div>
+When this script is activate, it execute sequentially each instruction of the <i>LILAS</i> script language. Here,
+	we have&nbsp;:
+	<ul id="ID_PubliTool_N10253">
+		<li>&lt;waitStable/&gt;&nbsp;: this cause the script waiting for a stabilisation of <i>LILAS</i> system (the system
+			is stable when the list of ready module is empty)</li>
+		<li>&lt;next signal="x" value="0.0"/&gt;&nbsp;: this cause a new value on the signal x; the group element
+			allow to set multiple signal at the same time (here there is only one signal, so the group element is not
+			necessary)</li>
+		<li>&lt;check signal="y" value="0.0"/&gt;&nbsp;: this check if the given value appears onto the given signal;
+			in case of failure, a message is printed.</li>
+	</ul> 
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Let's define to others scripts named <span style="font-family:monospace;">ok</span> and <span style="font-family:monospace;">bad</span>&nbsp;:
+<div style="white-space:pre;font-family:monospace;">
+	<font color="#A020F0">&lt;script name=</font><font color="#CC6600">"ok"</font><font color="#A020F0">&gt;</font>
+		<font color="#A020F0">&lt;print&gt;</font>** sqrt of 4.0 **<font color="#A020F0">&lt;/print&gt;</font>
+		<font color="#A020F0">&lt;next signal=</font><font color="#CC6600">"x"</font> <font color="#A020F0">value=</font><font color="#CC6600">"4.0"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;waitStable/&gt;</font>
+		<font color="#A020F0">&lt;check signal=</font><font color="#CC6600">"y"</font> <font color="#A020F0">value=</font><font color="#CC6600">"2.0"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;print&gt;</font>** sqrt of 2.0 **<font color="#A020F0">&lt;/print&gt;</font>
+		<font color="#A020F0">&lt;next signal=</font><font color="#CC6600">"x"</font> <font color="#A020F0">value=</font><font color="#CC6600">"2.0"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;waitStable/&gt;</font>
+		<font color="#A020F0">&lt;check signal=</font><font color="#CC6600">"y"</font> <font color="#A020F0">value=</font><font color="#CC6600">"1.414213562373095"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;print&gt;</font>** done **<font color="#A020F0">&lt;/print&gt;</font>
+	<font color="#A020F0">&lt;/script&gt;</font>
+	
+	<font color="#A020F0">&lt;script name=</font><font color="#CC6600">"bad"</font><font color="#A020F0">&gt;</font>
+		<font color="#A020F0">&lt;print&gt;</font>** sqrt of 4.0 **<font color="#A020F0">&lt;/print&gt;</font>
+		<font color="#A020F0">&lt;next signal=</font><font color="#CC6600">"x"</font> <font color="#A020F0">value=</font><font color="#CC6600">"4.0"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;waitStable/&gt;</font>
+		<font color="#A020F0">&lt;check signal=</font><font color="#CC6600">"y"</font> <font color="#A020F0">value=</font><font color="#CC6600">"2.0"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;print&gt;</font>** sqrt of 2.0 **<font color="#A020F0">&lt;/print&gt;</font>
+		<font color="#A020F0">&lt;next signal=</font><font color="#CC6600">"x"</font> <font color="#A020F0">value=</font><font color="#CC6600">"2.0"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;waitStable/&gt;</font>
+		<font color="#A020F0">&lt;check signal=</font><font color="#CC6600">"y"</font> <font color="#A020F0">value=</font><font color="#CC6600">"1.4142"</font><font color="#A020F0">/&gt;</font>
+		<font color="#A020F0">&lt;print&gt;</font>** done **<font color="#A020F0">&lt;/print&gt;</font>
+	<font color="#A020F0">&lt;/script&gt;</font>
+
+</div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+	To launch one of this script, simply indicate the script name with the parameter <span style="font-family:monospace;">-script=<i>script_name</i></span>&nbsp;:
+<div style="white-space:pre;font-family:monospace;">$ <font color="#0x000086">lilas /demo/sqrt/Sqrt1_tst.lilas -script=ok</font>
+Lilas ready&nbsp;!
+Script running
+** sqrt of 4.0 **
+** sqrt of 2.0 **
+** done **
+**Script ok done (2 validated checks of 2) at 1.837ms
+Lilas completed&nbsp;!
+$ <font color="#0x000086">lilas /demo/sqrt/Sqrt1_tst.lilas -script=bad</font>	
+Lilas ready&nbsp;!
+Script running
+** sqrt of 4.0 **
+** sqrt of 2.0 **
+script ligne 87 check not validated on signal /y&nbsp;: expected value 1.4142 # actual value 1.414213562373095 &agrave; 910715000
+** done **
+**Script bad done (1 validated check of 2) at 1.15ms
+Lilas completed&nbsp;!
+</div>
+</p></div></body></html>

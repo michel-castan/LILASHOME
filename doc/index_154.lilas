@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <signal mode="in" name="a" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="b" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="cin" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="cout" type="lilas.type.StdLogic" init="0b0" optional="true"/>
+  <signal mode="out" name="s" type="lilas.type.StdLogic" init="0b0"/>
+  
+    <code language="logic"><![CDATA[
+    	local g <= a and b;
+    	internal p:1 <= a or b;
+    	cout <= g or (p and cin);
+    	s <= a xor b xor cin;
+]]> </code>
+
+</module>

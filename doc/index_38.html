@@ -1,0 +1,49 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv2"><a href="index_22.html" onClick="return chargerURLavecHistorique(this)">5.1 lilas.base</a></li><li class="niv2"><a href="index_26.html" onClick="return chargerURLavecHistorique(this)">5.2 lilas.awt</a></li><li class="niv3"><a href="index_27.html" onClick="return chargerURLavecHistorique(this)">5.2.1 Panel</a></li><li class="niv3"><a href="index_28.html" onClick="return chargerURLavecHistorique(this)">5.2.2 ListDisplay</a></li><li class="niv3"><a href="index_29.html" onClick="return chargerURLavecHistorique(this)">5.2.3 SystemDisplay</a></li><li class="niv3"><a href="index_30.html" onClick="return chargerURLavecHistorique(this)">5.2.4 BoutonListeScripts</a></li><li class="niv3"><a href="index_31.html" onClick="return chargerURLavecHistorique(this)">5.2.5 BoutonScript</a></li><li class="niv3"><a href="index_32.html" onClick="return chargerURLavecHistorique(this)">5.2.6 BoutonPasAPas</a></li><li class="niv3"><a href="index_33.html" onClick="return chargerURLavecHistorique(this)">5.2.7 BoutonSnapshot</a></li><li class="niv3"><a href="index_34.html" onClick="return chargerURLavecHistorique(this)">5.2.8 Display</a></li><li class="niv3"><a href="index_35.html" onClick="return chargerURLavecHistorique(this)">5.2.9 DisplayScrollBar</a></li><li class="niv3"><a href="index_36.html" onClick="return chargerURLavecHistorique(this)">5.2.10 ImageSVG</a></li><li class="niv3"><a href="index_37.html" onClick="return chargerURLavecHistorique(this)">5.2.11 MemoryDisplay</a></li><li class="niv3sel"><a href="index_38.html" onClick="return chargerURLavecHistorique(this)">5.2.12 BoutonsLoadSaveMemory</a></li><li class="niv3"><a href="index_39.html" onClick="return chargerURLavecHistorique(this)">5.2.13 Text</a></li><li class="niv2"><a href="index_40.html" onClick="return chargerURLavecHistorique(this)">5.3 lilas.script</a></li><li class="niv2"><a href="index_60.html" onClick="return chargerURLavecHistorique(this)">5.4 lilas.sm</a></li><li class="niv2"><a href="index_61.html" onClick="return chargerURLavecHistorique(this)">5.5 lilas.code</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 5.2.12 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">BoutonsLoadSaveMemory</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The item "BoutonsSaveMemory" is a panel with two buttons, load and save, allowing initialization of 
+		a memory from the contents of a text file. The attributes of this element are:
+	<ul id="ID_PubliTool_N10852">
+		<li>memory&nbsp;: Indicates the instance <span style="font-family:monospace;">MemoryDisplayable</span></li>
+		<li>memInit&nbsp;: indicates the resource (extension <span style="font-family:monospace;">.mem</span>) containing the image memory.</li>
+	</ul>
+	</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Example&nbsp;: 
+<div style="white-space:pre;font-family:monospace;">
+	<font color="#A020F0">&lt;awt layout=</font><font color="#CC6600">"border"</font> <font color="#A020F0">name=</font><font color="#CC6600">"pan"</font><font color="#A020F0">&gt;</font>
+		<font color="#A020F0">&lt;page_start layout=</font><font color="#CC6600">"border"</font><font color="#A020F0">&gt;</font>
+			<font color="#A020F0">&lt;center layout=</font><font color="#CC6600">"scroll"</font> <font color="#A020F0">width=</font><font color="#CC6600">"300"</font> <font color="#A020F0">height=</font><font color="#CC6600">"300"</font><font color="#A020F0">&gt;</font>
+				<font color="#A020F0">&lt;MemoryDisplay memory=</font><font color="#CC6600">"MemoireRAM.mem"</font> <font color="#A020F0">model=</font><font color="#CC6600">"ModeleMemoireAdrOctet"</font> <font color="#A020F0">sizeCol0=</font><font color="#CC6600">"20"</font> <font color="#A020F0">sizeCol1=</font><font color="#CC6600">"50"</font><font color="#A020F0">/&gt;</font>	
+			<font color="#A020F0">&lt;/center&gt;</font>
+			<font color="#A020F0">&lt;page_end&gt;</font>
+				<font color="#A020F0">&lt;BoutonsLoadSaveMem memory=</font><font color="#CC6600">"MemoireRAM.mem"</font> <font color="#A020F0">memInit=</font><font color="#CC6600">"lilas.bib.logic.memoire.memoireInit"</font><font color="#A020F0">/&gt;</font>
+			<font color="#A020F0">&lt;/page_end&gt;</font>
+		<font color="#A020F0">&lt;/page_start&gt;</font>
+	<font color="#A020F0">&lt;/awt&gt;</font>
+
+</div>	</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Memory Image file format:
+<div style="white-space:pre;font-family:monospace;"><font color="#A020F0">&lt;MemoryImage&gt;</font>
+	<font color="#A020F0">&lt;Word adr=</font><font color="#CC6600">"5"</font> <font color="#A020F0">val=</font><font color="#CC6600">"content of the word 5"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;Word val=</font><font color="#CC6600">"content of the word 6"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;Word val=</font><font color="#CC6600">"content of the word 7"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;Word adr=</font><font color="#CC6600">"15"</font> <font color="#A020F0">val=</font><font color="#CC6600">"content of the word 15"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;Word val=</font><font color="#CC6600">"content of the word 16"</font><font color="#A020F0">/&gt;</font>
+	<font color="#A020F0">&lt;Word val=</font><font color="#CC6600">"content of the word 17"</font><font color="#A020F0">/&gt;</font>
+<font color="#A020F0">&lt;/MemoryImage&gt;</font>
+</div>
+corresponds to the memory initialization with the following content:
+<div style="white-space:pre;font-family:monospace;">
+	adr 5&nbsp;: content of the word 5
+	adr 6&nbsp;: content of the word 6
+	adr 7&nbsp;: content of the word 7
+	adr 8&nbsp;: content of the word 7
+	adr 9&nbsp;: content of the word 7
+    ...
+	adr 13&nbsp;: content of the word 7
+	adr 14&nbsp;: content of the word 7
+	adr 15&nbsp;: content of the word 15
+	adr 16&nbsp;: content of the word 16
+	adr 17&nbsp;: content of the word 17
+	adr 17&nbsp;: content of the word 17
+	adr 17&nbsp;: content of the word 17
+    ...
+</div>
+</p></div></body></html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <doc>Mémoire ROM simple</doc>
+  <signal mode="constant" name="sizeWord" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeAdr" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeMem" type="java.lang.Integer" init="256"/>
+
+  <signal mode="in" name="clk" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="we" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="adr" type="lilas.type.StdLogic" sensitive="true" size="sizeAdr"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="sizeWord"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="sizeWord"/>
+
+  <signal mode="internal" name="mem" type="lilas.type.ArrayStdLogic" init="256:0xUUUU"/>
+
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  //array mem <= ( 0xFF:8, 4:4 => 0xFE, 1:4=>0xFD, 0xFC, 0xFB, 0b0101 => 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0);
+  
+  if selected(clk) and clk then
+  	if we then mem(adr) <= dIn; end if;
+  	end if;	
+  dOut <= mem(adr);
+  ]]></code>
+  
+</module>

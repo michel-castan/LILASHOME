@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <signal mode="out" name="q" type="lilas.type.StdLogic" size="4"/>
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="in" name="d1" type="lilas.type.StdLogic" size="4"/>
+  <signal mode="in" name="d2" type="lilas.type.StdLogic" size="4"/>
+  
+   <code language="logic"><![CDATA[  
+   	q <= d1 plus d2;
+   ]]></code>
+
+</module>
+ 

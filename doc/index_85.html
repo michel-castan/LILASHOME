@@ -1,0 +1,37 @@
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv1sel"><a href="index_85.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li><li class="niv2"><a href="index_86.html" onClick="return chargerURLavecHistorique(this)">7.1 Signals for Nexys3</a></li><li class="niv2"><a href="index_87.html" onClick="return chargerURLavecHistorique(this)">7.2 Signals for Minispartan6</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 7 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">FPGA board</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder"><i>LILAS</i> considers three FPGA boards:
+	<ul id="ID_PubliTool_N1114C">
+		<li>board <a href="http://www.digilentinc.com/Products/Detail.cfm?NavPath=2,400,897&Prod=NEXYS3&CFID=11649987&CFTOKEN=dc80eafd3b6fabd3-DFC162F7-5056-0201-0297DBF3F1BC1A87">Nexys3 from Digilent</a></li>
+		<li>boards <a href="http://www.scarabhardware.com/minispartan6/">minispartan6 from Scarab Hardware</a>
+		(LX9 et LX25)</li>
+	</ul>
+	Names recognized by LILAC for these target cards are&nbsp;:
+	<ul id="ID_PubliTool_N1115C">
+		<li>nexys3 (Board Nexys3)</li>
+		<li>ms6lx9 (Board minispartan6 with Spartan 6 LX9)</li>
+		<li>ms6lx25 (Board minispartan6 with Spartan 6 LX25)</li>
+	</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">The indication of the target board can be done in several ways. By decreasing priority, we can specify the target:
+	<ul id="ID_PubliTool_N1116B">
+		<li>at the definition of a module through the board attribute:
+		<div style="white-space:pre;font-family:monospace;"><font color="#A020F0">&lt;module board=</font><font color="#CC6600">"nomDeLaCible"</font><font color="#A020F0">&gt;</font>
+  ...
+<font color="#A020F0">&lt;/module&gt;</font>
+			</div>
+			
+		</li>
+		<li>at the lilas command with the option -board:
+		<div style="white-space:pre;font-family:monospace;">$ <font color="#0x000086">lilas ... -board=boardName ...</font>
+		</div>
+		</li>
+		<li>in the configuration file with var element:
+		<div style="white-space:pre;font-family:monospace;"><font color="#A020F0">&lt;config&gt;</font>
+  ...
+  <font color="#A020F0">&lt;var name=</font><font color="#CC6600">"board"</font> <font color="#A020F0">value=</font><font color="#CC6600">"boardName"</font><font color="#A020F0">/&gt;</font>
+  ...
+<font color="#A020F0">&lt;/config&gt;</font>
+			</div>
+		</li>
+	</ul>
+	</p></div></body></html>

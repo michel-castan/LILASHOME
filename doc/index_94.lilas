@@ -1,37 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-
-  <signal mode="in" name="dataHexa" type="lilas.type.StdLogic" sensitive="true" init="0x0000"/>
-  <signal mode="in" name="dataGraphique" type="lilas.type.StdLogic" sensitive="true" init="0x00000000"/>
-  <signal mode="in" name="mode" type="lilas.type.StdLogic" sensitive="true" init="0b0"/><!-- 0=hexa, 1=graphique -->
-  <signal mode="in" name="clk100M" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="in" name="raz" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="out" name="Seg" type="lilas.type.StdLogic" init="0x00"/><!-- A B C D E F G P -->
-  <signal mode="out" name="AN" type="lilas.type.StdLogic" init="0x0"/> <!-- AN0 AN1 AN2 AN3 -->
+  <signal mode="constant" name="generatorFrequency" type="java.lang.Double"/>
+  <signal mode="constant" name="fftSize" type="java.lang.Integer"/>
+  <signal mode="in" name="start" init="false" sensitive="true" type="java.lang.Boolean"/>
   
-  <signal mode="internal" name="valCtr" type="lilas.type.StdLogic" size="20"/>
-
-  <code language="logic"><![CDATA[
-  // ctr
-  if raz then
-  	valCtr <= setBits valCtr with 0b0;
-  elsif selected(clk100M) and clk100M then
-	valCtr <= valCtr plus 0b1;
-  end if;
-  		
-  // cmd
-  LOCAL noChiffre <= valCtr[19:18];
-    
-  AN <= with noChiffre select (0b1110, 0b1101, 0b1011, 0b0111);
-  LOCAL q4b <= with noChiffre select (dataHexa[15:12], dataHexa[11:8], dataHexa[7:4], dataHexa[3:0]);
-
+  <signal mode="out" name="kout" type="java.lang.Integer"/>
+  <signal mode="out" name="xout" type="java.lang.Double"/>
+  <signal mode="out" name="yout" type="java.lang.Double"/>
   
-  LOCAL SegHexa <= with q4b select (
-        0b01110001, 0b01100001, 0b10000101, 0b01100011, 0b11000001, 0b00010001, 0b00001001, 0b00000001,
-        0b00011111, 0b01000001, 0b01001001, 0b10011001, 0b00001101, 0b00100101, 0b10011111, 0b00000011);
-  LOCAL SegGraphique <= with noChiffre select (dataGraphique[31:24], dataGraphique[23:16], dataGraphique[15:8], dataGraphique[7:0]);
-  Seg <= with mode select (SegGraphique, SegHexa); 
-  
-]]>  </code>
+<code language="java"/>
 
 </module>

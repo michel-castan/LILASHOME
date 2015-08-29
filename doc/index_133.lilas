@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Pour coder une valeur sur 4 bits et fournir le code 8 bits correspondant pour les afficheurs 7 segments</doc>
-  <signal init="0x0" mode="in" name="val" sensitive="true" type="lilas.type.StdLogic"/>
-  <signal init="0x00" mode="out" name="digit" type="lilas.type.StdLogic"/>
-	
-  <code language="logic"><![CDATA[
-	digit <= with val select (
-        0b01110001, 0b01100001, 0b10000101, 0b01100011, 0b11000001, 0b00010001, 0b00001001, 0b00000001,
-        0b00011111, 0b01000001, 0b01001001, 0b10011001, 0b00001101, 0b00100101, 0b10011111, 0b00000011);
+  <doc>Registre à base de FLip-flop Positive-Edge Clock with Enable clock, Asynchronous Clear</doc>
+  <signal mode="constant" name="size" type="java.lang.Integer" init="1"/>
+
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="en" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="clr" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
+
+  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" init="0b0"/>
   
-]]>  </code>
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  	if clr then regVal <= 0b0;
+  	elsif selected(clk) and clk then
+  		if en then regVal <= dIn;
+  		end if;
+ 	end if;
+  	
+  	dOut <= regVal;
+  	]]></code>
   
 </module>

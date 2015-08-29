@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<module>
-	<signal mode="constant" name="size" type="java.lang.Integer"/>
-	<signal mode="in" init="0b0" name="clkCircuit" type="lilas.type.StdLogic"/>
-	<signal mode="in" init="0b0" name="clear" type="lilas.type.StdLogic"/>
-	<signal mode="in" init="0b0" name="upDown" type="lilas.type.StdLogic"/>
-	<signal mode="out" init="0bU:size" name="ctr" type="lilas.type.StdLogic"/>
-					
-   	<signal mode="internal" name="valCtr" type="lilas.type.StdLogic" init="0bU:size"/>
-   
-	<code language="logic"><![CDATA[
- 	if clear then
-		valCtr <= 0b0:size;
-	elsif selected(clkCircuit) and clkCircuit then
-		if upDown then valCtr <= valCtr minus 0b1;
-		else valCtr <= valCtr plus 0b1;
-		end if;
-	end if;
-  
-	ctr <= valCtr; 	
-  ]]></code>
-
+<module>	
+	<awt name="myComponent"/>
+	
+	<code language="java"/>
 </module>

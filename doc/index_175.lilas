@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-	<doc>Execute operator Sigma(n, m, x) = x**n+x**(n+1)+..+x**m</doc>
-  <signal mode="constant" name="n" type="java.lang.Integer"/>
-  <signal mode="constant" name="m" type="java.lang.Integer"/>
-  
-  <signal mode="in" name="x" init="0" sensitive="true" type="java.lang.Long"/>
-  <signal mode="out" name="y" type="java.lang.Long"/>
 
-  <signal mode="constant" name="n0" type="java.lang.Integer" init="(n+m)/2"/>
-  <signal mode="constant" name="n1" type="java.lang.Integer" init="n0+1"/>
-    	
-  <signal mode="internal" name="y1" type="java.lang.Long" init="0" sensitive="true"/>
-  <signal mode="internal" name="y2" type="java.lang.Long" init="0" sensitive="true"/>
+  <signal mode="in" name="adr" sensitive="true" type="lilas.type.StdLogic" size="4"/>
+  <signal mode="in" name="we" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="clk" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="din" sensitive="true" type="lilas.type.StdLogic" size="8"/>
+  <signal mode="out" name="dout" optional="true" type="lilas.type.StdLogic" size="8"/>
   
-  <Sigma n="n" m="n0" x="x" y="y1"/>
-  <Sigma n="n1" m="m" x="x" y="y2"/>
- 
-  <code language="java"/>
-  
+  <signal mode="internal" name="mem" type="lilas.type.ArrayStdLogic" init="16:0xUU"/>
+
+  <code language="logic"><![CDATA[
+  array mem <= ( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0);
+  if selected(clk) and equals(clk,0b1) and equals(we,0b1) then
+  	mem(adr) <= din ;
+  end if;
+  dout <= mem(adr);
+      
+ ]]> </code>
+
 </module>
-  

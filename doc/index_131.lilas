@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Unsigned Down Counter With Asynchronous Reset and Synchronous Load</doc>
+  <doc>Registre à base de FLip-flop Positive-Edge Clock with Enable clock</doc>
   <signal mode="constant" name="size" type="java.lang.Integer"/>
-  <signal mode="out" name="q" type="lilas.type.StdLogic" size="size"/>
-  <signal mode="in" name="clk" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="load" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="ctrIn" type="lilas.type.StdLogic" init="0:size"/>
-  <signal mode="in" name="clr" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="ce" type="lilas.type.StdLogic" init="0b0"/>
- 
-  <signal mode="internal" name="valCtr" type="lilas.type.StdLogic" size="size"/>
 
-  <code language="logic"><![CDATA[  
-  if clr then
-     valCtr <= 0:size;
-  elsif selected(clk) and clk then
-  	if (ce) then
-  		if load then valCtr <= ctrIn;
-   		else valCtr <= valCtr minus 0b1;
-       end if;
-    end if;
-  end if;
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="en" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
+
+  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
   
-  q <= valCtr;
-    
-  ]]></code>
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  	if selected(clk) and clk then
+  		if en then regVal <= dIn;
+  		end if;
+ 	end if;
+  	
+  	dOut <= regVal;
+  	]]></code>
   
 </module>

@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc> Bascule D  Positive-Edge Clock with Enable clock, Asynchronous Clear </doc>
+  <signal mode="constant" name="size" type="java.lang.Integer"/>
 
-  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="en" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="clr" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="sel" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="Din" sensitive="true" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="out" name="Dout" type="lilas.type.StdLogic" init="0bZ:size"/>
 
-  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="1"/>
-  
   <code language="logic" duréeActivation="1ns"><![CDATA[
-  	if clr then regVal <= 0b0;
-  	elsif selected(clk) and clk then
-  		if en then regVal <= dIn;
-  		end if;
+  	if sel then Dout <= Din; 
+  	else Dout <= 0bZ:size;
  	end if;
-  	
-  	dOut <= regVal;
   	]]></code>
   
 </module>

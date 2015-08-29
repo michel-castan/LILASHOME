@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <signal mode="constant" name="fftSize" type="java.lang.Integer"/>
+  
+  <signal mode="in" name="kin" sensitive="true" type="java.lang.Integer"/>
+  <signal mode="in" name="xin" sensitive="true" type="java.lang.Double"/>
+  <signal mode="in" name="yin" sensitive="true" type="java.lang.Double"/>
+
+  <signal mode="out" name="kout" type="java.lang.Integer"/>
+  <signal mode="out" name="xout" type="java.lang.Double"/>
+  <signal mode="out" name="yout" type="java.lang.Double"/>
+
+<code language="java"/>
+
+</module>

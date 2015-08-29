@@ -1,112 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-	<!-- déclaration des attributs -->
-	<signal mode="constant" name="CLKFX_MULTIPLY" type="java.lang.Integer"/>
-	<signal mode="constant" name="CLKFX_DIVIDE" type="java.lang.Integer"/>
-	<signal mode="constant" name="CLKIN_PERIOD" type="java.lang.Float"/>
-    <signal mode="constant" name="printDelay" type="java.lang.Boolean"/>
+  <doc>Mémoire ROM simple</doc>
+  <signal mode="constant" name="sizeWord" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeAdr" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeMem" type="java.lang.Integer" init="256"/>
 
-	<!-- déclaration des ports -->
-	
-	<signal name="clkIn" mode="in" size="1" type="lilas.type.StdLogic"/>
-	<signal name="clkOut" mode="out" size="1" type="lilas.type.StdLogic"/>
-	
-	<code language="java"/>
+  <signal mode="in" name="clk" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="we" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="adr" type="lilas.type.StdLogic" sensitive="true" size="sizeAdr"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="sizeWord"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="sizeWord"/>
 
-	<code language="vhdl">
-entity <name/> is
-<portDecl/>
-end entity <name/>;
+  <signal mode="internal" name="mem" type="lilas.type.ArrayStdLogic" init="256:0xUUUU"/>
 
-architecture a_<name/> of <name/> is
-<![CDATA[
-	component DCM_SP
-	generic(
-		CLK_FEEDBACK : string :=  "1X";
-        CLKDV_DIVIDE : real :=  2.0;
-        CLKFX_DIVIDE : integer :=  1;
-        CLKIN_PERIOD : real :=  10.0;
-        CLKFX_MULTIPLY : integer :=  4;
-        CLKIN_DIVIDE_BY_2 : boolean :=  FALSE;
-        CLKOUT_PHASE_SHIFT : string :=  "NONE";
-        DESKEW_ADJUST : string :=  "SYSTEM_SYNCHRONOUS";
-        DFS_FREQUENCY_MODE : string :=  "LOW";
-        DLL_FREQUENCY_MODE : string :=  "LOW";
-        DSS_MODE : string :=  "NONE";
-        DUTY_CYCLE_CORRECTION : boolean :=  TRUE;
-        PHASE_SHIFT : integer :=  0;
-        STARTUP_WAIT : boolean :=  FALSE;
-        FACTORY_JF : bit_vector :=  x"C080");
-	
-	port(
-		CLKFB : IN std_logic := '0';
-		CLKIN : IN std_logic := '0';
-		DSSEN : IN std_logic := '0';
-		PSCLK : IN std_logic := '0';
-		PSEN : IN std_logic := '0';
-		PSINCDEC : IN std_logic := '0';
-		RST : IN std_logic := '0';
-		CLK0 : OUT std_logic := '0';
-		CLK180 : OUT std_logic := '0';
-		CLK270 : OUT std_logic := '0';
-		CLK2X : OUT std_logic := '0';
-		CLK2X180 : OUT std_logic := '0';
-		CLK90 : OUT std_logic := '0';
-		CLKDV : OUT std_logic := '0';
-		CLKFX : OUT std_logic := '0';
-		CLKFX180 : OUT std_logic := '0';
-		LOCKED : OUT std_logic := '0';
-		PSDONE : OUT std_logic := '0';
-		STATUS : OUT std_logic_vector(7 downto 0) := "00000000");
-	end component;
-	
-	signal zero1b : std_logic := '0';
-	signal clk0 : std_logic := '0';
-	signal PSCLK_openSignal : std_logic;
-	
-		
-begin
-	instDCM_SP : DCM_SP
-	generic map (
-		CLKDV_DIVIDE => 2.0, -- CLKDV divide value
-							 -- (1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,9,10,11,12,13,14,15,16).
-		CLKFX_DIVIDE => CLKFX_DIVIDE, -- Divide value on CLKFX outputs - D - (1-32)
-		CLKFX_MULTIPLY => CLKFX_MULTIPLY, -- Multiply value on CLKFX outputs - M - (2-32)
-		CLKIN_DIVIDE_BY_2 => FALSE, -- CLKIN divide by two (TRUE/FALSE)
-		CLKIN_PERIOD => CLKIN_PERIOD, -- Input clock period specified in nS
-		CLKOUT_PHASE_SHIFT => "NONE", -- Output phase shift (NONE, FIXED, VARIABLE)
-		CLK_FEEDBACK => "1X", -- Feedback source (NONE, 1X, 2X)
-		DESKEW_ADJUST => "SYSTEM_SYNCHRONOUS", -- SYSTEM_SYNCHRNOUS or SOURCE_SYNCHRONOUS
-		DFS_FREQUENCY_MODE => "LOW", -- Unsupported - Do not change value
-		DLL_FREQUENCY_MODE => "LOW", -- Unsupported - Do not change value
-		DSS_MODE => "NONE", -- Unsupported - Do not change value
-		DUTY_CYCLE_CORRECTION => TRUE, -- Unsupported - Do not change value
-		FACTORY_JF => X"c080", -- Unsupported - Do not change value
-		PHASE_SHIFT => 0, -- Amount of fixed phase shift (-255 to 255)
-		STARTUP_WAIT => FALSE -- Delay config DONE until DCM_SP LOCKED (TRUE/FALSE)
-	)
-	port map (
-		CLK0 => clk0, -- 1-bit output: 0 degree clock output
-		CLK180 => open, -- 1-bit output: 180 degree clock output
-		CLK270 => open, -- 1-bit output: 270 degree clock output
-		CLK2X => open, -- 1-bit output: 2X clock frequency clock output
-		CLK2X180 => open, -- 1-bit output: 2X clock frequency, 180 degree clock output
-		CLK90 => open, -- 1-bit output: 90 degree clock output
-		CLKDV => open, -- 1-bit output: Divided clock output
-		CLKFX => clkOut, -- 1-bit output: Digital Frequency Synthesizer output (DFS)
-		CLKFX180 => open, -- 1-bit output: 180 degree CLKFX output
-		LOCKED => open, -- 1-bit output: DCM_SP Lock Output
-		PSDONE => open, -- 1-bit output: Phase shift done output
-		STATUS => open, -- 8-bit output: DCM_SP status output
-		CLKFB => clk0, -- 1-bit input: Clock feedback input
-		CLKIN => clkIn, -- 1-bit input: Clock input
-		DSSEN => zero1b, -- 1-bit input: Unsupported, specify to GND.
-		PSCLK => PSCLK_openSignal, -- 1-bit input: Phase shift clock input
-		PSEN => zero1b, -- 1-bit input: Phase shift enable
-		PSINCDEC => zero1b, -- 1-bit input: Phase shift increment/decrement input
-		RST => zero1b -- 1-bit input: Active high reset input
-	);
-	]]>
-end architecture a_<name/>;
-</code>
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  //array mem <= ( 0xFF:8, 4:4 => 0xFE, 1:4=>0xFD, 0xFC, 0xFB, 0b0101 => 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0);
+  
+  if selected(clk) and clk then
+  	if we then mem(adr) <= dIn; end if;
+  	end if;	
+  dOut <= mem(adr);
+  ]]></code>
+  
 </module>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	
+	<signal init="0x00" mode="dummyExtern" name="digit" sensitive="true" type="lilas.type.StdLogic"/>
+
+	<signal init="0b0" mode="internal" name="a" type="lilas.type.StdLogic"/>
+	<signal init="0b0" mode="internal" name="b" type="lilas.type.StdLogic"/>
+	<signal init="0b0" mode="internal" name="c" type="lilas.type.StdLogic"/>
+	<signal init="0b0" mode="internal" name="d" type="lilas.type.StdLogic"/>
+	<signal init="0b0" mode="internal" name="e" type="lilas.type.StdLogic"/>
+	<signal init="0b0" mode="internal" name="f" type="lilas.type.StdLogic"/>
+	<signal init="0b0" mode="internal" name="g" type="lilas.type.StdLogic"/>
+	<signal init="0b0" mode="internal" name="p" type="lilas.type.StdLogic"/>
+	
+    <awt name="awt">
+      <ImageSVG img="lilas.bib.awt.Aff7Seg"> 
+        <ElementSVG_StdLogicSpecial_Inv idRef="a" signal="a"/>
+        <ElementSVG_StdLogicSpecial_Inv idRef="b" signal="b"/>
+        <ElementSVG_StdLogicSpecial_Inv idRef="c" signal="c"/>
+        <ElementSVG_StdLogicSpecial_Inv idRef="d" signal="d"/>
+        <ElementSVG_StdLogicSpecial_Inv idRef="e" signal="e"/>
+        <ElementSVG_StdLogicSpecial_Inv idRef="f" signal="f"/>
+        <ElementSVG_StdLogicSpecial_Inv idRef="g" signal="g"/>
+        <ElementSVG_StdLogicSpecial_Inv idRef="p" signal="p"/>	
+       </ImageSVG>
+	</awt> 
+  
+</module>

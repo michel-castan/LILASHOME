@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Square Roots by Newton's Method</doc>
-  <signal mode="in" name="x" sensitive="true" type="java.lang.Double" init="0.0"/>
-  <signal mode="out" name="y" type="java.lang.Double" init="0.0"/>
+	<doc>Execute operator Sigma(n, m, x) = x**n+x**(n+1)+..+x**m</doc>
+  <signal mode="constant" name="n" type="java.lang.Integer"/>
+  <signal mode="constant" name="m" type="java.lang.Integer"/>
+  
+  <signal mode="in" name="x" init="0" sensitive="true" type="java.lang.Long"/>
+  <signal mode="out" name="y" type="java.lang.Long"/>
 
+  <signal mode="constant" name="n0" type="java.lang.Integer" init="(n+m)/2"/>
+  <signal mode="constant" name="n1" type="java.lang.Integer" init="n0+1"/>
+    	
+  <signal mode="internal" name="y1" type="java.lang.Long" init="0" sensitive="true"/>
+  <signal mode="internal" name="y2" type="java.lang.Long" init="0" sensitive="true"/>
+  
+  <Sigma n="n" m="n0" x="x" y="y1"/>
+  <Sigma n="n1" m="m" x="x" y="y2"/>
+ 
   <code language="java"/>
+  
 </module>
+  

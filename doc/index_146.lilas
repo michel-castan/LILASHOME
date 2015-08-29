@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
+  <doc>Unsigned Down Counter With Asynchronous Set</doc>
+  <signal mode="constant" name="size" type="java.lang.Integer"/>
+  <signal mode="out" name="q" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="clr" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="ce" type="lilas.type.StdLogic" init="0b0"/>
+ 
+  <signal mode="internal" name="valCtr" type="lilas.type.StdLogic" size="size"/>
 
-  <signal mode="out" name="s" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="sel" type="lilas.type.StdLogic" size="2"/>
-  <signal mode="in" name="E0" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="E1" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="E2" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="E3" type="lilas.type.StdLogic" size="1"/>
+  <code language="logic"><![CDATA[  
+  if clr then
+     valCtr <= 0:size;
+  elsif selected(clk) and clk then
+  	if (ce) then 
+  		valCtr <= valCtr minus 0b1;
+    end if;
+  end if;
   
+  q <= valCtr;
+    
+  ]]></code>
   
-  <code language="logic"><![CDATA[
-  s <= with sel select (E3, E2, E1, E0);  
-]]></code>
-
 </module>

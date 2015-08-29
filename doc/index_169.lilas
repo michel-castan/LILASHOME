@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 
-  <signal mode="in" name="a" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="b" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="delta" sensitive="true" type="java.lang.Double"/>
-  <signal mode="out" name="nbrSol" type="java.lang.Integer"/>
-  <signal mode="out" name="sol1" type="java.lang.Double"/>
-  <signal mode="out" name="sol2" type="java.lang.Double"/>
+  <signal mode="out" name="x" type="lilas.type.StdLogic" size="3"/>
+  <signal mode="out" name="y" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="a" type="lilas.type.StdLogic" size="8"/>
+ 
   
-  <code language="java"/>
+  <code language="logic"><![CDATA[
+	 x<=a[4:2]; // a étant sur 8 bits
+  	 y<=a[3];
+  
+]]>   </code>
+
 </module>

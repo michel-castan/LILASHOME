@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<module>
 
-<module board="ms6lx9">
-	<signal mode="in" init="0b0" name="Clk50M" type="lilas.type.StdLogic"/>
-	<signal mode="in" init="0b0" name="clkMode" type="lilas.type.StdLogic"/>
-	<signal mode="in" init="0b0" name="clkManual" type="lilas.type.StdLogic"/>
-	<signal mode="in" init="0b0" name="upDown" type="lilas.type.StdLogic"/>
-	<signal mode="in" init="0b0" name="clear" type="lilas.type.StdLogic"/>
-	<signal mode="out" init="0x00" name="LedsPins" type="lilas.type.StdLogic"/>
-	<signal mode="out" init="0x0000_0000" name="ctr" type="lilas.type.StdLogic"/>
-	
-	<signal mode="internal" init="0x0000_0000" name="ctrIntern" type="lilas.type.StdLogic"/>
-	<signal mode="internal" init="0b1" name="clkCircuit" type="lilas.type.StdLogic"/>
-	
-	<lilas.bib.logic.clock.ClkGen clkMultiply="16" clkDivide="2" CLKIN_PERIOD="20" clkIn="Clk50M"
-		clkOut="clkCircuit" clkMode="clkMode" clkManual="clkManual" printDelay="true"/>
-	
-	<CtrUD clear="clear" clkCircuit="clkCircuit" ctr="ctrIntern" size="32" upDown="upDown"/>
-							
-	<code language="logic"><![CDATA[
-		LedsPins <= ctrIntern[31:28] & ctrIntern[3:0];
-		ctr <= ctrIntern;
-	]]></code>
-		
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="rst" type="lilas.type.StdLogic" size="1"/>
+  <signal name="etat" type="java.lang.String"/>
+  <signal mode="out" name="monter" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="out" name="descendre" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="DS" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="DI" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="MS" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="MI" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="MA" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="DA" type="lilas.type.StdLogic" size="1"/>
+  
+  
+  <code language="logic"><![CDATA[ 
+  moore smclock=clk smreset=rst sminit=CabineArretDescente
+  		smstate=etat
+	out=(monter, descendre)
+    {CabineArretDescente ()
+      on DS target CabineEnMontée,
+      on DI target CabineEnDescente},
+    {CabineArretMontée ()
+      on MS target CabineEnMontée,
+      on MI target CabineEnDescente},
+    {CabineEnMontée (monter<=0b1)
+      on MA target CabineArretMontée},
+     {CabineEnDescente (descendre<=0b1)
+      on DA target CabineArretDescente};
+ ]]> </code>
+
 </module>

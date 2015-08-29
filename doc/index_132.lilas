@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
+  <doc>Registre à base de FLip-flop Positive-Edge Clock with Enable clock, Asynchronous Clear
+	Appel : 
+  		<RegistreEnAC package="bib.logic.register" clk="clk" en="en" clr="clr" dIn="dIn" dOut="dOut"/>
 	
-	<signal init="0x00" mode="dummyExtern" name="digit" sensitive="true" type="lilas.type.StdLogic"/>
+    </doc>
+  <signal mode="constant" name="size" type="java.lang.Integer"/>
 
-	<signal init="0b0" mode="internal" name="a" type="lilas.type.StdLogic"/>
-	<signal init="0b0" mode="internal" name="b" type="lilas.type.StdLogic"/>
-	<signal init="0b0" mode="internal" name="c" type="lilas.type.StdLogic"/>
-	<signal init="0b0" mode="internal" name="d" type="lilas.type.StdLogic"/>
-	<signal init="0b0" mode="internal" name="e" type="lilas.type.StdLogic"/>
-	<signal init="0b0" mode="internal" name="f" type="lilas.type.StdLogic"/>
-	<signal init="0b0" mode="internal" name="g" type="lilas.type.StdLogic"/>
-	<signal init="0b0" mode="internal" name="p" type="lilas.type.StdLogic"/>
-	
-    <awt name="awt">
-      <ImageSVG img="lilas.bib.awt.Aff7Seg"> 
-        <ElementSVG_StdLogicSpecial_Inv idRef="a" signal="a"/>
-        <ElementSVG_StdLogicSpecial_Inv idRef="b" signal="b"/>
-        <ElementSVG_StdLogicSpecial_Inv idRef="c" signal="c"/>
-        <ElementSVG_StdLogicSpecial_Inv idRef="d" signal="d"/>
-        <ElementSVG_StdLogicSpecial_Inv idRef="e" signal="e"/>
-        <ElementSVG_StdLogicSpecial_Inv idRef="f" signal="f"/>
-        <ElementSVG_StdLogicSpecial_Inv idRef="g" signal="g"/>
-        <ElementSVG_StdLogicSpecial_Inv idRef="p" signal="p"/>	
-       </ImageSVG>
-	</awt> 
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="en" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="clr" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
+
+  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
+  
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  	if clr then regVal <= 0:size;
+  	elsif selected(clk) and clk then
+  		if en then regVal <= dIn;
+  		end if;
+ 	end if;
+  	
+  	dOut <= regVal;
+  	]]></code>
   
 </module>

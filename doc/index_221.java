@@ -1,15 +1,16 @@
 package demo.hello;
-public class Hello1 extends Hello1_LILAS
+public class Hello2 extends Hello2_LILAS
 {
-	public Hello1(String nomDansModuleParent, lilas.base.Module parent,
+	public Hello2(String nomDansModuleParent, lilas.base.Module parent,
 			lilas.base.Signal<java.lang.String> sender_signal) throws lilas.base.ExceptionLilas {
 		super(nomDansModuleParent, parent,
 			sender_signal);
+		msg_port.propagate=lilas.base.Port.Propagate.PERMANENT;
 	}
 
 	@Override
 	final protected void activation() throws lilas.base.ExceptionLilas {
-		System.out.println("Hello world from "+sender+" !");
+		msg = "Hello"+((sender==null)?"":" from "+sender);
 	}
 }
 

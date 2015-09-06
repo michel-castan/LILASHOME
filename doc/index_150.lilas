@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Unsigned Down Counter With Asynchronous Reset and Synchronous Load</doc>
+  <doc>Unsigned Down Counter With Asynchronous Set</doc>
   <signal mode="constant" name="size" type="java.lang.Integer"/>
   <signal mode="out" name="q" type="lilas.type.StdLogic" size="size"/>
   <signal mode="in" name="clk" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="load" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="ctrIn" type="lilas.type.StdLogic" init="0:size"/>
   <signal mode="in" name="clr" type="lilas.type.StdLogic" init="0b0"/>
   <signal mode="in" name="ce" type="lilas.type.StdLogic" init="0b0"/>
  
@@ -15,10 +13,8 @@
   if clr then
      valCtr <= 0:size;
   elsif selected(clk) and clk then
-  	if (ce) then
-  		if load then valCtr <= ctrIn;
-   		else valCtr <= valCtr minus 0b1;
-       end if;
+  	if (ce) then 
+  		valCtr <= valCtr minus 0b1;
     end if;
   end if;
   

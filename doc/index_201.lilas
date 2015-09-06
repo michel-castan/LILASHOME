@@ -1,100 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <module board="ms6lx9">
-	<signal init="32" mode="constant" name="size" type="java.lang.Integer"/>
-	<signal init="0b0" name="clkCircuit" type="lilas.type.StdLogic"/>
-	<signal init="0b0" name="clear" type="lilas.type.StdLogic"/>
-	<signal init="0b0" name="upDown" type="lilas.type.StdLogic"/>
-	<signal init="0bU:size" name="ctr" type="lilas.type.StdLogic"/>
-
-	<CtrUD clear="clear" clkCircuit="clkCircuit" ctr="ctr" name="instCtrUD" size="size" upDown="upDown"/>
-
-	<lilas.bib.awt.BoutonAvance delaiInit="10ns" name="btn"/>
-
-	<awt layout="border" name="awt">
-		<center layout="tab">
-			<onglet colonnes="1" layout="grid" titre="signaux">
-				<ListDisplay duréePixel="2000000" sizeCol0="100" sizeCol1="100" sizeCol2="100" sizeCol3="600" titleCol3="Module : demo.ctrud.CtrUD">
-					<node system="Date"/>
-					<node system="Messages"/>
-					<list open="true" titleCol3="Signaux Externes">
-						<node signal="size"/>
-						<node editable="true" signal="clkCircuit"/>
-						<node editable="true" signal="clear"/>
-						<node editable="true" signal="upDown"/>
-						<node signal="ctr"/>
-				
-					</list>
-					
-				
-				</ListDisplay>
-			</onglet>
-			<onglet colonnes="1" layout="grid" titre="full system">
-				<SystemDisplay/>
-			</onglet>
-		</center>
-		
-		<page_end>
-			<BoutonListeScripts/>
-			<BoutonPasAPas/>
-			<instance awt="btn.awt"/>
-		</page_end>
-	</awt>
-
-	<awt layout="border" name="simple">
-		<center layout="tab">
-			<onglet colonnes="1" layout="grid" titre="signaux">
-				<ListDisplay sizeCol0="100" sizeCol1="0" sizeCol2="100" sizeCol3="0" titleCol3="Module : demo.ctrud.CtrUD">
-					
-					<list open="true" titleCol3="Signaux Externes">
-						<node signal="size"/>
-						<node editable="true" signal="clkCircuit"/>
-						<node editable="true" signal="clear"/>
-						<node editable="true" signal="upDown"/>
-						<node signal="ctr"/>
-				
-					</list>
-				</ListDisplay>
-			</onglet>
-		</center>
-		
-		<page_end>
-			<BoutonListeScripts/>
-			<BoutonPasAPas/>
-			<instance awt="btn.awt"/>
-		</page_end>
-	</awt>
+	<signal mode="in" init="0b0" name="Clk50M" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="clkMode" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="clkManual" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="upDown" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="clear" type="lilas.type.StdLogic"/>
+	<signal mode="out" init="0x00" name="LedsPins" type="lilas.type.StdLogic"/>
+	<signal mode="out" init="0x0000_0000" name="ctr" type="lilas.type.StdLogic"/>
 	
-	<script name="clkPeriod">
-		<waitStable/>
-		<next signal="clkCircuit" value="0b1"/>
-		<waitStable/>
-		<next signal="clkCircuit" value="0b0"/>
-		<waitStable/>
-	</script>
+	<signal mode="internal" init="0x0000_0000" name="ctrIntern" type="lilas.type.StdLogic"/>
+	<signal mode="internal" init="0b1" name="clkCircuit" type="lilas.type.StdLogic"/>
 	
-	<script name="main">
-		<group>
-			<next signal="clkCircuit" value="0b0"/>
-			<next signal="clear" value="0b1"/>
-			<next signal="upDown" value="0b0"/>
-		</group>
-		<clkPeriod/>
-		<check signal="ctr" value="0x0000_0000"/>
-		<next signal="clear" value="0b0"/>
-		<clkPeriod/>
-		<check signal="ctr" value="0x0000_0001"/>
-		<clkPeriod/>
-		<check signal="ctr" value="0x0000_0002"/>
-		<next signal="upDown" value="0b1"/>
-		<clkPeriod/>
-		<check signal="ctr" value="0x0000_0001"/>
-		<clkPeriod/>
-		<check signal="ctr" value="0x0000_0000"/>
-		<clkPeriod/>
-		<check signal="ctr" value="0xFFFF_FFFF"/>
-		<next signal="clear" value="0b1"/>
-		<waitStable/>
-		<check signal="ctr" value="0x0000_0000"/>
-		<print>Done!</print>
-	</script>
+	<lilas.bib.logic.clock.ClkGen clkMultiply="16" clkDivide="2" CLKIN_PERIOD="20" clkIn="Clk50M"
+		clkOut="clkCircuit" clkMode="clkMode" clkManual="clkManual" printDelay="true"/>
+	
+	<CtrUD clear="clear" clkCircuit="clkCircuit" ctr="ctrIntern" size="32" upDown="upDown"/>
+							
+	<code language="logic"><![CDATA[
+		LedsPins <= ctrIntern[31:28] & ctrIntern[3:0];
+		ctr <= ctrIntern;
+	]]></code>
+		
 </module>

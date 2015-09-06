@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <doc>
+   <list>
+    <item>inUse : 1 si le module DSTM est actif, 0 sinon (etat = idle)</item>
+    <item>enableFromFPGA : 1 si un transfert vers le PC est autorisé, 0 sinon. Ce signal permet au PC d'attendre 
+    qu'un signal du circuit soit positionné avant de recevoir l'information.
+    Après la génération du startClkPulse, inutile d'attendre que le signal d'horloge ait été généré, étant donné la latence
+    de la prise en compte d'une nouvelle communication USB (environ entre 300ns et 600ns).	
+    </item>  
+   </list> 
+  </doc>
+  <signal mode="out" name="etatDSTM" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="out" name="inUse" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="transfert" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="fromTo" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="loadRegToFPGA" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="loadShiftRegister" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="startClkPulse" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="enableFromFPGA" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="in" name="raz" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="in" name="STMEN" type="lilas.type.StdLogic" init="0b1"/>
+  <signal mode="in" name="FLAGA" type="lilas.type.StdLogic" init="0b1"/>
+  <signal mode="in" name="FLAGB" type="lilas.type.StdLogic" init="0b1"/> 
+  <signal name="etatCourant" type="java.lang.String" mode="internal"/>
+  
+  <!--
+	fromTo : 1 fromFPGA 0=toFPGA
+  -->
+  <code language="logic"><![CDATA[
+  	moore
+  		smclock=clk smreset=raz sminit=stIdle smstate=etatCourant
+  	    out=(etatDSTM, inUse, transfert, fromTo, loadRegToFPGA, loadShiftRegister, startClkPulse)
+  		{ stIdle (etatDSTM<=0x0)
+  			on STMEN and not FLAGA target stToFPGA,
+  			on STMEN and not FLAGB and enableFromFPGA target stStartFromFPGA},
+  		{ stToFPGA (etatDSTM<=0x1, inUse, transfert)
+  			on not STMEN target stEndToFPGA},
+  		{ stEndToFPGA (etatDSTM<=0x2, inUse, loadRegToFPGA)
+  			target stEndToFPGAclk},
+  		{ stEndToFPGAclk (etatDSTM<=0x3, inUse, startClkPulse)
+  			target stIdle},
+  		{ stStartFromFPGA (etatDSTM<=0x4, inUse, loadShiftRegister)
+  			 target stFromFPGA}, 
+  		{ stFromFPGA (etatDSTM<=0x5, inUse, transfert, fromTo)
+  			on not STMEN target stIdle}; 
+]]>  </code>
+</module>

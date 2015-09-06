@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+
+  <signal mode="in" name="adr" sensitive="true" type="lilas.type.StdLogic" size="4"/>
+  <signal mode="in" name="we" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="clk" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="din" sensitive="true" type="lilas.type.StdLogic" size="8"/>
+  <signal mode="out" name="dout" optional="true" type="lilas.type.StdLogic" size="8"/>
+  
+  <signal mode="internal" name="mem" type="lilas.type.ArrayStdLogic" init="16:0xUU"/>
+
+  <code language="logic"><![CDATA[
+  array mem <= ( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0);
+  if selected(clk) and equals(clk,0b1) and equals(we,0b1) then
+  	mem(adr) <= din ;
+  end if;
+  dout <= mem(adr);
+      
+ ]]> </code>
+
+</module>

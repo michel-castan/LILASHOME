@@ -1,19 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <module>
-  <signal mode="constant" name="size" type="java.lang.Integer"/>
-
-  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size"/>
-  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
-
-  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="in" name="ledDebug" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="in" name="ledIO" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="in" name="digitDebug" type="lilas.type.StdLogic" init="0x0000"/>
+  <signal mode="in" name="digitIO" type="lilas.type.StdLogic" init="0x01010101"/>
+  <signal mode="out" name="SwitchsIO" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="out" name="ButtonsIO" type="lilas.type.StdLogic" init="0b00000"/>
+  <signal mode="out" name="resetIO" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="resetInterne" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="hardReset" type="lilas.type.StdLogic" init="0b0"/>
+  	  	 
+  <signal mode="out" name="LedsPins" init="0x00" type="lilas.type.StdLogic"/><!-- LED7 LED6 LED5 LED4 LED3 LED2 LED1 LED0 -->
+  <signal mode="in" name="SwitchsPins" type="lilas.type.StdLogic" init="0x00"/><!-- SW7 SW6 SW5 SW4 SW3 SW2 SW1 SW0 -->
+  <signal mode="in" name="ButtonsPins" type="lilas.type.StdLogic" sensitive="true" init="0b00000"/><!-- C U D L R -->
+  <signal mode="in" name="Clk100M" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="out" name="SegPins" type="lilas.type.StdLogic" init="0x00"/><!-- A B C D E F G P -->
+  <signal mode="out" name="ANPins" type="lilas.type.StdLogic" init="0x0"/> <!-- AN0 AN1 AN2 AN3 -->
   
-  <code language="logic" duréeActivation="1ns"><![CDATA[
-  	if selected(clk) and clk then
-  		regVal <= dIn;
- 	end if;
-  	
-  	dOut <= regVal;
-  	]]></code>
+  <signal mode="internal" name="noDigit" type="lilas.type.StdLogic" init="0b00" sensitive="true"/>
+
+  <signal mode="internal" name="hardResetInterne" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="clkDivisee" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="changementMode" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="modeIO" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="clkEn" type="lilas.type.StdLogic" init="0b0"/>
+ 
+  <ModeIO name="gestModeIO" reset="hardResetInterne" clk100M="Clk100M" modeIO="modeIO" changementMode="changementMode"/>
+  <ClkDivisor clkEn="clkEn" clk="Clk100M"/>
+  
+  <code language="logic"><![CDATA[
+
+  hardResetInterne <= ButtonsPins[1] and ButtonsPins[0];
+  if resetInterne then
+  	noDigit <= 0b00;
+  elsif selected(Clk100M) and Clk100M then
+  	if (clkEn) then
+  		noDigit <= noDigit plus 0b1;
+    	SwitchsIO <= SwitchsPins;
+    	ButtonsIO <= ButtonsPins;
+  		changementMode <= ButtonsPins[1];
+    end if;
+  end if; 
+    
+  ANPins <= with noDigit select (0b1110, 0b1101, 0b1011, 0b0111);
+  LOCAL q4b <= with noDigit select (digitDebug[15:12], digitDebug[11:8], digitDebug[7:4], digitDebug[3:0]);
+  
+  LOCAL SegHexa <= with q4b select (
+        0b01110000, 0b01100000, 0b10000100, 0b01100010, 0b11000000, 0b00010000, 0b00001000, 0b00000000,
+        0b00011110, 0b01000000, 0b01001000, 0b10011000, 0b00001100, 0b00100100, 0b10011110, 0b00000010);
+  LOCAL SegGraphique <= with noDigit select (digitIO[31:24], digitIO[23:16], digitIO[15:8], digitIO[7:0]);
+  
+  SegPins <= with modeIO select (SegGraphique, SegHexa); 
+   
+  resetIO <= resetInterne;
+  hardReset <= hardResetInterne;
+  LedsPins <= with modeIO select (ledIO, ledDebug);
+  ]]>
+</code>
+
   
 </module>

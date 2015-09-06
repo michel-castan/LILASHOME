@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <signal mode="in" name="a" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="b" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="cin" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="out" name="cout" type="lilas.type.StdLogic" init="0b0" optional="true"/>
-  <signal mode="out" name="s" type="lilas.type.StdLogic" init="0b0"/>
+
+  <signal mode="out" name="x" type="lilas.type.StdLogic" size="3"/>
+  <signal mode="out" name="y" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="a" type="lilas.type.StdLogic" size="8"/>
+ 
   
-    <code language="logic"><![CDATA[
-    	local g <= a and b;
-    	internal p:1 <= a or b;
-    	cout <= g or (p and cin);
-    	s <= a xor b xor cin;
-]]> </code>
+  <code language="logic"><![CDATA[
+	 x<=a[4:2]; // a étant sur 8 bits
+  	 y<=a[3];
+  
+]]>   </code>
 
 </module>

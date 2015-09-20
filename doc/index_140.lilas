@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Registre à base de FLip-flop Negative-Edge Clock with Enable clock</doc>
+  <doc>Registre à base de FLip-flop Positive-Edge Clock with Enable clock</doc>
   <signal mode="constant" name="size" type="java.lang.Integer"/>
 
   <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
@@ -11,7 +11,7 @@
   <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
   
   <code language="logic" duréeActivation="1ns"><![CDATA[
-  	if selected(clk) and not clk then
+  	if selected(clk) and clk then
   		if en then regVal <= dIn;
   		end if;
  	end if;

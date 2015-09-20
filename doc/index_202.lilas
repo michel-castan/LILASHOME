@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<doc>Execute operator Sigma(n, m, x) = x**n+x**(n+1)+..+x**m</doc>
+  <signal mode="constant" name="n" type="java.lang.Integer"/>
+  
+  <signal mode="in" name="x" init="0" sensitive="true" type="java.lang.Long"/>
+  <signal mode="out" name="y" type="java.lang.Long"/>
+
+  <code language="java"/>
+</module> 
+  

@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <signal mode="in" name="a" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="b" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="c" sensitive="true" type="java.lang.Double"/>
-  <signal init="0.0" mode="internal" name="delta" type="java.lang.Double"/>
-  <signal mode="out" name="nbrSol" type="java.lang.Integer"/>
-  <signal mode="out" name="sol1" type="java.lang.Double"/>
-  <signal mode="out" name="sol2" type="java.lang.Double"/>
+  <signal mode="in" name="va" sensitive="true" type="java.lang.Double"/>
+  <signal mode="in" name="vb" sensitive="true" type="java.lang.Double"/>
+  <signal mode="in" name="vc" sensitive="true" type="java.lang.Double"/>
+  <signal mode="out" name="vdelta" type="java.lang.Double"/> 
 
-  <Solution a="a" b="b" delta="delta" name="modSol" nbrSol="nbrSol" sol1="sol1" sol2="sol2"/>
-  <Discriminant name="modDisc" va="a" vb="b" vc="c" vdelta="delta"/>
-
-  <edit height="250" width="450">
-		<modDisc x="70" y="30"/>
-		<modSol x="230" y="30"/>
-  </edit>
+  <code language="java"/>
 </module>

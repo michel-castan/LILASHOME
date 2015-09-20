@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 	<signal mode="in" name="sender" sensitive="true" type="java.lang.String"/>
-					
-	<code language="java"/>
-			
-</module>
+	<signal mode="internal" name="msg" type="java.lang.String"/>		
+
+ 	<code language="java"/> 
+	
+ 	<awt name="draw">
+ 		<ImageSVG img="demo.hello.HelloDraw">
+ 			<ElementSVG idRef="msgHello" signal="msg"/>
+ 		</ImageSVG>
+ 	</awt>
+ 			
+ 	<awt name="drawInput" layout="border">
+ 		<center>
+ 			<instance awt="draw"/>
+ 		</center>
+ 		<page_end>
+ 			<Text signal="sender" taille="12" label="sender :" editable="true"/>
+ 		</page_end>
+ 	</awt>		
+ 	</module>

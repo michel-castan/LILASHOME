@@ -1,63 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <module>
-  <signal mode="in" name="ledDebug" type="lilas.type.StdLogic" init="0x00"/>
-  <signal mode="in" name="ledIO" type="lilas.type.StdLogic" init="0x00"/>
-  <signal mode="in" name="digitDebug" type="lilas.type.StdLogic" init="0x0000"/>
-  <signal mode="in" name="digitIO" type="lilas.type.StdLogic" init="0x01010101"/>
-  <signal mode="out" name="SwitchsIO" type="lilas.type.StdLogic" init="0x00"/>
-  <signal mode="out" name="ButtonsIO" type="lilas.type.StdLogic" init="0b00000"/>
-  <signal mode="out" name="resetIO" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="internal" name="resetInterne" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="out" name="hardReset" type="lilas.type.StdLogic" init="0b0"/>
-  	  	 
-  <signal mode="out" name="LedsPins" init="0x00" type="lilas.type.StdLogic"/><!-- LED7 LED6 LED5 LED4 LED3 LED2 LED1 LED0 -->
-  <signal mode="in" name="SwitchsPins" type="lilas.type.StdLogic" init="0x00"/><!-- SW7 SW6 SW5 SW4 SW3 SW2 SW1 SW0 -->
-  <signal mode="in" name="ButtonsPins" type="lilas.type.StdLogic" sensitive="true" init="0b00000"/><!-- C U D L R -->
-  <signal mode="in" name="Clk100M" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="out" name="SegPins" type="lilas.type.StdLogic" init="0x00"/><!-- A B C D E F G P -->
-  <signal mode="out" name="ANPins" type="lilas.type.StdLogic" init="0x0"/> <!-- AN0 AN1 AN2 AN3 -->
-  
-  <signal mode="internal" name="noDigit" type="lilas.type.StdLogic" init="0b00" sensitive="true"/>
+  <!-- taille des signaux à envoyer/recevoir (download : pc vers Nexys3). Max 64 octets (pour USB 1.1) ou 512 octets (pour USB 2) -->
+  <signal mode="constant" name="transfertSizeToFPGA" type="java.lang.Integer"/>
+  <signal mode="constant" name="transfertSizeFromFPGA" type="java.lang.Integer"/>
+  	 
+  <signal init="0b0" mode="in" name="IFCLK" type="lilas.type.StdLogic"/>
+  <signal init="0b0" mode="in" name="STMEN" type="lilas.type.StdLogic"/>
+  <signal init="0xZZ" mode="inout" name="USBDB" type="lilas.type.StdLogic"/>
+  <signal init="0b1" mode="in" name="FLAGA" type="lilas.type.StdLogic"/>
+  <signal init="0b1" mode="in" name="FLAGB" type="lilas.type.StdLogic"/>
+  <signal init="0bZZ" mode="out" name="FIFOADR" type="lilas.type.StdLogic"/>
+  <signal init="0bZ" mode="out" name="SLRD" type="lilas.type.StdLogic"/>
+  <signal init="0bZ" mode="out" name="SLWR" type="lilas.type.StdLogic"/>
+  <signal init="0bZ" mode="out" name="SLOE" type="lilas.type.StdLogic"/>
+  <signal init="0bZ" mode="out" name="PKTEND" type="lilas.type.StdLogic"/>
+  <signal mode="out" name="etatDSTM" type="lilas.type.StdLogic" init="0x0"/>
 
-  <signal mode="internal" name="hardResetInterne" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="internal" name="clkDivisee" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="internal" name="changementMode" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="internal" name="modeIO" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="internal" name="clkEn" type="lilas.type.StdLogic" init="0b0"/>
- 
-  <ModeIO name="gestModeIO" reset="hardResetInterne" clk100M="Clk100M" modeIO="modeIO" changementMode="changementMode"/>
-  <ClkDivisor clkEn="clkEn" clk="Clk100M"/>
+  <signal mode="in" name="enableFromFPGA" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="loadRegToFPGA" type="lilas.type.StdLogic" init="0b0"/>
   
-  <code language="logic"><![CDATA[
-
-  hardResetInterne <= ButtonsPins[1] and ButtonsPins[0];
-  if resetInterne then
-  	noDigit <= 0b00;
-  elsif selected(Clk100M) and Clk100M then
-  	if (clkEn) then
-  		noDigit <= noDigit plus 0b1;
-    	SwitchsIO <= SwitchsPins;
-    	ButtonsIO <= ButtonsPins;
-  		changementMode <= ButtonsPins[1];
-    end if;
-  end if; 
-    
-  ANPins <= with noDigit select (0b1110, 0b1101, 0b1011, 0b0111);
-  LOCAL q4b <= with noDigit select (digitDebug[15:12], digitDebug[11:8], digitDebug[7:4], digitDebug[3:0]);
+  <signal mode="out" name="inUse" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="startClkPulse" type="lilas.type.StdLogic" init="0b0"/>
   
-  LOCAL SegHexa <= with q4b select (
-        0b01110000, 0b01100000, 0b10000100, 0b01100010, 0b11000000, 0b00010000, 0b00001000, 0b00000000,
-        0b00011110, 0b01000000, 0b01001000, 0b10011000, 0b00001100, 0b00100100, 0b10011110, 0b00000010);
-  LOCAL SegGraphique <= with noDigit select (digitIO[31:24], digitIO[23:16], digitIO[15:8], digitIO[7:0]);
-  
-  SegPins <= with modeIO select (SegGraphique, SegHexa); 
+  <signal mode="out" name="dataToFPGA" type="lilas.type.StdLogic" size="transfertSizeToFPGA"/><!-- (upload : pc vers Nexys3) obligatoirement multiple de 8 -->
+  <signal mode="in" name="dataFromFPGA" type="lilas.type.StdLogic" size="transfertSizeFromFPGA"/><!-- (Download : Nexys3 vers pc) obligatoirement multiple de 8 -->
+  <signal mode="in" name="resetDSTM" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
    
-  resetIO <= resetInterne;
-  hardReset <= hardResetInterne;
-  LedsPins <= with modeIO select (ledIO, ledDebug);
-  ]]>
-</code>
+  <signal mode="internal" name="dataToFPGAInterne" type="lilas.type.StdLogic" size="transfertSizeToFPGA"/>
+  <signal mode="internal" name="d8b" type="lilas.type.StdLogic" init="0xZZ"/>
+  <signal mode="internal" name="q8b" type="lilas.type.StdLogic" sensitive="true" init="0xZZ"/>
+  <signal mode="internal" name="fromTo" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="internal" name="cmd" type="lilas.type.StdLogic" init="0b00"/>
+  <signal mode="internal" name="transfert" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="internal" name="loadRegToFPGAInterne" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="loadShiftRegister" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="internal" name="notUsed" type="lilas.type.StdLogic" init="0:transfertSizeToFPGA"/>
 
-  
+  <ShiftRegister name="ShRegFromFPGA" clk="IFCLK" raz="resetDSTM" cmd="cmd" d8b="USBDB" dataIn="dataFromFPGA" q8b="q8b" transfertSize="transfertSizeFromFPGA"/>
+  <ShiftRegister name="ShRegToFPGA" clk="IFCLK" raz="resetDSTM" cmd="cmd" d8b="USBDB" dataIn="notUsed" dataOut="dataToFPGAInterne" transfertSize="transfertSizeToFPGA"/>
+  <ControlSignals SLRD="SLRD" SLWR="SLWR" PKTEND="PKTEND" SLOE="SLOE" FIFOADR="FIFOADR" STMEN="STMEN" transfert="transfert" fromTo="fromTo"/>
+  <StateMachine name="sm" transfert="transfert" fromTo="fromTo" clk="IFCLK" raz="resetDSTM" STMEN="STMEN" FLAGA="FLAGA" FLAGB="FLAGB"
+  				loadRegToFPGA="loadRegToFPGAInterne" loadShiftRegister="loadShiftRegister" inUse="inUse" enableFromFPGA="enableFromFPGA"
+  				startClkPulse="startClkPulse" etatDSTM="etatDSTM"/>
+  <RegistreToFPGA name="RegToFPGA" ce="loadRegToFPGAInterne" clk="IFCLK" d="dataToFPGAInterne" q="dataToFPGA" raz="resetDSTM"
+                transfertSize="transfertSizeToFPGA"/>
+
+  <code language="logic"><![CDATA[
+	LOCAL tmp <= (not FLAGA and not fromTo) or (not FLAGB and fromTo);
+	USBDB <= with fromTo select(q8b, 0xZZ);
+	cmd <= (transfert and tmp) & (loadShiftRegister or (fromTo and STMEN and tmp));
+    loadRegToFPGA <= loadRegToFPGAInterne;
+]]>  </code>
 </module>

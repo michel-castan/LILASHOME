@@ -1,19 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <module>
-  <signal mode="constant" name="size" type="java.lang.Integer"/>
-
-  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size"/>
-  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
-
-  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="in" name="ledDebug" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="in" name="ledIO" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="in" name="digitDebug" type="lilas.type.StdLogic" init="0x0000"/>
+  <signal mode="in" name="digitIO" type="lilas.type.StdLogic" init="0x01010101"/>
+  <signal mode="out" name="SwitchsIO" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="out" name="ButtonsIO" type="lilas.type.StdLogic" init="0b00000"/>
+  <signal mode="internal" name="resetInterne" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="hardReset" type="lilas.type.StdLogic" init="0b0"/>
+  	  	 
+  <signal mode="out" name="LedsPins" init="0x00" type="lilas.type.StdLogic"/><!-- LED7 LED6 LED5 LED4 LED3 LED2 LED1 LED0 -->
+  <signal mode="in" name="SwitchsPins" type="lilas.type.StdLogic" init="0x00"/><!-- SW7 SW6 SW5 SW4 SW3 SW2 SW1 SW0 -->
+  <signal mode="in" name="ButtonsPins" type="lilas.type.StdLogic" sensitive="true" init="0b00000"/><!-- C U D L R -->
+  <signal mode="in" name="Clk100M" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="out" name="SegPins" type="lilas.type.StdLogic" init="0x00"/><!-- A B C D E F G P -->
+  <signal mode="out" name="ANPins" type="lilas.type.StdLogic" init="0x0"/> <!-- AN0 AN1 AN2 AN3 -->
   
-  <code language="logic" duréeActivation="1ns"><![CDATA[
-  	if selected(clk) and clk then
-  		regVal <= dIn;
- 	end if;
-  	
-  	dOut <= regVal;
-  	]]></code>
+  <signal mode="internal" name="noDigit" type="lilas.type.StdLogic" init="0b00" sensitive="true"/>
+
+  <signal mode="internal" name="hardResetInterne" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="clkDivisee" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="changementMode" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="modeIO" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="clkEn" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="digitDebug7Seg" type="lilas.type.StdLogic" init="0x01010101"/>
+  <signal mode="internal" name="digitDisplay" type="lilas.type.StdLogic" init="0x01010101"/>
+  <signal mode="internal" name="digitDebug0" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug1" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug2" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug3" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug7Seg0" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="digitDebug7Seg1" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="digitDebug7Seg2" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="digitDebug7Seg3" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="btnIntern" type="lilas.type.StdLogic" init="0b00000"/>
+ 
+  <ModeIO name="gestModeIO" reset="hardResetInterne" clk100M="Clk100M" modeIO="modeIO" changementMode="changementMode"/>
+  <ClkDivisor clkEn="clkEn" clk="Clk100M"/>
+  <ConvertHexa7Seg digitHexa="digitDebug0" digit7seg="digitDebug7Seg0"/>
+  <ConvertHexa7Seg digitHexa="digitDebug1" digit7seg="digitDebug7Seg1"/>
+  <ConvertHexa7Seg digitHexa="digitDebug2" digit7seg="digitDebug7Seg2"/>
+  <ConvertHexa7Seg digitHexa="digitDebug3" digit7seg="digitDebug7Seg3"/>
   
-</module>
+  <Nexys3IOAWT name="instAwt" digit="digitDisplay" led="LedsPins" btn="btnIntern" sw="SwitchsIO"/>
+  
+  <code language="logic"><![CDATA[
+
+  if selected(Clk100M) and Clk100M then
+  	if (clkEn) then
+  		noDigit <= noDigit plus 0b1;
+    	SwitchsIO <= SwitchsPins;
+    	btnIntern <= ButtonsPins;
+    end if;
+  end if; 
+  
+  changementMode <= btnIntern[1];
+  ButtonsIO <= btnIntern;
+  		
+  digitDebug0 <= digitDebug[3:0];
+  digitDebug1 <= digitDebug[7:4];
+  digitDebug2 <= digitDebug[11:8];
+  digitDebug3 <= digitDebug[15:12];
+  
+  LOCAL digitDebug7seg <= digitDebug7Seg3 & digitDebug7Seg2 & digitDebug7Seg1 & digitDebug7Seg0;
+  digitDisplay <= with modeIO select (digitIO, digitDebug7seg); 
+
+  ANPins <= with noDigit select (0b1110, 0b1101, 0b1011, 0b0111);
+  
+  SegPins <= with noDigit select (digitDisplay[31:24], digitDisplay[23:16], digitDisplay[15:8], digitDisplay[7:0]); 
+   
+  hardReset <= btnIntern[1] and btnIntern[0];
+  
+  LedsPins <= with modeIO select (ledIO, ledDebug);
+  ]]>
+</code>
+
+  <awt name="awt">
+  	<instance awt="instAwt.awt"/>
+  </awt>
+  <awt name="awt1">
+  	<instance awt="instAwt.awt1"/>
+  </awt>
+  </module>

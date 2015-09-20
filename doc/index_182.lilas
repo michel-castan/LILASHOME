@@ -1,33 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-
-  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="rst" type="lilas.type.StdLogic" size="1"/>
-  <signal name="etat" type="java.lang.String"/>
-  <signal mode="out" name="monter" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="out" name="descendre" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="DS" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="DI" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="MS" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="MI" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="MA" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="DA" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="a" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="b" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="cin" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="cout" type="lilas.type.StdLogic" init="0b0" optional="true"/>
+  <signal mode="out" name="s" type="lilas.type.StdLogic" init="0b0"/>
   
-  
-  <code language="logic"><![CDATA[ 
-  moore smclock=clk smreset=rst sminit=CabineArretDescente
-  		smstate=etat
-	out=(monter, descendre)
-    {CabineArretDescente ()
-      on DS target CabineEnMontée,
-      on DI target CabineEnDescente},
-    {CabineArretMontée ()
-      on MS target CabineEnMontée,
-      on MI target CabineEnDescente},
-    {CabineEnMontée (monter<=0b1)
-      on MA target CabineArretMontée},
-     {CabineEnDescente (descendre<=0b1)
-      on DA target CabineArretDescente};
- ]]> </code>
+    <code language="logic"><![CDATA[
+    	local g <= a and b;
+    	internal p:1 <= a or b;
+    	cout <= g or (p and cin);
+    	s <= a xor b xor cin;
+]]> </code>
 
 </module>

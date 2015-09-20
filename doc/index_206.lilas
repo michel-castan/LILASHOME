@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module board="ms6lx9">
+	<signal mode="in" init="0b0" name="Clk50M" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="clkMode" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="clkManual" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="upDown" type="lilas.type.StdLogic"/>
+	<signal mode="in" init="0b0" name="clear" type="lilas.type.StdLogic"/>
+	<signal mode="out" init="0x00" name="LedsPins" type="lilas.type.StdLogic"/>
+	<signal mode="out" init="0x0000_0000" name="ctr" type="lilas.type.StdLogic"/>
+	
+	<signal mode="internal" init="0x0000_0000" name="ctrIntern" type="lilas.type.StdLogic"/>
+	<signal mode="internal" init="0b1" name="clkCircuit" type="lilas.type.StdLogic"/>
+	
+	<lilas.bib.logic.clock.ClkGen clkMultiply="6" clkDivide="2" CLKIN_PERIOD="20" clkIn="Clk50M"
+		clkOut="clkCircuit" clkMode="clkMode" clkManual="clkManual" printDelay="true"/>
+	
+	<CtrUD clear="clear" clkCircuit="clkCircuit" ctr="ctrIntern" size="32" upDown="upDown"/>
+							
+	<code language="logic"><![CDATA[
+		LedsPins <= ctrIntern[31:28] & ctrIntern[3:0];
+		ctr <= ctrIntern;
+	]]></code>
+		
+</module>

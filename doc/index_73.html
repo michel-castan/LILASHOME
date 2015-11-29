@@ -1,245 +1,78 @@
 <html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>LILAS-V4</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
-   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv1"><a href="index_64.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv2"><a href="index_65.html" onClick="return chargerURLavecHistorique(this)">6.1 lilas.bib.awt</a></li><li class="niv2"><a href="index_69.html" onClick="return chargerURLavecHistorique(this)">6.2 lilas.bib.logic</a></li><li class="niv3"><a href="index_70.html" onClick="return chargerURLavecHistorique(this)">6.2.1 ctr</a></li><li class="niv3"><a href="index_71.html" onClick="return chargerURLavecHistorique(this)">6.2.2 flipflop</a></li><li class="niv3"><a href="index_72.html" onClick="return chargerURLavecHistorique(this)">6.2.3 memoire</a></li><li class="niv3sel"><a href="index_73.html" onClick="return chargerURLavecHistorique(this)">6.2.4 register</a></li><li class="niv3"><a href="index_74.html" onClick="return chargerURLavecHistorique(this)">6.2.5 shift</a></li><li class="niv3"><a href="index_75.html" onClick="return chargerURLavecHistorique(this)">6.2.6 clock</a></li><li class="niv2"><a href="index_76.html" onClick="return chargerURLavecHistorique(this)">6.3 lilas.bib.logique5E</a></li><li class="niv2"><a href="index_78.html" onClick="return chargerURLavecHistorique(this)">6.4 lilas.bib.nexys3</a></li><li class="niv2"><a href="index_81.html" onClick="return chargerURLavecHistorique(this)">6.5 lilas.bib.nexys3Old</a></li><li class="niv2"><a href="index_86.html" onClick="return chargerURLavecHistorique(this)">6.6 lilas.bib.miniSpartan6</a></li><li class="niv1"><a href="index_88.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li><li class="niv1"><a href="index_91.html" onClick="return chargerURLavecHistorique(this)">8 Lilas examples</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
-   - 6.2.4 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">register</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder"><ul id="ID_PubliTool_N10D1A">
-  	<li>Register&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_137.lilas">Register.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_4.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">LILAS-V4</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index.html" onClick="return chargerURLavecHistorique(this)">LILAS-V4</a></li><li class="niv1"><a href="index_6.html" onClick="return chargerURLavecHistorique(this)">1 Installation</a></li><li class="niv1"><a href="index_7.html" onClick="return chargerURLavecHistorique(this)">2 Quick start tutorial</a></li><li class="niv1"><a href="index_19.html" onClick="return chargerURLavecHistorique(this)">3 Launch command</a></li><li class="niv1"><a href="index_20.html" onClick="return chargerURLavecHistorique(this)">4 Configuration file</a></li><li class="niv1"><a href="index_21.html" onClick="return chargerURLavecHistorique(this)">5 Lilas programming</a></li><li class="niv1"><a href="index_65.html" onClick="return chargerURLavecHistorique(this)">6 lilas.bib</a></li><li class="niv2"><a href="index_66.html" onClick="return chargerURLavecHistorique(this)">6.1 lilas.bib.awt</a></li><li class="niv2"><a href="index_70.html" onClick="return chargerURLavecHistorique(this)">6.2 lilas.bib.logic</a></li><li class="niv3"><a href="index_71.html" onClick="return chargerURLavecHistorique(this)">6.2.1 ctr</a></li><li class="niv3"><a href="index_72.html" onClick="return chargerURLavecHistorique(this)">6.2.2 flipflop</a></li><li class="niv3sel"><a href="index_73.html" onClick="return chargerURLavecHistorique(this)">6.2.3 memoire</a></li><li class="niv3"><a href="index_74.html" onClick="return chargerURLavecHistorique(this)">6.2.4 register</a></li><li class="niv3"><a href="index_75.html" onClick="return chargerURLavecHistorique(this)">6.2.5 shift</a></li><li class="niv3"><a href="index_76.html" onClick="return chargerURLavecHistorique(this)">6.2.6 clock</a></li><li class="niv2"><a href="index_77.html" onClick="return chargerURLavecHistorique(this)">6.3 lilas.bib.logique5E</a></li><li class="niv2"><a href="index_79.html" onClick="return chargerURLavecHistorique(this)">6.4 lilas.bib.nexys3</a></li><li class="niv2"><a href="index_82.html" onClick="return chargerURLavecHistorique(this)">6.5 lilas.bib.nexys3Old</a></li><li class="niv2"><a href="index_87.html" onClick="return chargerURLavecHistorique(this)">6.6 lilas.bib.miniSpartan6</a></li><li class="niv1"><a href="index_89.html" onClick="return chargerURLavecHistorique(this)">7 FPGA board</a></li><li class="niv1"><a href="index_92.html" onClick="return chargerURLavecHistorique(this)">8 Lilas examples</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 6.2.3 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">memoire</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder"><ul id="ID_PubliTool_N10D0F">
+  	<li>MemoireROM&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_148.lilas">MemoireROM.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
 <font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;doc&gt;</font>M&eacute;moire ROM simple<font color="#A020F0">&lt;/doc&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"sizeWord"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"sizeAdr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"sizeMem"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font> <font color="#A020F0">init=</font><font color="#CC6600">"256"</font><font color="#A020F0">/&gt;</font>
 
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"we"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"adr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">size=</font><font color="#CC6600">"sizeAdr"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"sizeWord"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"sizeWord"</font><font color="#A020F0">/&gt;</font>
 
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">name=</font><font color="#CC6600">"mem"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.ArrayStdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"256:0xUUUU"</font><font color="#A020F0">/&gt;</font>
+
   <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if selected(clk) and clk then
-  		regVal &lt;= dIn;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+  //array mem &lt;= ( 0xFF:8, 4:4 =&gt; 0xFE, 1:4=&gt;0xFD, 0xFC, 0xFB, 0b0101 =&gt; 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0);
+  
+  if selected(clk) and clk then
+  	if we then mem(adr) &lt;= dIn; end if;
+  	end if;	
+  dOut &lt;= mem(adr);
+  <font color="#A020F0">]]&gt;&lt;/code&gt;</font>
   
 <font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>Register2Inputs&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_138.lilas">Register2Inputs.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+</div></div></p>
+  	<p style="top:10pt;bottom:5mm;text-align:justify;">It is possible to initialize the memory directly in the statement of the signal, using the attribute "memInit" (and possibly the "assembler" attribute):
+  		<div style="white-space:pre;font-family:monospace;">
+  			<font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">name=</font><font color="#CC6600">"mem"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.ArrayStdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"256:0xUUUU"</font>  <font color="#A020F0">memInit=</font><font color="#CC6600">"tst.code.logic.memoire.Rom"</font><font color="#A020F0">/&gt;</font>
+  			--&gt; initialise with the file content of tst/code/logic/memoire/Rom.mem or 
+  			the file content of tst/code/logic/memoire/Rom.ass if attribute 'assembleur' is given
+  		</div>
+  		</p>
+  	</li>
+  	<li> MemoireRAM: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_149.lilas">MemoireRAM.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
 <font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>
-  <font color="#A020F0">&lt;/doc&gt;</font>
-  
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"n"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">&gt;</font>taille du compteur<font color="#A020F0">&lt;/signal&gt;</font>
+  <font color="#A020F0">&lt;doc&gt;</font>M&eacute;moire RAM simple<font color="#A020F0">&lt;/doc&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"sizeWord"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"sizeAdr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"sizeMem"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
 
   <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"load"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"2"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"regIn0"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"n"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"regIn1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"n"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"regOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"n"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"we"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"adr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">size=</font><font color="#CC6600">"sizeAdr"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"sizeWord"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"sizeWord"</font><font color="#A020F0">/&gt;</font>
 
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"acc"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"n"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if selected(clk) and equals(clk,0b1) then
-  		if equals(load,0b01) then acc &lt;= regIn0;
-  		elsif equals(load,0b10) then acc &lt;= regIn1;
-  		end if;
- 	end if;
-  	
-  	regOut &lt;= acc;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>RegisterAC&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_139.lilas">RegisterAC.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Positive-Edge Clock with Asynchronous Clear<font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">name=</font><font color="#CC6600">"mem"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.ArrayStdLogic"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font>
+  		 <font color="#A020F0">init=</font><font color="#CC6600">"sizeMem:0bU:sizeWord"</font><font color="#A020F0">/&gt;</font>
+ 
+  <font color="#A020F0">&lt;awt name=</font><font color="#CC6600">"panDisplayMem"</font> <font color="#A020F0">layout=</font><font color="#CC6600">"grid"</font> <font color="#A020F0">colonnes=</font><font color="#CC6600">"1"</font><font color="#A020F0">&gt;</font>
+    <font color="#A020F0">&lt;MemoryDisplay memory=</font><font color="#CC6600">"mem"</font> <font color="#A020F0">model=</font><font color="#CC6600">"ModeleMemoireAdrOctet"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;/awt&gt;</font>
+ 
+  <font color="#A020F0">&lt;awt colonnes=</font><font color="#CC6600">"1"</font> <font color="#A020F0">height=</font><font color="#CC6600">"400"</font> <font color="#A020F0">layout=</font><font color="#CC6600">"grid"</font> <font color="#A020F0">name=</font><font color="#CC6600">"pan"</font> <font color="#A020F0">width=</font><font color="#CC6600">"1000"</font><font color="#A020F0">&gt;</font>
+    <font color="#A020F0">&lt;MemoryDisplay memory=</font><font color="#CC6600">"mem"</font> <font color="#A020F0">model=</font><font color="#CC6600">"ModeleMemoireAdrOctet"</font><font color="#A020F0">/&gt;</font>
+    <font color="#A020F0">&lt;ListDisplay&gt;</font>
+      <font color="#A020F0">&lt;node editable=</font><font color="#CC6600">"true"</font> <font color="#A020F0">signal=</font><font color="#CC6600">"clk"</font><font color="#A020F0">/&gt;</font>
+      <font color="#A020F0">&lt;node editable=</font><font color="#CC6600">"true"</font> <font color="#A020F0">signal=</font><font color="#CC6600">"we"</font><font color="#A020F0">/&gt;</font>
+      <font color="#A020F0">&lt;node editable=</font><font color="#CC6600">"true"</font> <font color="#A020F0">signal=</font><font color="#CC6600">"adr"</font><font color="#A020F0">/&gt;</font>
+      <font color="#A020F0">&lt;node editable=</font><font color="#CC6600">"true"</font> <font color="#A020F0">signal=</font><font color="#CC6600">"dIn"</font><font color="#A020F0">/&gt;</font>
+      <font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"dOut"</font><font color="#A020F0">/&gt;</font>
+    <font color="#A020F0">&lt;/ListDisplay&gt;</font>
+  <font color="#A020F0">&lt;/awt&gt;</font>
 
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font> <font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
   <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if clr then regVal &lt;= 0:size;
-  	elsif selected(clk) and clk then
-  			regVal &lt;= dIn;
-  	end if;
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
+  if selected(clk) and clk then
+  	if we then mem(adr) &lt;= dIn; end if;
+  end if;	
+  dOut &lt;= mem(adr);
+  <font color="#A020F0">]]&gt;&lt;/code&gt;</font>
   
 <font color="#A020F0">&lt;/module&gt;</font>
 </div></div></p></li>
-  	<li>RegisterEn&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_140.lilas">RegisterEn.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Positive-Edge Clock with Enable clock<font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"en"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if selected(clk) and clk then
-  		if en then regVal &lt;= dIn;
-  		end if;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>RegisterEnAC&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_141.lilas">RegisterEnAC.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Positive-Edge Clock with Enable clock, Asynchronous Clear
-	Appel : 
-  		<font color="#A020F0">&lt;RegistreEnAC package=</font><font color="#CC6600">"bib.logic.register"</font> <font color="#A020F0">clk=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">en=</font><font color="#CC6600">"en"</font> <font color="#A020F0">clr=</font><font color="#CC6600">"clr"</font> <font color="#A020F0">dIn=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">dOut=</font><font color="#CC6600">"dOut"</font><font color="#A020F0">/&gt;</font>
-	
-    <font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"en"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if clr then regVal &lt;= 0:size;
-  	elsif selected(clk) and clk then
-  		if en then regVal &lt;= dIn;
-  		end if;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>RegisterEnAC1b&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_142.lilas">RegisterEnAC1b.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Positive-Edge Clock with Enable clock, Asynchronous Clear<font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font> <font color="#A020F0">init=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"en"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">init=</font><font color="#CC6600">"0b0"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if clr then regVal &lt;= 0b0;
-  	elsif selected(clk) and clk then
-  		if en then regVal &lt;= dIn;
-  		end if;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>RegisterNeAC&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_143.lilas">RegisterNeAC.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Negative-Edge Clock with Asynchronous Clear<font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if clr then regVal &lt;= 0:size;
-  	elsif selected(clk) and not clk then
-  		regVal &lt;= dIn;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>RegisterNeAC1b&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_144.lilas">RegisterNeAC1b.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Negative-Edge Clock with Asynchronous Clear<font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font> <font color="#A020F0">init=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if clr then regVal &lt;= 0b0;
-  	elsif selected(clk) and not clk then
-  		regVal &lt;= dIn;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>RegisterNeEn&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_145.lilas">RegisterNeEn.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Negative-Edge Clock with Enable clock<font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"en"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if selected(clk) and not clk then
-  		if en then regVal &lt;= dIn;
-  		end if;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	<li>RegisterNeEnAC&nbsp;: <p style="top:10pt;bottom:5mm;text-align:justify;"><div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_146.lilas">RegisterNeEnAC.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
-<font color="#A020F0">&lt;module&gt;</font>
-  <font color="#A020F0">&lt;doc&gt;</font>Registre &agrave; base de FLip-flop Negative-Edge Clock with Enable clock, Asynchronous Clear<font color="#A020F0">&lt;/doc&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"size"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clk"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"en"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"clr"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"1"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dIn"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"out"</font> <font color="#A020F0">name=</font><font color="#CC6600">"dOut"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-
-  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"regVal"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font> <font color="#A020F0">type=</font><font color="#CC6600">"lilas.type.StdLogic"</font> <font color="#A020F0">size=</font><font color="#CC6600">"size"</font><font color="#A020F0">/&gt;</font>
-  
-  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"logic"</font> <font color="#A020F0">dur&eacute;eActivation=</font><font color="#CC6600">"1ns"</font><font color="#A020F0">&gt;&lt;![CDATA[</font>
-  	if clr then regVal &lt;= 0:size;
-  	elsif selected(clk) and not clk then
-  		if en then regVal &lt;= dIn;
-  		end if;
- 	end if;
-  	
-  	dOut &lt;= regVal;
-  	<font color="#A020F0">]]&gt;&lt;/code&gt;</font>
-  
-<font color="#A020F0">&lt;/module&gt;</font>
-</div></div></p></li>
-  	
     </ul></p></div></body></html>

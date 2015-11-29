@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <doc>Registre à base de FLip-flop Negative-Edge Clock with Asynchronous Clear</doc>
-  <signal mode="constant" name="size" type="java.lang.Integer" init="1"/>
+  <signal mode="constant" name="size" type="java.lang.Integer"/>
 
   <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
   <signal mode="in" name="clr" type="lilas.type.StdLogic" size="1"/>
@@ -11,7 +11,7 @@
   <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
   
   <code language="logic" duréeActivation="1ns"><![CDATA[
-  	if clr then regVal <= 0b0;
+  	if clr then regVal <= 0:size;
   	elsif selected(clk) and not clk then
   		regVal <= dIn;
  	end if;

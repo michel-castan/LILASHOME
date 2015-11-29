@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module>
-  <signal mode="in" name="va" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="vb" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="vc" sensitive="true" type="java.lang.Double"/>
-  <signal mode="out" name="vdelta" type="java.lang.Double"/> 
 
-  <code language="java"/>
+<module>	
+	<awt name="myComponent"/>
+	
+	<code language="java"/>
 </module>

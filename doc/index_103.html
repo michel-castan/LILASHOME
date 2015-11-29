@@ -1,0 +1,88 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Calcul FFT</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_94.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">Calcul FFT</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index_93.html" onClick="return chargerURLavecHistorique(this)">Calcul FFT</a></li><li class="niv1"><a href="index_95.html" onClick="return chargerURLavecHistorique(this)">1 Ex&eacute;cution pipe-line</a></li></ul></div><div class="zoneMain"><div class="zoneTitreCentr&eacute;eSimple" id="titre">DataReceptorP1</div><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">
+		<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_104.lilas">DataReceptorP1.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+<font color="#A020F0">&lt;module&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"fftSize"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"kin"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"xin"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Double"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal mode=</font><font color="#CC6600">"in"</font> <font color="#A020F0">name=</font><font color="#CC6600">"yin"</font> <font color="#A020F0">sensitive=</font><font color="#CC6600">"true"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Double"</font><font color="#A020F0">/&gt;</font>
+  
+  <font color="#A020F0">&lt;code language=</font><font color="#CC6600">"java"</font><font color="#A020F0">/&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div>
+		<div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_105.java">DataReceptorP1.java</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#009900">package</font><font color="#0000FF"> demo.fft</font>;
+<font color="#009900">public</font> <font color="#009900">class</font> <font color="#0000FF">DataReceptorP1</font> <font color="#009900">extends</font> <font color="#0000FF">DataReceptorP1_LILAS</font>
+{
+	<font color="#0000FF">double[] </font><font color="#FF00FF">x</font>;
+	<font color="#0000FF">double[] </font><font color="#FF00FF">y</font>;
+	<font color="#009900">int</font> <font color="#FF00FF">ctrRecu</font> = 0;
+	<font color="#009900">int</font> <font color="#FF00FF">ctrS&eacute;rie</font> = 1;
+	<font color="#0000FF">boolean[] </font><font color="#FF00FF">present</font>;
+	<font color="#009900">int</font> <font color="#FF00FF">nbrEtage</font>;
+	
+	<font color="#009900">public</font> <font color="#0000FF">DataReceptorP1</font>(<font color="#0000FF">String</font> <font color="#FF00FF">nameInParentModule</font>, <font color="#0000FF">lilas.base.Module</font> <font color="#FF00FF">parent</font>,
+			<font color="#0000FF">lilas.base.Signal</font><font color="#FF00FF">&lt;</font><font color="#0000FF">java.lang.Integer</font><font color="#FF00FF">&gt;</font> <font color="#0000FF">fftSize_signal</font><font color="#FF00FF">,</font>
+			<font color="#0000FF">lilas.base.Signal</font><font color="#FF00FF">&lt;</font><font color="#0000FF">java.lang.Integer</font><font color="#FF00FF">&gt;</font> <font color="#0000FF">kin_signal</font><font color="#FF00FF">,</font>
+			<font color="#0000FF">lilas.base.Signal</font><font color="#FF00FF">&lt;</font><font color="#0000FF">java.lang.Double</font><font color="#FF00FF">&gt;</font> <font color="#0000FF">xin_signal</font><font color="#FF00FF">,</font>
+			<font color="#0000FF">lilas.base.Signal</font><font color="#FF00FF">&lt;</font><font color="#0000FF">java.lang.Double</font><font color="#FF00FF">&gt;</font> <font color="#0000FF">yin_signal</font><font color="#FF00FF">)</font> <font color="#0000FF">throws</font> <font color="#FF00FF">lilas.base.ExceptionLilas</font> <font color="#0000FF">{</font>
+		<font color="#FF00FF">super</font><font color="#0000FF">(</font><font color="#FF00FF">nameInParentModule</font>, <font color="#0000FF">parent</font><font color="#FF00FF">,</font>
+			<font color="#0000FF">fftSize_signal</font><font color="#FF00FF">,</font>
+			<font color="#0000FF">kin_signal</font><font color="#FF00FF">,</font>
+			<font color="#0000FF">xin_signal</font><font color="#FF00FF">,</font>
+			<font color="#0000FF">yin_signal</font><font color="#FF00FF">)</font><font color="#0000FF">;</font>
+		
+		<font color="#FF00FF">x</font> <font color="#0000FF">=</font> <font color="#FF00FF">new</font> <font color="#0000FF">double[fftSize]</font><font color="#FF00FF">;</font>
+		<font color="#0000FF">y</font> <font color="#FF00FF">=</font> <font color="#0000FF">new</font> <font color="#FF00FF">double[fftSize]</font><font color="#0000FF">;</font>
+		<font color="#FF00FF">present</font> <font color="#0000FF">=</font> <font color="#FF00FF">new</font> <font color="#0000FF">boolean[fftSize]</font><font color="#FF00FF">;</font>
+		<font color="#0000FF">for</font> <font color="#FF00FF">(</font><font color="#0000FF">int</font> <font color="#FF00FF">i</font><font color="#0000FF">=</font><font color="#FF00FF">0</font><font color="#0000FF">;</font> <font color="#FF00FF">i</font><font color="#0000FF">&lt;</font><font color="#FF00FF">present.length</font><font color="#0000FF">;</font> <font color="#FF00FF">i</font><font color="#0000FF">++</font><font color="#FF00FF">)</font> <font color="#0000FF">present[i]</font> <font color="#FF00FF">=</font> <font color="#0000FF">false</font><font color="#FF00FF">;</font>
+		<font color="#0000FF">nbrEtage</font> <font color="#FF00FF">=</font> <font color="#0000FF">(</font><font color="#FF00FF">int</font>)(Math.log(fftSize) / Math.log(2));
+	}
+
+	<font color="#009900">int</font> <font color="#0000FF">bitReverse</font>(<font color="#0000FF">int</font> <font color="#FF00FF">k</font>) {
+    	<font color="#009900">int</font> <font color="#FF00FF">kBR</font>= 0;
+    	<font color="#009900">for</font> (<font color="#009900">int</font> <font color="#FF00FF">i</font>=0; i&lt;nbrEtage; i++) {
+    		kBR = kBR*2+k%2;
+    		k= k/2;
+    	}
+    	<font color="#009900">return</font> <font color="#FF00FF">kBR</font>;
+	}
+    
+	<font color="#009900">private</font> <font color="#009900">long</font> <font color="#FF00FF">lastReceivedDate</font>;
+	
+	@Override
+	<font color="#009900">final</font> <font color="#009900">protected</font> <font color="#009900">void</font> <font color="#0000FF">activation</font>() <font color="#009900">throws</font> <font color="#0000FF">lilas.base.ExceptionLilas</font> {
+		<font color="#009900">if</font> (present==null || kin==null) <font color="#009900">return</font>;
+		<font color="#009900">if</font> (present[kin]) printMsg(<font color="#CC6600">"Erreur sur s&eacute;rie "</font>+ctrS&eacute;rie+<font color="#CC6600">" pour r&eacute;ceptor, donn&eacute;e pr&eacute;c&eacute;dente non trait&eacute;e : "</font>+kin, java.awt.Color.red); 
+		<font color="#9A1900">// calcul bitReverse de kin
+</font>    	<font color="#009900">int</font> <font color="#FF00FF">kinBR</font>= bitReverse(kin);
+		x[kinBR] = xin;
+		y[kinBR] = yin;
+		<font color="#009900">long</font> <font color="#FF00FF">delay</font> = systemL.getCurrentDate()-lastReceivedDate;
+		lastReceivedDate = systemL.getCurrentDate();
+		printMsg(<font color="#CC6600">"DataReceptorP1 Receive series "</font>+ctrS&eacute;rie+<font color="#CC6600">" : "</font>+kin+<font color="#CC6600">" =&gt; "</font>+kinBR+<font color="#CC6600">" at "</font>+systemL.getCurrentDateStr()
+				+<font color="#CC6600">" ("</font>+lilas.util.Chronometer.toString(delay)+<font color="#CC6600">")"</font>, java.awt.Color.black);
+		ctrRecu++;
+		<font color="#009900">if</font> (ctrRecu==fftSize) {
+			<font color="#9A1900">// on v&eacute;rifie les r&eacute;sultats
+</font>			printMsg(<font color="#CC6600">"DataReceptorP1 End of series, verification."</font>, java.awt.Color.green);      
+			<font color="#0000FF">Complex[] </font><font color="#FF00FF">xc</font> = <font color="#009900">new</font> Complex[fftSize];
+			<font color="#9A1900">// original data
+</font>			<font color="#009900">for</font> (<font color="#009900">int</font> <font color="#FF00FF">i</font> = 0; i &lt; fftSize; i++) {
+				xc[i] = <font color="#009900">new</font> Complex(i, 0);
+			}
+			<font color="#0000FF">Complex[] </font><font color="#FF00FF">z</font> = FFT.fft(xc);
+			<font color="#009900">boolean</font> <font color="#FF00FF">test</font> = Test.cmp(z, x, y);
+			<font color="#9A1900">//System.out.println("Test &eacute;galit&eacute; s&eacute;rie "+ctrS&eacute;rie+" : "+ test);
+</font>			printMsg(<font color="#CC6600">"Test equality series "</font>+ctrS&eacute;rie+<font color="#CC6600">" : "</font>+ test, (test?java.awt.Color.green:java.awt.Color.red));         
+			ctrRecu=0;
+			ctrS&eacute;rie++;
+			<font color="#009900">for</font> (<font color="#009900">int</font> <font color="#FF00FF">i</font>=0; i&lt;present.length; i++) present[i] = false;
+		}
+		<font color="#9A1900">//dur&eacute;eActivation = 10000;
+</font>	}
+}
+
+</div></div>
+	</p></div></body></html>

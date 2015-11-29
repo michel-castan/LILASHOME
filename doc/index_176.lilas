@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 
-  <signal mode="out" name="a" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="out" name="b" type="lilas.type.StdLogic" size="2"/>
-  <signal mode="out" name="c" type="lilas.type.StdLogic" size="3"/>
-  <signal mode="in" name="bus" type="lilas.type.StdLogic" size="6"/>
+  <signal mode="out" name="s" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="sel" type="lilas.type.StdLogic" size="2"/>
+  <signal mode="in" name="E0" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="E1" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="E2" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="E3" type="lilas.type.StdLogic" size="1"/>
   
-    <code language="logic"><![CDATA[
-   (a, b, c) <= bus;  
+  
+  <code language="logic"><![CDATA[
+  s <= with sel select (E3, E2, E1, E0);  
 ]]></code>
-  
+
 </module>

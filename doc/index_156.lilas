@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Unsigned Up Counter With Asynchronous Set</doc>
+  <doc>Unsigned Down Counter With Asynchronous Set</doc>
   <signal mode="constant" name="size" type="java.lang.Integer"/>
   <signal mode="out" name="q" type="lilas.type.StdLogic" size="size"/>
   <signal mode="in" name="clk" type="lilas.type.StdLogic" init="0b0"/>
@@ -11,10 +11,10 @@
 
   <code language="logic"><![CDATA[  
   if clr then
-     valCtr <= setBits valCtr with 0b0;
+     valCtr <= 0:size;
   elsif selected(clk) and clk then
-  	if ce then 
-  		valCtr <= valCtr plus 0b1;
+  	if (ce) then 
+  		valCtr <= valCtr minus 0b1;
     end if;
   end if;
   

@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Registre à base de FLip-flop Positive-Edge Clock with Asynchronous Clear</doc>
-  <signal mode="constant" name="size" type="java.lang.Integer"/>
+  <doc>
+  </doc>
+  
+  <signal mode="constant" name="n" type="java.lang.Integer">taille du compteur</signal>
 
   <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="clr" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size" />
-  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="in" name="load" type="lilas.type.StdLogic" size="2"/>
+  <signal mode="in" name="regIn0" type="lilas.type.StdLogic" size="n"/>
+  <signal mode="in" name="regIn1" type="lilas.type.StdLogic" size="n"/>
+  <signal mode="out" name="regOut" type="lilas.type.StdLogic" size="n"/>
 
-  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
+  <signal name="acc" type="lilas.type.StdLogic" size="n"/>
   
-  <code language="logic" duréeActivation="1ns"><![CDATA[
-  	if clr then regVal <= 0:size;
-  	elsif selected(clk) and clk then
-  			regVal <= dIn;
-  	end if;
-  	dOut <= regVal;
+  <code language="logic"><![CDATA[
+  	if selected(clk) and equals(clk,0b1) then
+  		if equals(load,0b01) then acc <= regIn0;
+  		elsif equals(load,0b10) then acc <= regIn1;
+  		end if;
+ 	end if;
+  	
+  	regOut <= acc;
   	]]></code>
   
 </module>

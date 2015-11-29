@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-
-  <signal mode="out" name="s" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="sel" type="lilas.type.StdLogic" size="2"/>
-  <signal mode="in" name="E0" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="E1" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="E2" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="E3" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="out" name="q" type="lilas.type.StdLogic" size="4"/>
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="in" name="d" type="lilas.type.StdLogic" size="4"/>
   
-  
-  <code language="logic"><![CDATA[
-  s <= with sel select (E3, E2, E1, E0);  
-]]></code>
+   <code language="logic"><![CDATA[  
+ if selected(clk) and equals(clk,0b1) then
+  	q <= d;
+ end if; 
+  ]]></code>
 
 </module>
+ 

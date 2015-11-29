@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 
-  <signal mode="out" name="x" type="lilas.type.StdLogic" size="8"/>
-  <signal mode="in" name="a" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="b" type="lilas.type.StdLogic" size="2"/>
-  <signal mode="in" name="c" type="lilas.type.StdLogic" size="5"/>
+  <signal mode="out" name="x" type="lilas.type.StdLogic" size="3"/>
+  <signal mode="out" name="y" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="a" type="lilas.type.StdLogic" size="8"/>
+ 
   
   <code language="logic"><![CDATA[
-	x <= a & b & c;
-]]>  </code>
+	 x<=a[4:2]; // a étant sur 8 bits
+  	 y<=a[3];
   
+]]>   </code>
+
 </module>

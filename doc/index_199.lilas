@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+
+  <signal mode="in" name="a" sensitive="true" type="java.lang.Double"/>
+  <signal mode="in" name="b" sensitive="true" type="java.lang.Double"/>
+  <signal mode="in" name="delta" sensitive="true" type="java.lang.Double"/>
+  <signal mode="out" name="nbrSol" type="java.lang.Integer"/>
+  <signal mode="out" name="sol1" type="java.lang.Double"/>
+  <signal mode="out" name="sol2" type="java.lang.Double"/>
+  
+  <code language="java"/>
+</module>

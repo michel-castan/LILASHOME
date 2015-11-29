@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>
-  	clkMultiply = 2..32 default=4
-  	clkDivide   = 1..32 default=1
-  	
-  	CLOUT_PERIOD donnée en ns
-  </doc>
-  <signal mode="constant" name="CLKOUT_PERIOD" type="java.lang.Float"/>
-  <signal mode="constant" name="printDelay" type="java.lang.Boolean"/>
-  	  
-  <signal init="0b0" mode="out" name="clkOut" type="lilas.type.StdLogic"/>
-  
-  <code language="java"/>
+  <signal mode="constant" name="size" type="java.lang.Integer"/>
+
+  <signal mode="in" name="sel" sensitive="true" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="Din" sensitive="true" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="out" name="Dout" type="lilas.type.StdLogic" init="0bZ:size"/>
+
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  	if sel then Dout <= Din; 
+  	else Dout <= 0bZ:size;
+ 	end if;
+  	]]></code>
   
 </module>

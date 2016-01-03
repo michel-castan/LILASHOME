@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <signal mode="in" name="a" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="b" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="in" name="cin" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="out" name="cout" type="lilas.type.StdLogic" init="0b0" optional="true"/>
-  <signal mode="out" name="s" type="lilas.type.StdLogic" init="0b0"/>
+  <doc>Execute operator Sigma(n, m, x) = x**n+x**(n+1)+..+x**m</doc>
+  <signal mode="constant" name="n" type="java.lang.Integer"/>
+  <signal mode="constant" name="m" type="java.lang.Integer"/>
   
-    <code language="logic"><![CDATA[
-    	local g <= a and b;
-    	internal p:1 <= a or b;
-    	cout <= g or (p and cin);
-    	s <= a xor b xor cin;
-]]> </code>
+  <signal mode="in" name="x" init="0" sensitive="true" type="java.lang.Long"/>
+  <signal mode="out" name="y" type="java.lang.Long"/>
 
+<case>
+	<when cond="n.equals(m)">
+		<SigmaN n="n" x="x" y="y"/>
+	</when>
+	<otherwise>
+		<SigmaNM n="n" m="m" x="x" y="y"/>
+	</otherwise>
+</case>
+  
 </module>
+ 

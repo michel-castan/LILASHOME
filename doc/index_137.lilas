@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>Registre à décalage gauche</doc>
+  <doc>Unsigned Down Counter With Asynchronous Set</doc>
   <signal mode="constant" name="size" type="java.lang.Integer"/>
+  <signal mode="out" name="q" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="clr" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="ce" type="lilas.type.StdLogic" init="0b0"/>
+ 
+  <signal mode="internal" name="valCtr" type="lilas.type.StdLogic" size="size"/>
 
-  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="reset" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="ld" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="shift" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size"/>
-  <signal mode="in" name="cIn" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
-  <signal mode="out" name="cOut" type="lilas.type.StdLogic" size="1" optional="true"/>
-  	
-  <signal name="regVal" mode="internal" type="lilas.type.StdLogic" size="size"/>
-   
-  <code language="logic" duréeActivation="1ns"><![CDATA[
-  	if (reset) then
-		regVal <= 0:size;
-	elsif selected(clk) and clk then
-  		if ld then regVal <= dIn; 
-  		elsif shift then regVal <= regVal[size-2:0] & cIn;
-  		end if;
- 	end if;
-  	
-  	dOut <= regVal;
-  	cOut <= regVal[size-1];
-  	]]></code>
+  <code language="logic"><![CDATA[  
+  if clr then
+     valCtr <= 0:size;
+  elsif selected(clk) and clk then
+  	if (ce) then 
+  		valCtr <= valCtr minus 0b1;
+    end if;
+  end if;
+  
+  q <= valCtr;
+    
+  ]]></code>
   
 </module>
- 

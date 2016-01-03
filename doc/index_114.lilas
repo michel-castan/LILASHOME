@@ -1,54 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <module>
-  <!-- taille des signaux à envoyer/recevoir (download : pc vers Nexys3). Max 64 octets (pour USB 1.1) ou 512 octets (pour USB 2) -->
-  <signal mode="constant" name="transfertSize" type="java.lang.Integer"/>
+  <signal mode="in" name="ledDebug" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="in" name="ledIO" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="in" name="digitDebug" type="lilas.type.StdLogic" init="0x0000"/>
+  <signal mode="in" name="digitIO" type="lilas.type.StdLogic" init="0x01010101"/>
+  <signal mode="out" name="SwitchsIO" type="lilas.type.StdLogic" init="0x00"/>
+  <signal mode="out" name="ButtonsIO" type="lilas.type.StdLogic" init="0b00000"/>
+  <signal mode="internal" name="resetInterne" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="out" name="hardReset" type="lilas.type.StdLogic" init="0b0"/>
+  	  	 
+  <signal mode="out" name="LedsPins" init="0x00" type="lilas.type.StdLogic"/><!-- LED7 LED6 LED5 LED4 LED3 LED2 LED1 LED0 -->
+  <signal mode="in" name="SwitchsPins" type="lilas.type.StdLogic" init="0x00"/><!-- SW7 SW6 SW5 SW4 SW3 SW2 SW1 SW0 -->
+  <signal mode="in" name="ButtonsPins" type="lilas.type.StdLogic" sensitive="true" init="0b00000"/><!-- C U D L R -->
+  <signal mode="in" name="Clk100M" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
+  <signal mode="out" name="SegPins" type="lilas.type.StdLogic" init="0x00"/><!-- A B C D E F G P -->
+  <signal mode="out" name="ANPins" type="lilas.type.StdLogic" init="0x0"/> <!-- AN0 AN1 AN2 AN3 -->
+  
+  <signal mode="internal" name="noDigit" type="lilas.type.StdLogic" init="0b00" sensitive="true"/>
+
+  <signal mode="internal" name="hardResetInterne" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="clkDivisee" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="changementMode" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="modeIO" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="clkEn" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="internal" name="digitDebug7Seg" type="lilas.type.StdLogic" init="0x01010101"/>
+  <signal mode="internal" name="digitDisplay" type="lilas.type.StdLogic" init="0x01010101"/>
+  <signal mode="internal" name="digitDebug0" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug1" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug2" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug3" type="lilas.type.StdLogic" init="0x0"/>
+  <signal mode="internal" name="digitDebug7Seg0" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="digitDebug7Seg1" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="digitDebug7Seg2" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="digitDebug7Seg3" type="lilas.type.StdLogic" init="0x01"/>
+  <signal mode="internal" name="btnIntern" type="lilas.type.StdLogic" init="0b00000"/>
  
-  <signal init="0b0" mode="in" name="IFCLK" type="lilas.type.StdLogic"/>
-  <signal init="0b0" mode="in" name="STMEN" type="lilas.type.StdLogic"/>
-  <signal init="0xZZ" mode="inout" name="USBDB" type="lilas.type.StdLogic"/>
-  <signal init="0b1" mode="in" name="FLAGA" type="lilas.type.StdLogic"/>
-  <signal init="0b1" mode="in" name="FLAGB" type="lilas.type.StdLogic"/>
-  <signal init="0bZZ" mode="out" name="FIFOADR" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="SLRD" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="SLWR" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="SLOE" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="PKTEND" type="lilas.type.StdLogic"/>
-  <signal mode="in" name="cmdGenClkInit" type="lilas.type.StdLogic" init="0x0"/>
-  <signal mode="out" name="etatDSTM" type="lilas.type.StdLogic" init="0x0"/>
-
-  <signal mode="in" name="enableFromFPGA" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="out" name="loadRegToFPGA" type="lilas.type.StdLogic" init="0b0"/>
+  <ModeIO name="gestModeIO" reset="hardResetInterne" clk100M="Clk100M" modeIO="modeIO" changementMode="changementMode"/>
+  <ClkDivisor clkEn="clkEn" clk="Clk100M"/>
+  <ConvertHexa7Seg digitHexa="digitDebug0" digit7seg="digitDebug7Seg0"/>
+  <ConvertHexa7Seg digitHexa="digitDebug1" digit7seg="digitDebug7Seg1"/>
+  <ConvertHexa7Seg digitHexa="digitDebug2" digit7seg="digitDebug7Seg2"/>
+  <ConvertHexa7Seg digitHexa="digitDebug3" digit7seg="digitDebug7Seg3"/>
   
-  <signal mode="out" name="inUse" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="out" name="startClkPulse" type="lilas.type.StdLogic" init="0b0"/>
+  <Nexys3IOAWT name="instAwt" digit="digitDisplay" led="LedsPins" btn="btnIntern" sw="SwitchsIO"/>
   
-  <signal mode="out" name="dataToFPGA" type="lilas.type.StdLogic" size="transfertSize"/><!-- (upload : pc vers Nexys3) obligatoirement multiple de 8 -->
-  <signal mode="in" name="dataFromFPGA" type="lilas.type.StdLogic" size="transfertSize"/><!-- (Download : Nexys3 vers pc) obligatoirement multiple de 8 -->
-  <signal mode="in" name="resetDSTM" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-   
-  <signal mode="internal" name="dataToFPGAInterne" type="lilas.type.StdLogic" size="transfertSize"/>
-  	  <signal mode="internal" name="d8b" type="lilas.type.StdLogic" init="0xZZ"/>
-  <signal mode="internal" name="q8b" type="lilas.type.StdLogic" sensitive="true" init="0xZZ"/>
-  <signal mode="internal" name="fromTo" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="internal" name="cmd" type="lilas.type.StdLogic" init="0b00"/>
-  <signal mode="internal" name="transfert" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="internal" name="loadRegToFPGAInterne" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="internal" name="loadShiftRegister" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="internal" name="notUsed" type="lilas.type.StdLogic" init="0:transfertSize"/>
-
-  <ShiftRegister clk="IFCLK" raz="resetDSTM" cmd="cmd" d8b="USBDB" dataIn="dataFromFPGA" q8b="q8b" transfertSize="transfertSize"/>
-  <ShiftRegister clk="IFCLK" raz="resetDSTM" cmd="cmd" d8b="USBDB" dataIn="notUsed" dataOut="dataToFPGAInterne" transfertSize="transfertSize"/>
-  <ControlSignals SLRD="SLRD" SLWR="SLWR" PKTEND="PKTEND" SLOE="SLOE" FIFOADR="FIFOADR" STMEN="STMEN" transfert="transfert" fromTo="fromTo"/>
-  <StateMachine name="sm" transfert="transfert" fromTo="fromTo" clk="IFCLK" raz="resetDSTM" STMEN="STMEN" FLAGA="FLAGA" FLAGB="FLAGB"
-  				loadRegToFPGA="loadRegToFPGAInterne" loadShiftRegister="loadShiftRegister" inUse="inUse" enableFromFPGA="enableFromFPGA"
-  				startClkPulse="startClkPulse" etatDSTM="etatDSTM"/>
-  <RegistreToFPGA name="RegToFPGA" ce="loadRegToFPGAInterne" clk="IFCLK" d="dataToFPGAInterne" q="dataToFPGA" raz="resetDSTM"
-                transfertSize="transfertSize" cmdGenClkInit="cmdGenClkInit"/>
-
   <code language="logic"><![CDATA[
-	LOCAL tmp <= (not FLAGA and not fromTo) or (not FLAGB and fromTo);
-	USBDB <= with fromTo select(q8b, 0xZZ);
-	cmd <= (transfert and tmp) & (loadShiftRegister or (fromTo and STMEN and tmp));
-    loadRegToFPGA <= loadRegToFPGAInterne;
-]]>  </code>
-</module>
+
+  if selected(Clk100M) and Clk100M then
+  	if (clkEn) then
+  		noDigit <= noDigit plus 0b1;
+    	SwitchsIO <= SwitchsPins;
+    	btnIntern <= ButtonsPins;
+    end if;
+  end if; 
+  
+  changementMode <= btnIntern[1];
+  ButtonsIO <= btnIntern;
+  		
+  digitDebug0 <= digitDebug[3:0];
+  digitDebug1 <= digitDebug[7:4];
+  digitDebug2 <= digitDebug[11:8];
+  digitDebug3 <= digitDebug[15:12];
+  
+  LOCAL digitDebug7seg <= digitDebug7Seg3 & digitDebug7Seg2 & digitDebug7Seg1 & digitDebug7Seg0;
+  digitDisplay <= with modeIO select (digitIO, digitDebug7seg); 
+
+  ANPins <= with noDigit select (0b1110, 0b1101, 0b1011, 0b0111);
+  
+  SegPins <= with noDigit select (digitDisplay[31:24], digitDisplay[23:16], digitDisplay[15:8], digitDisplay[7:0]); 
+   
+  hardReset <= btnIntern[1] and btnIntern[0];
+  
+  LedsPins <= with modeIO select (ledIO, ledDebug);
+  ]]>
+</code>
+
+  <awt name="awt">
+  	<instance awt="instAwt.awt"/>
+  </awt>
+  <awt name="awt1">
+  	<instance awt="instAwt.awt1"/>
+  </awt>
+  </module>

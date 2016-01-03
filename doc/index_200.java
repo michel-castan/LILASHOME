@@ -1,43 +1,33 @@
-package demo.eq2d;
-public class Solution extends Solution_LILAS
+package demo.sqrt;
+
+import java.awt.Color;
+
+import lilas.Main;
+
+public class Sqrt2 extends Sqrt2_LILAS implements lilas.base.Coroutine
 {
-	public Solution(String nameInParentModule, lilas.base.Module parent,
-			lilas.base.Signal<java.lang.Double> a_signal,
-			lilas.base.Signal<java.lang.Double> b_signal,
-			lilas.base.Signal<java.lang.Double> delta_signal,
-			lilas.base.Signal<java.lang.Integer> nbrSol_signal,
-			lilas.base.Signal<java.lang.Double> sol1_signal,
-			lilas.base.Signal<java.lang.Double> sol2_signal) throws lilas.base.ExceptionLilas {
-		super(nameInParentModule, parent,
-			a_signal,
-			b_signal,
-			delta_signal,
-			nbrSol_signal,
-			sol1_signal,
-			sol2_signal);
-		nbrSol_port.propagate = lilas.base.Port.Propagate.PERMANENT;
-		sol1_port.propagate = lilas.base.Port.Propagate.PERMANENT;
-		sol2_port.propagate = lilas.base.Port.Propagate.PERMANENT;
+	public Sqrt2(String nomDansModuleParent, lilas.base.Module parent,
+			lilas.base.Signal<java.lang.Double> x_signal,
+			lilas.base.Signal<java.lang.Double> y_signal) throws lilas.base.ExceptionLilas {
+		super(nomDansModuleParent, parent,
+			x_signal,
+			y_signal);
+		y_port.propagate = lilas.base.Port.Propagate.PERMANENT;
+		tmp_port.propagate = lilas.base.Port.Propagate.PERMANENT;
 	}
 
 	@Override
 	final protected void activation() throws lilas.base.ExceptionLilas {
-		if (delta==0.0) {
-			double res = -b / (2.0*a);
-			nbrSol = 1;
-			sol1 = res;
-			sol2 = res;
-		} else if (delta>0.0 && !Double.isNaN(delta)) {
-			double sqrtDelta = Math.sqrt(delta);
-			nbrSol = 2;
-			sol1=((-b+sqrtDelta) / (2.0*a));
-			sol2=((-b-sqrtDelta) / (2.0*a));
-		} else {
-			nbrSol = 0;
-			sol1 = Double.NaN;
-			sol2 = Double.NaN;
-		}
-
+		double xnplus1=x; 
+		double xn=x/2.0;
+		double deuxPuissanceMoins52 = Double.longBitsToDouble(Long.parseLong("3ff0000000000001", 16))-1;
+		while (Math.abs(xnplus1-xn)/xn > deuxPuissanceMoins52){
+			xn=xnplus1;
+			xnplus1=0.5 * (xn+x/xn);
+			tmp = xnplus1;
+			yieldLilas();
+		} 
+		y = xnplus1;
 	}
 }
 

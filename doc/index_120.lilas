@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <doc>
+  </doc>
+  
+  <signal mode="constant" name="n" type="java.lang.Integer">taille du compteur</signal>
+
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="load" type="lilas.type.StdLogic" size="2"/>
+  <signal mode="in" name="regIn0" type="lilas.type.StdLogic" size="n"/>
+  <signal mode="in" name="regIn1" type="lilas.type.StdLogic" size="n"/>
+  <signal mode="out" name="regOut" type="lilas.type.StdLogic" size="n"/>
+
+  <code language="logic"><![CDATA[
+  	if selected(clk) and clk then
+  		if equals(load,0b01) then regOut <= regIn0;
+  		elsif equals(load,0b10) then regOut <= regIn1;
+  		end if;
+ 	end if;
+  	
+  	]]></code>
+  
+</module>

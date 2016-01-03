@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <doc>Mémoire RAM simple</doc>
+  <signal mode="constant" name="sizeWord" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeAdr" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeMem" type="java.lang.Integer"/>
+
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="we" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="adr" type="lilas.type.StdLogic" sensitive="true" size="sizeAdr"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="sizeWord"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="sizeWord"/>
+
+  <signal mode="internal" name="mem" type="lilas.type.ArrayStdLogic" sensitive="true"
+  		 init="sizeMem:0bU:sizeWord"/>
+ 
+  <awt name="panDisplayMem" layout="grid" colonnes="1">
+    <MemoryDisplay memory="mem" model="ModeleMemoireAdrOctet"/>
+  </awt>
+ 
+  <awt colonnes="1" height="400" layout="grid" name="pan" width="1000">
+    <MemoryDisplay memory="mem" model="ModeleMemoireAdrOctet"/>
+    <ListDisplay>
+      <node editable="true" signal="clk"/>
+      <node editable="true" signal="we"/>
+      <node editable="true" signal="adr"/>
+      <node editable="true" signal="dIn"/>
+      <node signal="dOut"/>
+    </ListDisplay>
+  </awt>
+
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  if selected(clk) and clk then
+  	if we then mem(adr) <= dIn; end if;
+  end if;	
+  dOut <= mem(adr);
+  ]]></code>
+  
+</module>

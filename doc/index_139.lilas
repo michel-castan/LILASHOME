@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <doc>
-  </doc>
-  
-  <signal mode="constant" name="n" type="java.lang.Integer">taille du compteur</signal>
+  <doc>Unsigned UpDown Counter With Asynchronous Set</doc>
+  <signal mode="constant" name="size" type="java.lang.Integer"/>
+  <signal mode="out" name="q" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="raz" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="ce" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="up_down" type="lilas.type.StdLogic" init="0b0"/>
+ 
+  <signal mode="internal" name="valCtr" type="lilas.type.StdLogic" size="size"/>
 
-  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
-  <signal mode="in" name="load" type="lilas.type.StdLogic" size="2"/>
-  <signal mode="in" name="regIn0" type="lilas.type.StdLogic" size="n"/>
-  <signal mode="in" name="regIn1" type="lilas.type.StdLogic" size="n"/>
-  <signal mode="out" name="regOut" type="lilas.type.StdLogic" size="n"/>
-
-  <signal name="acc" type="lilas.type.StdLogic" size="n"/>
+  <code language="logic"><![CDATA[  
+  if raz then
+     valCtr <= setBits valCtr with 0b0;
+  elsif selected(clk) and clk then
+  	if ce then 
+  		if up_down then
+			valCtr <= valCtr plus 0b1;
+  		else
+  			valCtr <= valCtr minus 0b1;
+        end if;  
+    end if;
+  end if;
   
-  <code language="logic"><![CDATA[
-  	if selected(clk) and equals(clk,0b1) then
-  		if equals(load,0b01) then acc <= regIn0;
-  		elsif equals(load,0b10) then acc <= regIn1;
-  		end if;
- 	end if;
-  	
-  	regOut <= acc;
-  	]]></code>
+  q <= valCtr;
+    
+  ]]></code>
   
 </module>

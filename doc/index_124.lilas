@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <doc>Registre à base de FLip-flop Positive-Edge Clock with Enable clock, Asynchronous Clear</doc>
+  <signal mode="constant" name="size" type="java.lang.Integer" init="1"/>
+
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="en" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="clr" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="size"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="size"/>
+
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  	if clr then dOut <= 0b0;
+  	elsif selected(clk) and clk then
+  		if en then dOut <= dIn;
+  		end if;
+ 	end if;
+  	
+  	]]></code>
+  
+</module>

@@ -1,54 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <!-- taille des signaux à envoyer/recevoir (download : pc vers Nexys3). Max 64 octets (pour USB 1.1) ou 512 octets (pour USB 2) -->
-  <signal mode="constant" name="transfertSizeToFPGA" type="java.lang.Integer"/>
-  <signal mode="constant" name="transfertSizeFromFPGA" type="java.lang.Integer"/>
-  	 
-  <signal init="0b0" mode="in" name="IFCLK" type="lilas.type.StdLogic"/>
-  <signal init="0b0" mode="in" name="STMEN" type="lilas.type.StdLogic"/>
-  <signal init="0xZZ" mode="inout" name="USBDB" type="lilas.type.StdLogic"/>
-  <signal init="0b1" mode="in" name="FLAGA" type="lilas.type.StdLogic"/>
-  <signal init="0b1" mode="in" name="FLAGB" type="lilas.type.StdLogic"/>
-  <signal init="0bZZ" mode="out" name="FIFOADR" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="SLRD" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="SLWR" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="SLOE" type="lilas.type.StdLogic"/>
-  <signal init="0bZ" mode="out" name="PKTEND" type="lilas.type.StdLogic"/>
-  <signal mode="out" name="etatDSTM" type="lilas.type.StdLogic" init="0x0"/>
+  <doc>Mémoire ROM simple</doc>
+  <signal mode="constant" name="sizeWord" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeAdr" type="java.lang.Integer"/>
+  <signal mode="constant" name="sizeMem" type="java.lang.Integer" init="256"/>
 
-  <signal mode="in" name="enableFromFPGA" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="out" name="loadRegToFPGA" type="lilas.type.StdLogic" init="0b0"/>
+  <signal mode="in" name="adr" type="lilas.type.StdLogic" sensitive="true" size="sizeAdr"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="sizeWord"/>
+
+  <signal mode="internal" name="mem" type="lilas.type.ArrayStdLogic" init="256:0xUUUU"/>
+
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  //array mem <= ( 0xFF:8, 4:4 => 0xFE, 1:4=>0xFD, 0xFC, 0xFB, 0b0101 => 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0);
   
-  <signal mode="out" name="inUse" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="out" name="startClkPulse" type="lilas.type.StdLogic" init="0b0"/>
+  dOut <= mem(adr);
+  ]]></code>
   
-  <signal mode="out" name="dataToFPGA" type="lilas.type.StdLogic" size="transfertSizeToFPGA"/><!-- (upload : pc vers Nexys3) obligatoirement multiple de 8 -->
-  <signal mode="in" name="dataFromFPGA" type="lilas.type.StdLogic" size="transfertSizeFromFPGA"/><!-- (Download : Nexys3 vers pc) obligatoirement multiple de 8 -->
-  <signal mode="in" name="resetDSTM" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-   
-  <signal mode="internal" name="dataToFPGAInterne" type="lilas.type.StdLogic" size="transfertSizeToFPGA"/>
-  <signal mode="internal" name="d8b" type="lilas.type.StdLogic" init="0xZZ"/>
-  <signal mode="internal" name="q8b" type="lilas.type.StdLogic" sensitive="true" init="0xZZ"/>
-  <signal mode="internal" name="fromTo" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="internal" name="cmd" type="lilas.type.StdLogic" init="0b00"/>
-  <signal mode="internal" name="transfert" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="internal" name="loadRegToFPGAInterne" type="lilas.type.StdLogic" init="0b0"/>
-  <signal mode="internal" name="loadShiftRegister" type="lilas.type.StdLogic" sensitive="true" init="0b0"/>
-  <signal mode="internal" name="notUsed" type="lilas.type.StdLogic" init="0:transfertSizeToFPGA"/>
-
-  <ShiftRegister name="ShRegFromFPGA" clk="IFCLK" raz="resetDSTM" cmd="cmd" d8b="USBDB" dataIn="dataFromFPGA" q8b="q8b" transfertSize="transfertSizeFromFPGA"/>
-  <ShiftRegister name="ShRegToFPGA" clk="IFCLK" raz="resetDSTM" cmd="cmd" d8b="USBDB" dataIn="notUsed" dataOut="dataToFPGAInterne" transfertSize="transfertSizeToFPGA"/>
-  <ControlSignals SLRD="SLRD" SLWR="SLWR" PKTEND="PKTEND" SLOE="SLOE" FIFOADR="FIFOADR" STMEN="STMEN" transfert="transfert" fromTo="fromTo"/>
-  <StateMachine name="sm" transfert="transfert" fromTo="fromTo" clk="IFCLK" raz="resetDSTM" STMEN="STMEN" FLAGA="FLAGA" FLAGB="FLAGB"
-  				loadRegToFPGA="loadRegToFPGAInterne" loadShiftRegister="loadShiftRegister" inUse="inUse" enableFromFPGA="enableFromFPGA"
-  				startClkPulse="startClkPulse" etatDSTM="etatDSTM"/>
-  <RegistreToFPGA name="RegToFPGA" ce="loadRegToFPGAInterne" clk="IFCLK" d="dataToFPGAInterne" q="dataToFPGA" raz="resetDSTM"
-                transfertSize="transfertSizeToFPGA"/>
-
-  <code language="logic"><![CDATA[
-	LOCAL tmp <= (not FLAGA and not fromTo) or (not FLAGB and fromTo);
-	USBDB <= with fromTo select(q8b, 0xZZ);
-	cmd <= (transfert and tmp) & (loadShiftRegister or (fromTo and STMEN and tmp));
-    loadRegToFPGA <= loadRegToFPGAInterne;
-]]>  </code>
 </module>

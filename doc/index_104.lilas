@@ -1,11 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <module>
-  <signal mode="constant" name="fftSize" type="java.lang.Integer"/>
+  <signal init="2000.0" mode="constant" name="generatorFrequency" type="java.lang.Double"/>
+  <signal init="16" mode="constant" name="fftSize" type="java.lang.Integer"/>
+
+  <signal name="k0" type="java.lang.Integer" mode="internal"/>
+  <signal name="x0" type="java.lang.Double" mode="internal"/>
+  <signal name="y0" type="java.lang.Double" mode="internal"/>
+
+  <signal name="k1" type="java.lang.Integer" mode="internal"/>
+  <signal name="x1" type="java.lang.Double" mode="internal"/>
+  <signal name="y1" type="java.lang.Double" mode="internal"/>
+
+  <signal name="start" type="java.lang.Boolean" mode="internal"/>
+
+  <DataGeneratorP1 generatorFrequency="generatorFrequency" start="start" fftSize="fftSize" kout="k0" xout="x0" yout="y0" />
   
-  <signal mode="in" name="kin" sensitive="true" type="java.lang.Integer"/>
-  <signal mode="in" name="xin" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="yin" sensitive="true" type="java.lang.Double"/>
-  
-  <code language="java"/>
+  <EtageTabP1 name="etgtab" fftSize="fftSize" 
+          kin="k0" xin="x0" yin="y0"
+  	      kout="k1" xout="x1" yout="y1"/>
+
+  <DataReceptorP1 fftSize="fftSize" kin="k1" xin="x1" yin="y1"/>
+
+  <awt layout="border" name="awt">
+		<center layout="tab">
+			<onglet colonnes="1" layout="grid" titre="signaux">
+				<ListDisplay duréePixel="2000000" sizeCol0="100" sizeCol1="100" sizeCol2="100" sizeCol3="600" titleCol3="Module : demo.fft.MainNP1">
+					<node system="Date"/>
+					<node system="Messages"/>
+					<node signal="start"/> 
+					<list open="true" titleCol3="Generator">
+						<node signal="k0"/> 
+						<node signal="x0"/> 
+						<node signal="y0"/> 
+					</list>
+					<list open="true" titleCol3="Receptor">
+						<node signal="k1"/> 
+						<node signal="x1"/> 
+						<node signal="y1"/> 
+					</list>
+					
+				</ListDisplay>
+			</onglet>
+			<onglet colonnes="1" layout="grid" titre="full system">
+				<SystemDisplay/>
+			</onglet>
+		</center>
+		
+		<page_end>
+			<BoutonListeScripts/>
+			<BoutonPasAPas/>
+		</page_end>
+	</awt>
+
+  	
+  <script name="main">
+  	<waitStable/>
+  	<next signal="start" value="true"/>
+  	<for var="i" from="1" to="fftSize">
+  		<waitValue signal="k1"/>
+  	</for>
+	<print>Terminé</print>
+  </script>
 
 </module>

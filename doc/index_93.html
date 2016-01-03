@@ -1,5 +1,138 @@
 <html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Calcul FFT</title><!--Généré dynamiquement par PubliTool 2009--><link href="index_2.css" rel="stylesheet"><script src="index_3.js" type="text/javascript">
-   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_94.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">Calcul FFT</td></tr></table></div><div id="tocFixe"><ul><li class="niv0sel"><a href="index_93.html" onClick="return chargerURLavecHistorique(this)">Calcul FFT</a></li><li class="niv1"><a href="index_95.html" onClick="return chargerURLavecHistorique(this)">1 Ex&eacute;cution pipe-line</a></li></ul></div><div class="zoneMain"><div class="" xmlns:url="http://whatever/java/java.net.URLEncoder"><p style="text-align:justify;"></p></div><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder"></p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder"></p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">On d&eacute;sire r&eacute;aliser un module de calcul de fft sur un flot de valeurs. L'algorithme de fft de d&eacute;part 
-	est celui founi par <a href="http://cnx.org/content/m12016/latest/">Douglas L. Jones</a>. 
-	Une version java de cet algorithme est accessible sur <a href="http://introcs.cs.princeton.edu/java/97data/FFT.java.html">http://introcs.cs.princeton.edu/java/97data/FFT.java.html</a>.
+   </script></head><body><div xmlns:url="http://whatever/java/java.net.URLEncoder" class="zoneTitre"><table class="zoneTitre" width="100%"><tr class="zoneTitre"><td class="colTitreLogo"><embed src="index_92.svg" type="image/svg+xml"></embed></td><td class="colTitreTxt">Calcul FFT</td></tr></table></div><div id="tocFixe"><ul><li class="niv0"><a href="index_91.html" onClick="return chargerURLavecHistorique(this)">Calcul FFT</a></li><li class="niv1sel"><a href="index_93.html" onClick="return chargerURLavecHistorique(this)">1 Ex&eacute;cution pipe-line</a></li><li class="niv2"><a href="index_94.html" onClick="return chargerURLavecHistorique(this)">1.1 EtageP1</a></li></ul></div><div class="zoneMain"><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">
+   - 1 -</p><p class="H2c" xmlns:url="http://whatever/java/java.net.URLEncoder">Ex&eacute;cution pipe-line</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Le mode pipe-line est cr&eacute;&eacute; &agrave; partir de trois modules&nbsp;: un module g&eacute;n&eacute;rateur de donn&eacute;e 
+	(<a href="index_95.html">DataGeneratorP1</a>), 
+		un module de calcul de la fft (<a href="index_98.html">EtageTabP1</a>), 
+			et un module r&eacute;cepteur de donn&eacute;e r&eacute;sultat 
+	(<a href="index_101.html">DataReceptorP1</a>). 
+				Le module <div class="" style="white-space:pre;background-color:#e7e3e7;margin:1cm"> <span style="background:#99FF66"><a href="index_104.lilas">MainNP1.lilas</a> : </span><div class="" style="white-space:pre;font-family:monospace;background-color:#e7e3e7;margin-top:0.2cm;margin-left:1cm"><font color="#B88408">&lt;?</font><font color="#208820">xml version="1.0" encoding="UTF-8"</font><font color="#B88408">?&gt;</font>
+
+<font color="#A020F0">&lt;module&gt;</font>
+  <font color="#A020F0">&lt;signal init=</font><font color="#CC6600">"2000.0"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"generatorFrequency"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Double"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal init=</font><font color="#CC6600">"16"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"constant"</font> <font color="#A020F0">name=</font><font color="#CC6600">"fftSize"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font><font color="#A020F0">/&gt;</font>
+
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"k0"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"x0"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Double"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"y0"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Double"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font><font color="#A020F0">/&gt;</font>
+
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"k1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Integer"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"x1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Double"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font><font color="#A020F0">/&gt;</font>
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"y1"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Double"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font><font color="#A020F0">/&gt;</font>
+
+  <font color="#A020F0">&lt;signal name=</font><font color="#CC6600">"start"</font> <font color="#A020F0">type=</font><font color="#CC6600">"java.lang.Boolean"</font> <font color="#A020F0">mode=</font><font color="#CC6600">"internal"</font><font color="#A020F0">/&gt;</font>
+
+  <font color="#A020F0">&lt;DataGeneratorP1 generatorFrequency=</font><font color="#CC6600">"generatorFrequency"</font> <font color="#A020F0">start=</font><font color="#CC6600">"start"</font> <font color="#A020F0">fftSize=</font><font color="#CC6600">"fftSize"</font> <font color="#A020F0">kout=</font><font color="#CC6600">"k0"</font> <font color="#A020F0">xout=</font><font color="#CC6600">"x0"</font> <font color="#A020F0">yout=</font><font color="#CC6600">"y0"</font> <font color="#A020F0">/&gt;</font>
+  
+  <font color="#A020F0">&lt;EtageTabP1 name=</font><font color="#CC6600">"etgtab"</font> <font color="#A020F0">fftSize=</font><font color="#CC6600">"fftSize"</font> 
+          <font color="#A020F0">kin=</font><font color="#CC6600">"k0"</font> <font color="#A020F0">xin=</font><font color="#CC6600">"x0"</font> <font color="#A020F0">yin=</font><font color="#CC6600">"y0"</font>
+  	      <font color="#A020F0">kout=</font><font color="#CC6600">"k1"</font> <font color="#A020F0">xout=</font><font color="#CC6600">"x1"</font> <font color="#A020F0">yout=</font><font color="#CC6600">"y1"</font><font color="#A020F0">/&gt;</font>
+
+  <font color="#A020F0">&lt;DataReceptorP1 fftSize=</font><font color="#CC6600">"fftSize"</font> <font color="#A020F0">kin=</font><font color="#CC6600">"k1"</font> <font color="#A020F0">xin=</font><font color="#CC6600">"x1"</font> <font color="#A020F0">yin=</font><font color="#CC6600">"y1"</font><font color="#A020F0">/&gt;</font>
+
+  <font color="#A020F0">&lt;awt layout=</font><font color="#CC6600">"border"</font> <font color="#A020F0">name=</font><font color="#CC6600">"awt"</font><font color="#A020F0">&gt;</font>
+		<font color="#A020F0">&lt;center layout=</font><font color="#CC6600">"tab"</font><font color="#A020F0">&gt;</font>
+			<font color="#A020F0">&lt;onglet colonnes=</font><font color="#CC6600">"1"</font> <font color="#A020F0">layout=</font><font color="#CC6600">"grid"</font> <font color="#A020F0">titre=</font><font color="#CC6600">"signaux"</font><font color="#A020F0">&gt;</font>
+				<font color="#A020F0">&lt;ListDisplay dur&eacute;ePixel=</font><font color="#CC6600">"2000000"</font> <font color="#A020F0">sizeCol0=</font><font color="#CC6600">"100"</font> <font color="#A020F0">sizeCol1=</font><font color="#CC6600">"100"</font> <font color="#A020F0">sizeCol2=</font><font color="#CC6600">"100"</font> <font color="#A020F0">sizeCol3=</font><font color="#CC6600">"600"</font> <font color="#A020F0">titleCol3=</font><font color="#CC6600">"Module : demo.fft.MainNP1"</font><font color="#A020F0">&gt;</font>
+					<font color="#A020F0">&lt;node system=</font><font color="#CC6600">"Date"</font><font color="#A020F0">/&gt;</font>
+					<font color="#A020F0">&lt;node system=</font><font color="#CC6600">"Messages"</font><font color="#A020F0">/&gt;</font>
+					<font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"start"</font><font color="#A020F0">/&gt;</font> 
+					<font color="#A020F0">&lt;list open=</font><font color="#CC6600">"true"</font> <font color="#A020F0">titleCol3=</font><font color="#CC6600">"Generator"</font><font color="#A020F0">&gt;</font>
+						<font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"k0"</font><font color="#A020F0">/&gt;</font> 
+						<font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"x0"</font><font color="#A020F0">/&gt;</font> 
+						<font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"y0"</font><font color="#A020F0">/&gt;</font> 
+					<font color="#A020F0">&lt;/list&gt;</font>
+					<font color="#A020F0">&lt;list open=</font><font color="#CC6600">"true"</font> <font color="#A020F0">titleCol3=</font><font color="#CC6600">"Receptor"</font><font color="#A020F0">&gt;</font>
+						<font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"k1"</font><font color="#A020F0">/&gt;</font> 
+						<font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"x1"</font><font color="#A020F0">/&gt;</font> 
+						<font color="#A020F0">&lt;node signal=</font><font color="#CC6600">"y1"</font><font color="#A020F0">/&gt;</font> 
+					<font color="#A020F0">&lt;/list&gt;</font>
+					
+				<font color="#A020F0">&lt;/ListDisplay&gt;</font>
+			<font color="#A020F0">&lt;/onglet&gt;</font>
+			<font color="#A020F0">&lt;onglet colonnes=</font><font color="#CC6600">"1"</font> <font color="#A020F0">layout=</font><font color="#CC6600">"grid"</font> <font color="#A020F0">titre=</font><font color="#CC6600">"full system"</font><font color="#A020F0">&gt;</font>
+				<font color="#A020F0">&lt;SystemDisplay/&gt;</font>
+			<font color="#A020F0">&lt;/onglet&gt;</font>
+		<font color="#A020F0">&lt;/center&gt;</font>
+		
+		<font color="#A020F0">&lt;page_end&gt;</font>
+			<font color="#A020F0">&lt;BoutonListeScripts/&gt;</font>
+			<font color="#A020F0">&lt;BoutonPasAPas/&gt;</font>
+		<font color="#A020F0">&lt;/page_end&gt;</font>
+	<font color="#A020F0">&lt;/awt&gt;</font>
+
+  	
+  <font color="#A020F0">&lt;script name=</font><font color="#CC6600">"main"</font><font color="#A020F0">&gt;</font>
+  	<font color="#A020F0">&lt;waitStable/&gt;</font>
+  	<font color="#A020F0">&lt;next signal=</font><font color="#CC6600">"start"</font> <font color="#A020F0">value=</font><font color="#CC6600">"true"</font><font color="#A020F0">/&gt;</font>
+  	<font color="#A020F0">&lt;for var=</font><font color="#CC6600">"i"</font> <font color="#A020F0">from=</font><font color="#CC6600">"1"</font> <font color="#A020F0">to=</font><font color="#CC6600">"fftSize"</font><font color="#A020F0">&gt;</font>
+  		<font color="#A020F0">&lt;waitValue signal=</font><font color="#CC6600">"k1"</font><font color="#A020F0">/&gt;</font>
+  	<font color="#A020F0">&lt;/for&gt;</font>
+	<font color="#A020F0">&lt;print&gt;</font>Termin&eacute;<font color="#A020F0">&lt;/print&gt;</font>
+  <font color="#A020F0">&lt;/script&gt;</font>
+
+<font color="#A020F0">&lt;/module&gt;</font>
+</div></div> utilisant ces trois modules correspond 
+					&agrave; l'organisation de la figure  1.1 ci-dessous.
+
+<div class="centr&eacute;e"><embed src="index_105.svg" type="image/svg+xml"></embed></div><div class="centr&eacute;e"> Fig 1.1  : Organisation pipeline</div>
+
+Le g&eacute;n&eacute;rateur de donn&eacute;es produit un flot de 2<sup>n</sup> valeurs (ki, xi, yi) o&ugrave;
+<ul id="ID_PubliTool_N10074">
+  <li>ki est le num&eacute;ro d'une valeur complexe (compris entre 0 et 2<sup>n</sup>-1 (entier)</li>
+  <li>xi est la partie r&eacute;elle de la valeur complexe (double)</li>
+  <li>yi est la partie imaginaire de la valeur complexe (double)</li>
+</ul>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">Le module EtageTabP1 repr&eacute;sente n &eacute;tages pipelin&eacute;s. Par exemple, pour des calculs de fft 
+	sur 2<sup>4</sup> valeurs, nous aurons l'organisation de la figure  1.21.3 ci-dessous.
+
+<div class="centr&eacute;e"><embed src="index_106.svg" type="image/svg+xml"></embed></div><div class="centr&eacute;e"> Fig 1.2  : Organisation pipeline</div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder"><div class="centr&eacute;e"><embed src="index_107.svg" type="image/svg+xml"></embed></div>
+</p><p style="top:10pt;bottom:5mm;text-align:justify;" xmlns:url="http://whatever/java/java.net.URLEncoder">A l'ex&eacute;cution, nous retrouvons bien le m&ecirc;me sch&eacute;ma au niveau du parall&eacute;lisme&nbsp;:
+<div style="white-space:pre;font-family:monospace;">$ <font color="#0x000086">lilas /demo/fft/MainNP1.lilas -awt=awt</font>
+Taille 16
+init ok
+Cr&eacute;ation etage 0
+Cr&eacute;ation etage 1
+Cr&eacute;ation etage 2
+Cr&eacute;ation etage 3
+Lilas pr&ecirc;t&nbsp;!
+Start send series 0 at 594.548&micro;s
+DataGeneratorP1 Send series 0&nbsp;: 0 at 1.147ms
+DataGeneratorP1 Send series 0&nbsp;: 1 at 1.944ms
+DataGeneratorP1 Send series 0&nbsp;: 2 at 2.431ms
+DataGeneratorP1 Send series 0&nbsp;: 3 at 2.933ms
+DataGeneratorP1 Send series 0&nbsp;: 4 at 3.204ms
+DataGeneratorP1 Send series 0&nbsp;: 5 at 3.595ms
+DataGeneratorP1 Send series 0&nbsp;: 6 at 4.095ms
+DataGeneratorP1 Send series 0&nbsp;: 7 at 4.595ms
+DataGeneratorP1 Send series 0&nbsp;: 8 at 5.095ms
+DataGeneratorP1 Send series 0&nbsp;: 9 at 5.595ms
+DataGeneratorP1 Send series 0&nbsp;: 10 at 6.095ms
+DataGeneratorP1 Send series 0&nbsp;: 11 at 6.595ms
+DataGeneratorP1 Send series 0&nbsp;: 12 at 7.095ms
+DataGeneratorP1 Send series 0&nbsp;: 13 at 7.636ms
+DataGeneratorP1 Send series 0&nbsp;: 14 at 8.104ms
+DataGeneratorP1 Send series 0&nbsp;: 15 at 8.678ms
+End series 0
+DataReceptorP1 Receive series 1&nbsp;: 0 =&gt; 0 at 9.88ms (9.88ms)
+DataReceptorP1 Receive series 1&nbsp;: 1 =&gt; 8 at 10.116ms (235.596&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 2 =&gt; 4 at 10.268ms (152.268&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 3 =&gt; 12 at 10.422ms (153.808&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 4 =&gt; 2 at 10.571ms (148.752&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 5 =&gt; 10 at 10.72ms (149.34&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 6 =&gt; 6 at 10.871ms (151.3&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 7 =&gt; 14 at 11.022ms (150.504&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 8 =&gt; 1 at 11.19ms (168.07&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 9 =&gt; 9 at 11.341ms (151.425&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 10 =&gt; 5 at 11.494ms (152.23&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 11 =&gt; 13 at 11.648ms (153.937&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 12 =&gt; 3 at 11.931ms (283.175&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 13 =&gt; 11 at 12.089ms (158.15&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 14 =&gt; 7 at 12.247ms (158.392&micro;s)
+DataReceptorP1 Receive series 1&nbsp;: 15 =&gt; 15 at 12.407ms (159.152&micro;s)
+DataReceptorP1 End of series, verification.
+Termin&eacute;
+Test equality series 1&nbsp;: true
+</div>
+	<div class="centr&eacute;e"><embed src="index_108.svg" type="image/svg+xml"></embed></div><div class="centr&eacute;e"> Fig 1.3  : Organisation pipeline</div>
 </p></div></body></html>

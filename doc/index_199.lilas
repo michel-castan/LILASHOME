@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
+  <doc>Square Roots by Newton's Method, version 2</doc>
+  <signal mode="in" name="x" sensitive="true" type="java.lang.Double" init="0.0"/>
+  <signal mode="out" name="y" type="java.lang.Double" init="0.0"/>
+  <signal name="tmp" type="java.lang.Double" init="0"/>
 
-  <signal mode="in" name="a" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="b" sensitive="true" type="java.lang.Double"/>
-  <signal mode="in" name="delta" sensitive="true" type="java.lang.Double"/>
-  <signal mode="out" name="nbrSol" type="java.lang.Integer"/>
-  <signal mode="out" name="sol1" type="java.lang.Double"/>
-  <signal mode="out" name="sol2" type="java.lang.Double"/>
-  
   <code language="java"/>
 </module>
+ 

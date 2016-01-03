@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <doc> Bascule D  Positive-Edge Clock</doc>
+
+  <signal mode="in" name="clk" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="in" name="dIn" type="lilas.type.StdLogic" size="1"/>
+  <signal mode="out" name="dOut" type="lilas.type.StdLogic" size="1"/>
+
+  <code language="logic" duréeActivation="1ns"><![CDATA[
+  	if selected(clk) and clk then
+  		dOut <= dIn;
+ 	end if;
+  	
+  	]]></code>
+  
+</module>
